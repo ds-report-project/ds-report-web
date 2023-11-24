@@ -41,22 +41,34 @@ class Post(models.Model):
     likes = models.ManyToManyField(User, related_name='liked_posts', blank=True) # 게시물 공감
     is_resolved = models.BooleanField(default=False)  # 해결인 경우 True
 
-    # 검색
+    # 검색 ####################
     @classmethod
     def search(cls, query):
         return cls.objects.filter(
             Q(title__icontains=query) | Q(content__icontains=query)
         )
 
-    # 공감순 인기글
-    @property
-    def popularity(self):
-        return self.likes.count()
 
-    def check_popularity(self):
-        if self.popularity >= 10:
-            # 여기에 인기글로 등록하는 로직 추가
-            pass
+	# 최신순 게시글 정렬 기능 추가 ####################
+    @classmethod
+    def latest_posts(cls):
+        return cls.objects.order_by('-created_at')
+
+    # 공감순 게시글 정렬 기능 추가 ####################
+    @classmethod
+    def popular_posts(cls):
+        return cls.objects.annotate(num_likes=Count('likes')).order_by('-num_likes')
+
+    # 댓글순 게시글 정렬 기능 추가 ####################
+    @classmethod
+    def commented_posts(cls):
+        return cls.objects.annotate(num_comments=Count('comment')).order_by('-num_comments')
+
+    # 공감 많은 순 상위 5개 게시물 뽑기 ####################
+    @classmethod
+    def top_five_popular_posts(cls):
+        top_five = cls.objects.annotate(num_likes=Count('likes')).order_by('-num_likes')[:5]
+        return top_five
 
 
 # 공감 기능(게시물, 댓글)
