@@ -16,7 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from . import views
 
+app_name = 'comments'
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('<int:pk>/comments/', views.comments_create, name='comments_create'),
+    path('<int:article_pk>/comments/<int:comment_pk>/delete/', views.comments_delete, name='comments_delete'),
 ]
