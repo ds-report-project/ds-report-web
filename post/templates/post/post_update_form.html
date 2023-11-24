@@ -1,0 +1,17 @@
+{% extends 'post/base.html' %}
+
+{% block head_title %}
+  Update Post-BLOG
+{% endblock %}
+
+{% block main_area %}
+  <h1> Edit Post</h1>
+  <hr>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+        <table>
+          {{ form }}
+        </table>
+      <button type="submit"> 등록 </button>
+    </form>
+{% endblock %}
