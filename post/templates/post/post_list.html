@@ -15,7 +15,7 @@
     </h1>
 
     {% if post_list.exists %}
-        {% for p in post_list %}
+        {% for post in post_list %}
             <!-- Blog Post -->
             <div class="card mb-4">
                 {% comment %} {% if p.head_image %}
@@ -25,14 +25,14 @@
                 {% endif %} {% endcomment %}
                 <div class="card-body">
 
-                    {% if p.category %}
-                        <span class="badge bg-secondary">{{ p.category }}</span>
+                    {% if post.category %}
+                        <span class="badge bg-secondary">{{ post.category }}</span>
                     {% else %}
                         <span class="badge bg-secondary">미분류</span>
                     {% endif %}
 
-                    <h2 class="card-title">{{ p.title }}</h2>
-                    <p class="card-text">{{ p.content | truncatewords:10 }}</p>
+                    <h2 class="card-title">{{ post.title }}</h2>
+                    <p class="card-text">{{ post.content | truncatewords:10 }}</p>
 
                     {% comment %} {% if p.tags.exists %}
                         <i class="fa fa-tags"></i>
@@ -43,12 +43,12 @@
                     <br>
                     <br>
 
-                    <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
+                    <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">
-                    Posted on {{ p.created_at }} by
+                    Posted on {{ post.created_at }} by
                     {% comment %} <a href="#"> {{ p.author | upper}} </a> {% endcomment %}
-                    <a href="#">{{ p.anonymous_nickname | default:"Anonymous" | upper }}</a>
+                    <a href="#">{{ post.anonymous_nickname | default:"Anonymous" | upper }}</a>
                 </div>
             </div>
         {% endfor %}
