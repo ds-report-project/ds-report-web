@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from .models import Post
+from .models import Post, Category
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.exceptions import PermissionDenied
@@ -41,6 +41,7 @@ class PostList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(PostList, self).get_context_data()
+        context['categories'] = Category.objects.all()
         return context
 
 class PostDetail(DetailView):
