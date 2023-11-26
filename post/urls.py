@@ -11,5 +11,5 @@ urlpatterns = [
     path('delete_post/<int:pk>/', views.PostDelete.as_view(), name='post_delete'),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
