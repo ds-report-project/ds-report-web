@@ -8,7 +8,7 @@ class Category(models.Model):
     slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
     def __str__(self):
         return self.name
-    
+
 class Post(models.Model):
 
     ANONYMOUS = '익명'
