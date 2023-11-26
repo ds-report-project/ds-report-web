@@ -85,7 +85,7 @@ def category_page(request, slug):
 
     return render(
         request,
-        'blog/post_list.html',
+        'post/post_list.html',
     {
         'post_list' : post_list,
         'categories' : Category.objects.all(),

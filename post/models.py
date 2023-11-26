@@ -10,7 +10,7 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return f'/blog/category/{self.slug}'
+        return f'/post/category/{self.slug}/'
 
 class Post(models.Model):
 
