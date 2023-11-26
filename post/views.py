@@ -73,4 +73,24 @@ class PostDelete(DeleteView):
             return super(PostDelete, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied
+
+#카테고리 별 상세페이지
+def category_page(request, slug):
+    if slug == 'no_category':
+        category = '기타'
+        post_list = Post.objects.filter(category=None)
+    else:
+        category = Category.objects.get(slug=slug)
+        post_list = Post.objects.filter(category=category)
+
+    return render(
+        request,
+        'blog/post_list.html',
+    {
+        'post_list' : post_list,
+        'categories' : Category.objects.all(),
+        'no_categories_post_count' : Post.objects.filter(category=None).count(),
+        'category' : category,
+    }
+    )
         

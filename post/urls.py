@@ -9,6 +9,7 @@ urlpatterns = [
     path('create_post/', views.PostCreate.as_view(), name='post_create'),
     path('update_post/<int:pk>/', views.PostUpdate.as_view(), name='post_update'),
     path('delete_post/<int:pk>/', views.PostDelete.as_view(), name='post_delete'),
+    path('category/<str:slug>/', views.category_page)
 ]
 
 if settings.DEBUG:
