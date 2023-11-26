@@ -30,7 +30,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    category = models.ForeignKey(Category, null=True, blank=True on_delete=models.SET_NULL)
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
     anonymous_nickname = models.CharField(
         max_length=100, blank=True, null=True, choices=ANONYMOUS_NICKNAME_CHOICES
     )
