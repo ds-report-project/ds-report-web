@@ -42,6 +42,7 @@ class PostList(ListView):
     def get_context_data(self, **kwargs):
         context = super(PostList, self).get_context_data()
         context['categories'] = Category.objects.all()
+        context['no_categories_post_count'] = Post.objects.filter(category=None).count()
         return context
 
 class PostDetail(DetailView):
