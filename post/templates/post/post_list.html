@@ -1,0 +1,59 @@
+{% extends 'post/base.html' %}
+
+{% block main_area %}
+
+    {% if user.is_authenticated %}
+        {% if user.is_superuser or user.is_staff %}
+            <a class="btn btn-info btn-sm float-end" href="/post/create_post/" role="button"><i class="fa fa-tags"></i>글 등록</a>
+            
+        {% endif %}
+    {% endif %}
+
+    <h1>게시물
+        {% if category %}<span class="badge bg-secondary">{{ category }}</span> {% endif %}
+        {% if tag %}<span class="bg-info text-dark"><i class="fa fa-tags"></i>{{ tag }}({{ tag.post_set.count}})</i></span> {% endif %}
+    </h1>
+
+    {% if post_list.exists %}
+        {% for post in post_list %}
+            <!-- Blog Post -->
+            <div class="card mb-4">
+                {% comment %} {% if p.head_image %}
+                    <img class="card-img-top" src="{{ p.head_image.url }}" alt="Card image cap">
+                {% else %}
+                    <img class="card-img-top" src="https://picsum.photos/seed/{{ p.id }}/800/200" alt="random image">
+                {% endif %} {% endcomment %}
+                <div class="card-body">
+
+                    {% if post.category %}
+                        <span class="badge bg-secondary">{{ post.category }}</span>
+                    {% else %}
+                        <span class="badge bg-secondary">미분류</span>
+                    {% endif %}
+
+                    <h2 class="card-title">{{ post.title }}</h2>
+                    <p class="card-text">{{ post.content | truncatewords:10 }}</p>
+
+                    {% comment %} {% if p.tags.exists %}
+                        <i class="fa fa-tags"></i>
+                        {% for tag in p.tags.iterator %}
+                            <a href="{{ tag.get_absolute_url }}"><span class="badge bg-secondary">{{ tag }}</span></a>
+                        {% endfor %}
+                    {% endif %} {% endcomment %}
+                    <br>
+                    <br>
+
+                    <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
+                </div>
+                <div class="card-footer text-muted">
+                    Posted on {{ post.created_at }} by
+                    {% comment %} <a href="#"> {{ p.author | upper}} </a> {% endcomment %}
+                    <a href="#">{{ post.anonymous_nickname | default:"Anonymous" | upper }}</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h1>게시물이 없습니다.</h1>
+    {% endif %}
+
+{% endblock %}
