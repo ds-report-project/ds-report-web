@@ -4,8 +4,8 @@ from .models import Post
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content', 'author', 'category', 'anonymous_nickname', 'images']  
+        fields = ['title', 'content', 'author', 'category', 'anonymous_nickname', 'image']  
         widgets = {
-            'images': forms.ClearableFileInput(attrs={'multiple': True,'class': 'form-control'}),
+            'image': forms.ClearableFileInput(attrs={'multiple': True,'class': 'form-control'}),
         }
 

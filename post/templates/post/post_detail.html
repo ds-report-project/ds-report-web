@@ -41,11 +41,13 @@
                         <section class="mb-5">
                             <p class="fs-5 mb-4">{{ post.content }}</p>
                         </section>
-
-<!--                         다운로드 버튼생성-->
-                        {% if post.file_upload %}
-                            <a href="{{ post.file_upload.url }}" class="btn btn-outline-dark" role="button" download>다운로드</a>
+                        <!-- 이미지 표시 -->
+                        {% if post.images %}
+                            <img src="{{ post.images.url }}" alt="Post Image" class="img-fluid">
                         {% endif %}
+                    </section>
+
+
 
                     </article>
                     <!-- Comments section-->

@@ -1,37 +1,20 @@
-from .models import Post, Image
+from .models import Post
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.exceptions import PermissionDenied
-from django.db import models
-from django.shortcuts import render, get_object_or_404, redirect
-from django.forms import inlineformset_factory
 
-
-ImageFormSet = inlineformset_factory(Post, Image, fields=('image',), extra=1)
 
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
-    fields = ['title', 'content', 'category', 'anonymous_nickname','images']
+    fields = ['title', 'content', 'category', 'anonymous_nickname', 'images']
 
     def form_valid(self, form):
         current_user = self.request.user
         if current_user.is_authenticated and (current_user.is_staff or current_user.is_superuser):
             form.instance.author = current_user
             form.instance.anonymous_nickname = "Default Nickname"
-
-            # 이미지 폼셋 처리
-            formset = ImageFormSet(self.request.POST, self.request.FILES, instance=form.instance)
-            if formset.is_valid():
-                self.object = form.save()
-                formset.instance = self.object
-                formset.save()
-
-                return super(PostCreate, self).form_valid(form)
-            else:
-                # 이미지 폼셋이 유효하지 않을 경우 추가 처리
-                return self.form_invalid(form)
-
+            return super(PostCreate, self).form_valid(form)
         else:
             return redirect('/post/')
 
@@ -46,17 +29,18 @@ class PostList(ListView):
     model = Post
     ordering = '-pk'
 
+
 class PostDetail(DetailView):
     model = Post
 
     def get_context_data(self, **kwargs):
         context = super(PostDetail, self).get_context_data(**kwargs)
-        context['images'] = Image.objects.filter(post=self.object)
         return context
+
 
 class PostUpdate(UpdateView):
     model = Post
-    fields = ['title', 'content', 'category', 'anonymous_nickname']
+    fields = ['title', 'content', 'category', 'anonymous_nickname','images']
     template_name = 'post/post_update_form.html'
 
     def dispatch(self, request, *args, **kwargs):
@@ -67,8 +51,9 @@ class PostUpdate(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(PostUpdate, self).get_context_data(**kwargs)
-        context['post'] = self.get_object()  
+        context['post'] = self.get_object()
         return context
+
 
 class PostDelete(DeleteView):
     model = Post
@@ -79,4 +64,5 @@ class PostDelete(DeleteView):
             return super(PostDelete, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied
+
         
