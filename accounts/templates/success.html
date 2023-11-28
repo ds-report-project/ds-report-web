@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %} 
+{% block content %}
+<div class="wrapper" style="text-align: center;">
+
+    <h1>성공</h1>
+
+    {% if user.is_authenticated %}
+        <p> 로그인한 사용자: {{ user.username }} </p>
+
+        <a class="btn btn-primary" href='/accounts/delete_account/' role="button">회원 탈퇴</a>
+        <a class="btn btn-primary" href='/accounts/logout/' role="button">로그아웃</a>
+    {% else %}
+        <a class="btn btn-primary" href='/accounts/login/' role="button">로그인</a>
+    {% endif %}
+</div>
+{% endblock %}
