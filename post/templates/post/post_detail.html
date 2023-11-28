@@ -10,22 +10,24 @@
                         <!-- Post header-->
                         <header class="mb-4">
                             <!-- Post title-->
-                            <h1 class="fw-bolder mb-1"> {{ p.title }}</h1>
+                            <h1 class="fw-bolder mb-1"> {{ post.title }}</h1>
 
 
                             <!-- Post meta content-->
-                            <div class="text-muted fst-italic mb-2">Posted on {{ p.created_at }} </div>
+                            <div class="text-muted fst-italic mb-2">Posted on {{ post.created_at }} </div>
 
                             <!-- Post update icon -->
-                            {% if user.is_authenticated and user == p.author %}
-                                <a class="btn btn-info btn-sm float-end" href="post/update_post/{{ p.pk }}" role="button">수정</a>
+                            {% if user.is_authenticated and user == post.author %}
+                                {% comment %} <a class="btn btn-info btn-sm float-end" href="post/update_post/{{ post.pk }}" role="button">수정</a> {% endcomment %}
+                                <a class="btn btn-info btn-sm float-end" href="{% url 'post_update' pk=post.pk %}" role="button">수정</a>
                             {% endif %}
 
-                            {% if user.is_authenticated and user == p.author %}
-                                <a class="btn btn-info btn-sm float-end" href="post/delete_post/{{ pt.pk }}" role="button">삭제</a>
-                               
-
+                            {% if user.is_authenticated and user == post.author %}
+                                {% comment %} <a class="btn btn-info btn-sm float-end" href="post/delete_post/{{ post.pk }}" role="button">삭제</a> {% endcomment %}
+                                <a class="btn btn-info btn-sm float-end" href="{% url 'post_delete' pk=post.pk %}" role="button">삭제</a>
                             {% endif %}
+
+                            
 
                             <!-- Post categories-->
                             {% if post.category %}
@@ -37,12 +39,12 @@
                         </header>
 
                         <section class="mb-5">
-                            <p class="fs-5 mb-4">{{ p.content }}</p>
+                            <p class="fs-5 mb-4">{{ post.content }}</p>
                         </section>
 
 <!--                         다운로드 버튼생성-->
-                        {% if p.file_upload %}
-                            <a href="{{ p.file_upload.url }}" class="btn btn-outline-dark" role="button" download>다운로드</a>
+                        {% if post.file_upload %}
+                            <a href="{{ post.file_upload.url }}" class="btn btn-outline-dark" role="button" download>다운로드</a>
                         {% endif %}
 
                     </article>

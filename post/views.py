@@ -1,5 +1,5 @@
+from .models import Post, Category, Tag
 from django.urls import reverse_lazy
-from .models import Post, Category
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.exceptions import PermissionDenied
@@ -10,7 +10,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 class PostCreate(LoginRequiredMixin,UserPassesTestMixin,CreateView):
     model = Post
     fields = ['title', 'content', 'category', 'anonymous_nickname']
-
+    
     def form_valid(self, form):
         current_user = self.request.user
         if current_user.is_authenticated and (current_user.is_staff or current_user.is_superuser):
@@ -55,14 +55,19 @@ class PostDetail(DetailView):
 
 class PostUpdate(UpdateView):
     model = Post
-    fields = ['title', 'content','category']
-    template_name = 'post_update_form.html'
+    fields = ['title', 'content', 'category', 'anonymous_nickname']
+    template_name = 'post/post_update_form.html'
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user == self.get_object().author:
             return super(PostUpdate, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied
+
+    def get_context_data(self, **kwargs):
+        context = super(PostUpdate, self).get_context_data(**kwargs)
+        context['post'] = self.get_object()  
+        return context
 
 class PostDelete(DeleteView):
     model = Post
@@ -94,3 +99,18 @@ def category_page(request, slug):
     }
     )
         
+#태그
+def tag_page(request, slug):
+    tag = Tag.objects.get(slug=slug)
+    post_list = tag.post_set.all()
+
+    return render(
+        request,
+        'post/post_list.html',
+        {
+            'post_list': post_list,
+            'tag': tag,
+            'categories': Category.objects.all(),
+            'no_category_post_count': Post.objects.filter(category=None).count()
+        }
+    )

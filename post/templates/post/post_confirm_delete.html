@@ -11,7 +11,9 @@
       {% csrf_token %}
       <p>정말로 해당 글을 삭제하시나요?</p>
         <input type="submit" class="btn btn-primary" value="Delete">
-        <a href="/post/{{p.pk}}" class="btn btn-outline">Cancel</a>
+        <a href="{% url 'post_detail' post.pk %}" class="btn btn-outline">Cancel</a>
+
+
 
     </form>
 {% endblock %}

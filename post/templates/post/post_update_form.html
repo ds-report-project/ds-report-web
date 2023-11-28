@@ -7,11 +7,11 @@
 {% block main_area %}
   <h1> Edit Post</h1>
   <hr>
-    <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-        <table>
-          {{ form }}
-        </table>
-      <button type="submit"> 등록 </button>
-    </form>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+      {{ form }}
+    </table>
+    <button type="submit"> 등록 </button>
+  </form>
 {% endblock %}
