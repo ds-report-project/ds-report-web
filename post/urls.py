@@ -9,7 +9,6 @@ urlpatterns = [
     path('create_post/', views.PostCreate.as_view(), name='post_create'),
     path('update_post/<int:pk>/', views.PostUpdate.as_view(), name='post_update'),
     path('delete_post/<int:pk>/', views.PostDelete.as_view(), name='post_delete'),
-    path('search/', views.post_search, name='post_search'),
 ]
 
 if settings.DEBUG:
