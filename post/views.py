@@ -1,13 +1,13 @@
+from django.shortcuts import redirect
 from .models import Post
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.exceptions import PermissionDenied
 
-
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
-    fields = ['title', 'content', 'category', 'anonymous_nickname', 'images']
+    fields = ['title', 'content', 'category', 'anonymous_nickname', 'images', 'video', 'attachment']
 
     def form_valid(self, form):
         current_user = self.request.user
@@ -40,7 +40,7 @@ class PostDetail(DetailView):
 
 class PostUpdate(UpdateView):
     model = Post
-    fields = ['title', 'content', 'category', 'anonymous_nickname','images']
+    fields = ['title', 'content', 'category', 'anonymous_nickname', 'images', 'video', 'attachment']
     template_name = 'post/post_update_form.html'
 
     def dispatch(self, request, *args, **kwargs):

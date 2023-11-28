@@ -5,13 +5,40 @@
 {% endblock %}
 
 {% block main_area %}
-  <h1> Edit Post</h1>
+  <h1>Edit Post</h1>
   <hr>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <table>
-      {{ form }}
+      {{ form.title.label_tag }}
+      {{ form.title }}
+      <br>
+
+      {{ form.content.label_tag }}
+      {{ form.content }}
+      <br>
+
+      {{ form.category.label_tag }}
+      {{ form.category }}
+      <br>
+
+      {{ form.anonymous_nickname.label_tag }}
+      {{ form.anonymous_nickname }}
+      <br>
+
+      {{ form.images.label_tag }}
+      {{ form.images }}
+      <br>
+
+      {{ form.video.label_tag }}
+      {{ form.video }}
+      <br>
+
+      {{ form.attachment.label_tag }}
+      {{ form.attachment }}
+      <br>
     </table>
-    <button type="submit"> 등록 </button>
+    <button type="submit">등록</button>
   </form>
 {% endblock %}
+
