@@ -75,3 +75,11 @@ class PostDelete(DeleteView):
         else:
             raise PermissionDenied
         
+def post_search(request):
+    query = request.GET.get('q')  # 폼에서 전달된 검색어를 가져옴
+    if query:
+        posts = Post.search(query)  # Post 모델의 search 메서드로 검색 실행
+    else:
+        posts = Post.objects.none()  # 빈 쿼리셋 반환 (검색어가 없는 경우)
+
+    return render(request, 'post/search.html', {'posts': posts, 'query': query})
