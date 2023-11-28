@@ -1,0 +1,9 @@
+{% extends 'your_base_template.html' %}
+
+{% block content %}
+  <form method="post" action="{% url 'new_comment' pk=post.pk %}">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit" class="btn btn-primary">댓글 남기기</button>
+  </form>
+{% endblock %}

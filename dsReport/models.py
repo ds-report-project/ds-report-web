@@ -1,131 +1,46 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models import Q, Count
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes.fields import GenericForeignKey
-import pandas as pd
+from django.urls import reverse
 
-#카테고리
-class Category(models.Model):
-    name = models.CharField(max_length=50, unique=True)
-    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return f'/앱 이름/category/{self.slug}'
-
-
-# 태그
-class Tag(models.Model): 
-    name = models.CharField(max_length=50, unique=True)
-    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return f'/앱 이름/tag/{self.slug}'
-
-
-# 게시물
 class Post(models.Model):
-    title = models.CharField(max_length=255)
-    content = models.TextField()
+
+    ANONYMOUS = '익명'
+    MAJOR_SCIENCE_TECH = '과학기술대학'
+    MAJOR_GLOBAL_CONVERGENCE = '글로벌융합대학'
+    MAJOR_ART_DESIGN='Art & Design대학'
+    MAJOR_PHARMACY='약학대학'
+
+    ANONYMOUS_NICKNAME_CHOICES = [
+        (ANONYMOUS, '익명'),
+        (MAJOR_SCIENCE_TECH, '과학기술대학'),
+        (MAJOR_GLOBAL_CONVERGENCE, '글로벌융합대학'),
+        (MAJOR_ART_DESIGN,'Art & Design 대학'),
+        (MAJOR_PHARMACY,'약학대학')
+    ]
+
+    title = models.CharField(max_length=50)
+    content = models.TextField(max_length=255)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     category = models.CharField(max_length=255)
-    tags = models.ManyToManyField(Tag, blank=True)
-    likes = models.ManyToManyField(User, related_name='liked_posts', blank=True) # 게시물 공감
-    is_resolved = models.BooleanField(default=False)  # 해결인 경우 True
+    anonymous_nickname = models.CharField(
+        max_length=100, blank=True, null=True, choices=ANONYMOUS_NICKNAME_CHOICES
+    )
 
-    # 검색
-    @classmethod
-    def search(cls, query):
-        return cls.objects.filter(
-            Q(title__icontains=query) | Q(content__icontains=query)
-        )
-
-    # 공감순 인기글
-    @property
-    def popularity(self):
-        return self.likes.count()
-
-    def check_popularity(self):
-        if self.popularity >= 10:
-            # 여기에 인기글로 등록하는 로직 추가
-            pass
+    def get_absolute_url(self):
+        return reverse('post_detail', args=[str(self.id)])
 
 
-# 공감 기능(게시물, 댓글)
-class Like(models.Model):
-    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-
-    # 추천한 글 모아볼 때 최신순으로 정렬하기 위해 시간 기록
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    # 다대일 관계:한 유저가 여러 개의 추천.
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-
-    object_id = models.PositiveIntegerField()  # id는 항상 양수
-
-    # 이름을 content_type, object_id로 지으면 위의 파라미터 없어도 됨.
-    liked_object = GenericForeignKey('content_type', 'object_id')
-
-    def __str__(self):
-        return f"({self.user}, {self.liked_object})"
-
-
-# 이미지 첨부
-class PostImage(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    image_file = models.ImageField(upload_to='post_images/')
-
-
-# 댓글
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    content = models.TextField
+    content = models.CharField('*댓글을 입력하세요.', max_length= 150)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    modified_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f'{self.author}::{self.content}'
 
     def get_absolute_url(self):
         return f'{self.post.get_absolute_url()}#comment-{self.pk}'
-
-
-# 공감 기능(게시물, 댓글)
-class Like(models.Model):
-    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-
-    # 추천한 글 모아볼 때 최신순으로 정렬하기 위해 시간 기록
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    # 다대일 관계:한 유저가 여러 개의 추천.
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-
-    object_id = models.PositiveIntegerField()  # id는 항상 양수
-
-    # 이름을 content_type, object_id로 지으면 위의 파라미터 없어도 됨.
-    liked_object = GenericForeignKey('content_type', 'object_id')
-
-    def __str__(self):
-        return f"({self.user}, {self.liked_object})"
-
-
-# 규정 검색 기능
-class ExcelData(models.Model):
-    file = models.FileField(upload_to='uploads/')
-
-    @staticmethod
-    def search_data(search_term):
-        excel_data = pd.read_excel(ExcelData.file.path)
-        result_data = excel_data[excel_data['Column_Name'].str.contains(search_term, case=False)]
-        result_list = result_data.to_dict(orient='records')
-
-        return result_list
