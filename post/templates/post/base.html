@@ -173,8 +173,8 @@ border: 1px solid #CCCCCC;
 /* action_key */
 #action_key {
     position: absolute;
-    width: 24px;
-    height: 24px;
+    /*width: 24px;*/
+    /*height: 24px;*/
     left: 36px;
     top: 226px;
 }
@@ -234,7 +234,7 @@ border: 1px solid #CCCCCC;
 /* 덕성신문고 */
 #duckSungLogo {
     position: absolute;
-    width: 74px;
+    width: 90px;
     height: 20px;
     left: 64px;
     top: 19px;
@@ -244,6 +244,7 @@ border: 1px solid #CCCCCC;
     font-size: 17px;
     line-height: 20px;
     color: #000000;
+    cursor: pointer;
 }
 
 /* 로그아웃 */
@@ -268,18 +269,11 @@ border: 1px solid #CCCCCC;
     height: 24px;
     left: 36px;
     top: 17px;
-    background: #D9D9D9;
+    /*background: #D9D9D9;*/
+    cursor: pointer;
 }
 
-#notificationsIcon::before {
-    content: '';
-    position: absolute;
-    left: 8.33%;
-    right: 8.33%;
-    top: 8.13%;
-    bottom: 8.33%;
-    background: #1C1B1F;
-}
+
 
 /* account_circle */
 #accountIcon {
@@ -306,6 +300,53 @@ border: 1px solid #CCCCCC;
 
 [id^="rectangle"]:hover {
     border: 1px solid #CCCCCC;
+}
+
+/* Rectangle 17 */
+#rectangle17 {
+    position: absolute;
+    width: 76px;
+    height: 38px;
+    background: #333333;
+    border-radius: 19px;
+    top:10px;
+    left:1309px;
+}
+
+/* 로그인 */
+#loginText {
+    position: absolute;
+    width: 44px;
+    height: 16px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #000000;
+    top:19px;
+    left:1255px;
+}
+
+/* 회원가입 */
+#signupText {
+    position: absolute;
+    width: 55px;
+    height: 16px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 16px;
+    color: #FFFFFF;
+    top:20px;
+    left:1321px;
+}
+a {
+    text-decoration: none;
+}
+
+#main-container{
 }
 
 
@@ -339,17 +380,29 @@ border: 1px solid #CCCCCC;
             <div id="info">정보</div>
             <!-- 규정 검색 -->
             <a id="rectangle40"></a>
-            <img src="action_key.png" id="action_key">
+            <img src="./action_key.png" id="action_key">
             <div id="searchRegulation">규정 검색</div>
 
         <!-- 게시물 카테고리 사이드바 -->
-        {% include 'post/post.html' %}
+        {% include 'post/sidebar_post.html' %}
 
         <!-- 상단바 -->
         <div id="Rectangle52"></div>
+        <img src="./notification.png" id="notificationsIcon">
+        <a id="duckSungLogo" href="{% url 'post_list' %}">덕성신문고</a>
+        {% if user.is_authenticated %}
+            {% if user.is_superuser or user.is_staff %}
+                <img src="account.png" alt="" id="accountIcon">
+                <a id="logout">로그아웃</a>
+            {% endif %}
+        {% endif %}
+        <a href="/accounts/login/" id="loginText">로그인</a>
+        <a href="/accounts/signup/" id="rectangle17"></a>
+        <a id="signupText" href="/accounts/signup/">회원가입</a>
 
 
 
+    <div id="main-container">
         <div class="container my-3">
             <div class="row">
                 <div class="col-md-8 col-lg-9 mt-1" id="main-area">
@@ -373,9 +426,12 @@ border: 1px solid #CCCCCC;
 
             </div>
         </div>
+    </div>
+
+
 
         <!-- Footer -->
-        {% include 'post/footer.html' %}
+<!--        {% include 'post/footer.html' %}-->
 
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
