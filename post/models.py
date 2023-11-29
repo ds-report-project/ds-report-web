@@ -41,7 +41,33 @@ class Post(models.Model):
         (MAJOR_PHARMACY,'약학대학')
     ]
 
-    #카테고리 배열
+    title = models.CharField(max_length=50)
+    content = models.TextField(max_length=255)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
+    tags = models.ManyToManyField(Tag, blank=True)
+
+    anonymous_nickname = models.CharField(
+        max_length=100, blank=True, null=True, choices=ANONYMOUS_NICKNAME_CHOICES
+    )
+    images=models.ImageField(blank=True,null=True)
+    video = models.FileField(blank=True, null=True, upload_to='post_videos/')
+    attachment = models.FileField(blank=True, null=True, upload_to='post_attachments/')
+ 
+
+    def get_absolute_url(self):
+        return reverse('post_detail', args=[str(self.id)])
+    
+    pass
+
+
+
+
+
+#카테고리 배열
     # FACILITIES = '시설'
     # ADMINISTRATION = '행정'
     # WELFARE = '복지'
@@ -94,38 +120,9 @@ class Post(models.Model):
     #     (GETAJOB, '취업/창업'),
     #     (ETC, '기타')
     # ]
-
-
-    title = models.CharField(max_length=50)
-    content = models.TextField(max_length=255)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
     # category = models.CharField(
     #     max_length=100, blank=True, null=True, choices=CATEGORY_CHOICES
     # )
-
-    tags = models.ManyToManyField(Tag, blank=True)
     # tags = models.CharField(
     #     max_length=100, blank=True, null=True, choices=TAG_CHOICES
     # )
-    anonymous_nickname = models.CharField(
-        max_length=100, blank=True, null=True, choices=ANONYMOUS_NICKNAME_CHOICES
-    )
-    images=models.ImageField(blank=True,null=True)
-    video = models.FileField(blank=True, null=True, upload_to='post_videos/')
-    attachment = models.FileField(blank=True, null=True, upload_to='post_attachments/')
- 
-
-    def get_absolute_url(self):
-        return reverse('post_detail', args=[str(self.id)])
-    
-    pass
-
-
-
-
-
-

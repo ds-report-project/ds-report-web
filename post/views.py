@@ -7,7 +7,7 @@ from django.core.exceptions import PermissionDenied
 
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
-    fields = ['title', 'content', 'category', 'anonymous_nickname', 'images', 'video', 'attachment']
+    fields = ['title', 'content', 'category', 'tags', 'anonymous_nickname', 'images', 'video', 'attachment']
 
     def form_valid(self, form):
         current_user = self.request.user
