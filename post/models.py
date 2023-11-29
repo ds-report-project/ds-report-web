@@ -54,6 +54,10 @@ class Post(models.Model):
     images=models.ImageField(blank=True,null=True)
     video = models.FileField(blank=True, null=True, upload_to='post_videos/')
     attachment = models.FileField(blank=True, null=True, upload_to='post_attachments/')
+    likes = models.ManyToManyField(User, related_name='post_like')
+
+    def number_of_like(self):
+        return self.likes.count()
  
 
     def get_absolute_url(self):

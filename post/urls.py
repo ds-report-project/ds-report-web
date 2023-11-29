@@ -10,7 +10,8 @@ urlpatterns = [
     path('update_post/<int:pk>/', views.PostUpdate.as_view(), name='post_update'),
     path('delete_post/<int:pk>/', views.PostDelete.as_view(), name='post_delete'),
     path('category/<str:slug>/', views.category_page),
-    path('tag/<str:slug>/', views.tag_page)
+    path('tag/<str:slug>/', views.tag_page),
+    path('post-like/<int:pk>', views.PostLike, name="post_like"),
 ]
 
 # if settings.DEBUG:
