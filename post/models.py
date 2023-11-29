@@ -41,19 +41,60 @@ class Post(models.Model):
         (MAJOR_PHARMACY,'약학대학')
     ]
 
-    FACILITIES = '시설'
-    ADMINISTRATION = '행정'
-    WELFARE = '복지'
-    EDUCATION='교육'
-    ETC='기타'
+    #카테고리 배열
+    # FACILITIES = '시설'
+    # ADMINISTRATION = '행정'
+    # WELFARE = '복지'
+    # EDUCATION='교육'
+    # ETC='기타'
+    #
+    # CATEGORY_CHOICES = [
+    #     (FACILITIES, '시설'),
+    #     (ADMINISTRATION, '행정'),
+    #     (WELFARE, '복지'),
+    #     (EDUCATION, '교육'),
+    #     (ETC, '기타')
+    # ]
 
-    CATEGORY_CHOICES = [
-        (FACILITIES, '시설'),
-        (ADMINISTRATION, '행정'),
-        (WELFARE, '복지'),
-        (EDUCATION, '교육'),
-        (ETC, '기타')
-    ]
+    #태그 배열
+    # DORMITORY = '기숙사'
+    # CLASSROOM = '강의실'
+    # LIBRARY = '도서관'
+    # ACCOMMODATION = '편의시설'
+    # TEACHER = '교원'
+    # ACADEMIC = '학사'
+    # LECTURE = '강의'
+    # PLANNING = '기획'
+    # BUDGET = '예산'
+    # IT = 'IT 서비스'
+    # SCHOLARSHIP = '장학금'
+    # CAFETERIA = '학식'
+    # SPECIALLECTURE = '특강'
+    # CURRICULUM = '커리큘럼'
+    # INTERNATIONAL = '국제교류'
+    # GETAJOB = '취업/창업'
+    # ETC = '기타'
+    #
+    # TAG_CHOICES = [
+    #     (DORMITORY, '기숙사'),
+    #     (CLASSROOM, '강의실'),
+    #     (LIBRARY, '도서관'),
+    #     (ACCOMMODATION, '편의시설'),
+    #     (TEACHER, '교원'),
+    #     (ACADEMIC, '학사'),
+    #     (LECTURE, '강의'),
+    #     (PLANNING, '기획'),
+    #     (BUDGET, '예산'),
+    #     (IT, 'IT 서비스'),
+    #     (SCHOLARSHIP, '장학금'),
+    #     (CAFETERIA, '학식'),
+    #     (SPECIALLECTURE, '특강'),
+    #     (CURRICULUM, '커리큘럼'),
+    #     (INTERNATIONAL, '국제교류'),
+    #     (GETAJOB, '취업/창업'),
+    #     (ETC, '기타')
+    # ]
+
 
     title = models.CharField(max_length=50)
     content = models.TextField(max_length=255)
@@ -61,12 +102,15 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    # category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
-    category = models.CharField(
-        max_length=100, blank=True, null=True, choices=CATEGORY_CHOICES
-    )
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
+    # category = models.CharField(
+    #     max_length=100, blank=True, null=True, choices=CATEGORY_CHOICES
+    # )
 
     tags = models.ManyToManyField(Tag, blank=True)
+    # tags = models.CharField(
+    #     max_length=100, blank=True, null=True, choices=TAG_CHOICES
+    # )
     anonymous_nickname = models.CharField(
         max_length=100, blank=True, null=True, choices=ANONYMOUS_NICKNAME_CHOICES
     )
