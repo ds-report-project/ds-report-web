@@ -41,12 +41,31 @@ class Post(models.Model):
         (MAJOR_PHARMACY,'약학대학')
     ]
 
+    FACILITIES = '시설'
+    ADMINISTRATION = '행정'
+    WELFARE = '복지'
+    EDUCATION='교육'
+    ETC='기타'
+
+    CATEGORY_CHOICES = [
+        (FACILITIES, '시설'),
+        (ADMINISTRATION, '행정'),
+        (WELFARE, '복지'),
+        (EDUCATION, '교육'),
+        (ETC, '기타')
+    ]
+
     title = models.CharField(max_length=50)
     content = models.TextField(max_length=255)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
+
+    # category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
+    category = models.CharField(
+        max_length=100, blank=True, null=True, choices=CATEGORY_CHOICES
+    )
+
     tags = models.ManyToManyField(Tag, blank=True)
     anonymous_nickname = models.CharField(
         max_length=100, blank=True, null=True, choices=ANONYMOUS_NICKNAME_CHOICES
