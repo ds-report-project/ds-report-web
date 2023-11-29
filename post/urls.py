@@ -9,6 +9,10 @@ urlpatterns = [
     path('create_post/', views.PostCreate.as_view(), name='post_create'),
     path('update_post/<int:pk>/', views.PostUpdate.as_view(), name='post_update'),
     path('delete_post/<int:pk>/', views.PostDelete.as_view(), name='post_delete'),
+    path('category/<str:slug>/', views.category_page),
+    path('tag/<str:slug>/', views.tag_page),
+    path('resolved/', views.PostResolvedList, name='post_resolved'),
+    path('unresolved/', views.PostUnresolvedList, name='post_unresolved'),
 ]
 
 # if settings.DEBUG:
