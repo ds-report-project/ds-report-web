@@ -68,16 +68,16 @@
     {% csrf_token %}
 
     {% if post_is_liked %}
-    <button type="submit" name="post_id" value="{{object.id}}" class="btn btn-info">Unlike</button>
+    <button type="submit" name="post_id" value="{{object.id}}" class="btn btn-info">비공감</button>
     {% else %}
-    <button type="submit" name="post_id" value="{{object.id}}" class="btn btn-info">Like</button>
+    <button type="submit" name="post_id" value="{{object.id}}" class="btn btn-info">공감</button>
     {% endif %}
   </form>
 {% else %}
   <a class="btn btn-outline-info" href="{% url 'login' %}?next={{request.path}}">Log in to like this article!</a><br>
 {% endif %}
 
-<strong class="text-secondary">{{ number_of_likes }} Like{{ number_of_likes|pluralize }}</strong>
+<strong class="text-secondary">공감수{{ number_of_likes }}{{ number_of_likes|pluralize }}</strong>
 
                 </article>
 

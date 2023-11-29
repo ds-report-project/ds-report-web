@@ -130,4 +130,4 @@ def PostLike(request, pk):
     else:
         post.likes.add(request.user)
 
-    return HttpResponseRedirect(reverse('PostDelete', args=[str(pk)]))
+    return HttpResponseRedirect(reverse('post_detail', args=[str(pk)]))
