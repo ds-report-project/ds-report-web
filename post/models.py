@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django import forms
 import os
 
 class Tag(models.Model):
@@ -22,6 +23,7 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return f'/post/category/{self.slug}/'
+
 
 class Post(models.Model):
 
@@ -49,6 +51,18 @@ class Post(models.Model):
     anonymous_nickname = models.CharField(
         max_length=100, blank=True, null=True, choices=ANONYMOUS_NICKNAME_CHOICES
     )
+    images=models.ImageField(blank=True,null=True)
+    video = models.FileField(blank=True, null=True, upload_to='post_videos/')
+    attachment = models.FileField(blank=True, null=True, upload_to='post_attachments/')
+ 
 
     def get_absolute_url(self):
         return reverse('post_detail', args=[str(self.id)])
+    
+    pass
+
+
+
+
+
+

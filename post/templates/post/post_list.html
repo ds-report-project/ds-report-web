@@ -1,11 +1,9 @@
 {% extends 'post/base.html' %}
 
 {% block main_area %}
-
     {% if user.is_authenticated %}
         {% if user.is_superuser or user.is_staff %}
-            <a class="btn btn-info btn-sm float-end" href="/post/create_post/" role="button"><i class="fa fa-tags"></i>글 등록</a>
-            
+            <a class="btn btn-info btn-sm float-end" href="{% url 'post_create' %}" role="button"><i class="fa fa-tags"></i>글 등록</a>
         {% endif %}
     {% endif %}
 
@@ -18,13 +16,19 @@
         {% for post in post_list %}
             <!-- Blog Post -->
             <div class="card mb-4">
-                {% comment %} {% if p.head_image %}
-                    <img class="card-img-top" src="{{ p.head_image.url }}" alt="Card image cap">
-                {% else %}
-                    <img class="card-img-top" src="https://picsum.photos/seed/{{ p.id }}/800/200" alt="random image">
-                {% endif %} {% endcomment %}
-                <div class="card-body">
+                {% if post.images %}
+                    <img class="card-img-top float-end" src="{{ post.images.url }}" alt="{{ post.title }}" style="max-width: 20%; max-height: 20%;">
+                {% endif %}
 
+                <!-- 동영상 표시 -->
+                {% if post.video %}
+                    <video width="320" height="240" controls>
+                        <source src="{{ post.video.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                {% endif %}
+
+                <div class="card-body">
                     {% if post.category %}
                         <span class="badge bg-secondary">{{ post.category }}</span>
                     {% else %}
@@ -40,20 +44,33 @@
                             <a href="{{ tag.get_absolute_url }}"><span class="badge bg-secondary">{{ tag }}</span></a>
                         {% endfor %}
                     {% endif %}
+              
                     <br>
                     <br>
 
                     <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
+
                 <div class="card-footer text-muted">
                     Posted on {{ post.created_at }} by
-                    {% comment %} <a href="#"> {{ p.author | upper}} </a> {% endcomment %}
-                    <a href="#">{{ post.anonymous_nickname | default:"Anonymous" | upper }}</a>
+                    {% if post.anonymous %}
+                        {% if post.anonymous_nickname %}
+                            {{ post.anonymous_nickname }}
+                        {% else %}
+                            {{ "Anonymous" | upper }}
+                        {% endif %}
+                    {% else %}
+                        <a href="#">{{ post.author.username | default:"Anonymous" | upper }}</a>
+                    {% endif %}
                 </div>
+
+               
             </div>
         {% endfor %}
     {% else %}
         <h1>게시물이 없습니다.</h1>
     {% endif %}
-
 {% endblock %}
+
+
+
