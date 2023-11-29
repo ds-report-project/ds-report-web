@@ -46,7 +46,7 @@ class PostDetail(DetailView):
 
 class PostUpdate(UpdateView):
     model = Post
-    fields = ['title', 'content', 'category', 'anonymous_nickname', 'images', 'video', 'attachment']
+    fields = ['title', 'content', 'category', 'tags', 'anonymous_nickname', 'images', 'video', 'attachment']
     template_name = 'post/post_update_form.html'
 
     def dispatch(self, request, *args, **kwargs):
