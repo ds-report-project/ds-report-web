@@ -1,10 +1,13 @@
 from django.urls import reverse_lazy
-from .models import Post
-from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
+from .models import Post, Comment
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.exceptions import PermissionDenied
 from django.db import models
 from django.shortcuts import render, get_object_or_404, redirect
+from .forms import CommentForm
+from django.http import JsonResponse
+
 
 
 class PostCreate(LoginRequiredMixin,UserPassesTestMixin,CreateView):
@@ -70,3 +73,53 @@ class PostDelete(DeleteView):
         else:
             raise PermissionDenied
         
+def new_comment(request, pk):
+    if request.user.is_authenticated:
+        post = get_object_or_404(Post, pk=pk)
+
+        if request.method == 'POST':
+            comment_form = CommentForm(request.POST)
+            if comment_form.is_valid():
+                comment = comment_form.save(commit=False)
+                comment.post = post
+                comment.author = request.user
+                comment.save()
+                return redirect(post.get_absolute_url())  # post or comment
+        else:
+            return redirect(post.get_absolute_url())
+    else:
+        raise PermissionDenied
+
+
+class CommentUpdate(LoginRequiredMixin, UpdateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'post/update_comment_form.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user == self.get_object().author:
+            return super(CommentUpdate, self).dispatch(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
+
+
+def delete_comment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    post = comment.post
+
+    if request.user.is_authenticated and request.user == comment.author:
+        comment.delete()
+        return redirect(post.get_absolute_url())
+    else:
+        raise PermissionDenied
+
+
+def delete_comment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    post = comment.post
+
+    if request.user.is_authenticated and request.user == comment.author:
+        comment.delete()
+        return JsonResponse({'status': 'success'})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Permission denied'}, status=403)
