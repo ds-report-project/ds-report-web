@@ -12,7 +12,9 @@ urlpatterns = [
     path('delete_post/<int:pk>/', views.PostDelete.as_view(), name='post_delete'),
     path('update_comment/<int:pk>/', views.CommentUpdate.as_view(), name='update_comment'),
     path('delete_comment/<int:pk>', views.delete_comment, name='delete_comment'),
+    path('category/<str:slug>/', views.category_page),
+    path('tag/<str:slug>/', views.tag_page)
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

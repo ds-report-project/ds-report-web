@@ -3,16 +3,16 @@
 {% load crispy_forms_tags %}
 
 {% block main_area %}
-        <!-- Page content-->
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-lg-8">
-                    <!-- Post content-->
-                    <article>
-                        <!-- Post header-->
-                        <header class="mb-4">
-                            <!-- Post title-->
-                            <h1 class="fw-bolder mb-1"> {{ p.title }}</h1>
+    <!-- Page content-->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Post content-->
+                <article>
+                    <!-- Post header-->
+                    <header class="mb-4">
+                        <!-- Post title-->
+                        <h1 class="fw-bolder mb-1">{{ post.title }}</h1>
 
                             <!-- Post meta content-->
                             <div class="\" ass="text-muted fst-italic mb-2">Posted on {{ p.created_at }} </div>
@@ -46,9 +46,28 @@
                             <a href="{{ p.file_upload.url }}" class="btn btn-outline-dark" role="button" download>다운로드</a>
                         {% endif %}
 
-                    </article>
-                    <!-- Comments section-->
+                        <!-- Post categories-->
+                        {% if post.category %}
+                            <span class="badge bg-secondary">{{ post.category }}</span>
+                        {% else %}
+                            <span class ="badge bg-secondary">기타</span>
+                        {% endif %}
+
+                        <!-- Display Anonymous Nickname -->
+                        {% if post.anonymous %}
+                            {% if post.anonymous_nickname %}
+                                <div class="text-muted fst-italic mb-2">작성자: {{ post.anonymous_nickname }}</div>
+                            {% else %}
+                                <div class="text-muted fst-italic mb-2">작성자: Anonymous</div>
+                            {% endif %}
+                        {% else %}
+                            <div class="text-muted fst-italic mb-2">작성자: <a
+                                    href="#">{{ post.author.username | default:"Anonymous" | upper }}</a></div>
+                        {% endif %}
+                    </header>
+
                     <section class="mb-5">
+<<<<<<< HEAD
                         <div class="card bg-light">
                             <div class="card-body">
 
@@ -112,10 +131,60 @@
 
                             </div>
                         </div>
+=======
+                        <p class="fs-5 mb-4">{{ post.content }}</p>
+>>>>>>> 8171b4237b5180a06317a9172622683fb962afa4
                     </section>
-                </div>
+<!-- 이미지 표시 -->
+{% if post.images %}
+    <img src="{{ post.images.url }}" alt="Post Image" class="img-fluid" style="max-width: 30%; max-height: 30%;">
+{% endif %}
+
+<!-- 동영상 표시 -->
+{% if post.video %}
+    <video width="320" height="240" controls>
+        <source src="{{ post.video.url }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+{% endif %}
+
+<!-- 첨부 파일 다운로드 버튼 -->
+{% if post.attachment %}
+    <a href="{{ post.attachment.url }}" class="btn btn-primary" download>첨부 파일 다운로드</a>
+{% endif %}
+
+
+                </article>
+
+                <!-- Comments section-->
+                <section class="mb-5">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <!-- Comment form-->
+                            <form class="mb-4"><textarea class="form-control" rows="3"
+                                                        placeholder="Join the discussion and leave a comment!"></textarea>
+                            </form>
+
+                            <!-- Display comments -->
+                            {% for comment in post.comments.all %}
+                                <div class="d-flex mb-4">
+                                    <!-- Commenter avatar-->
+                                    <div class="flex-shrink-0"><img class="rounded-circle"
+                                                                   src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
+                                                                   alt="..."/></div>
+                                    <!-- Commenter content-->
+                                    <div class="ms-3">
+                                        <div class="fw-bold">{{ comment.commenter_name }}</div>
+                                        {{ comment.content }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
+    </div>
 
 {% endblock %}
 
@@ -143,5 +212,6 @@
 }
 
 </script>
+
 
 
