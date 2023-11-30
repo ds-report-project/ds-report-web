@@ -1,21 +1,14 @@
-from .models import Post, Category, Tag
+from django.db import models
+from .models import Post, Category, Tag,Comment
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-<<<<<<< HEAD
-from .models import Post, Comment
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.exceptions import PermissionDenied
-from django.db import models
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import CommentForm
 from django.http import JsonResponse
 
-=======
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.core.exceptions import PermissionDenied
->>>>>>> 8171b4237b5180a06317a9172622683fb962afa4
 
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
