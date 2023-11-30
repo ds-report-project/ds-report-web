@@ -1,0 +1,47 @@
+<div class="btn-group " role="group" aria-label="Button group with nested dropdown">
+    {% if post_list.exists %}
+        {% with limited_posts=post_list|slice:":5" %}
+            {% for post in limited_posts %}
+                {% if post.tags.exists %}
+                    {% for tag in post.tags.iterator %}
+                        <a href="{{ tag.get_absolute_url }}" class="btn btn-primary">{{ tag }}</a>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% endwith %}
+    {% endif %}
+
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      더보기
+    </button>
+    <ul class="dropdown-menu">
+        {% with remaining_posts=post_list|slice:"5:" %}
+            {% for post in remaining_posts %}
+                {% if post.tags.exists %}
+                    {% for tag in post.tags.iterator %}
+                        <li><a href="{{ tag.get_absolute_url }}" class="dropdown-item">{{ tag }}</a></li>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% endwith %}
+    </ul>
+  </div>
+</div>
+
+
+<!--    <a href="#" class="btn btn-primary">기숙사</a>-->
+<!--    <a href="#" class="btn btn-primary">강의실</a>-->
+
+<!--    {% if post_list.exists %}-->
+<!--        {% for post in post_list|slice:":5" %}-->
+<!--            {% if post.tags.exists %}-->
+<!--                {% for tag in post.tags.iterator %}-->
+<!--                    <a href="{{ tag.get_absolute_url }}" class="btn btn-primary"><span class="badge bg-secondary">{{ tag }}</span></a>-->
+<!--                {% endfor %}-->
+<!--            {% endif %}-->
+<!--        {% endfor %}-->
+<!--    {% endif %}-->
+
+<!--      <li><a class="dropdown-item" href="#">Dropdown link</a></li>-->
+<!--      <li><a class="dropdown-item" href="#">Dropdown link</a></li>-->
