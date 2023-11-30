@@ -50,7 +50,7 @@ box-shadow: -4px 0px 2px rgba(0, 0, 0, 0.1),
     width: 210px;
     height: 48px;
     left: 107px;
-    top: 403px;
+    top: 211px;
     background: #FFFFFF;
     border-radius: 26px;
 }
@@ -61,7 +61,7 @@ box-shadow: -4px 0px 2px rgba(0, 0, 0, 0.1),
     width: 210px;
     height: 48px;
     left: 107px;
-    top: 451px;
+    top: 259px;
     background: #FFFFFF;
     border-radius: 26px;
 }
@@ -117,7 +117,7 @@ box-shadow: -4px 0px 2px rgba(0, 0, 0, 0.1),
     width: 36px;
     height: 18px;
     left: 127px;
-    top: 419px;
+    top: 227px;
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 600;
@@ -132,7 +132,7 @@ box-shadow: -4px 0px 2px rgba(0, 0, 0, 0.1),
     width: 36px;
     height: 18px;
     left: 127px;
-    top: 467px;
+    top: 275px;
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 600;
@@ -254,9 +254,36 @@ box-shadow: -4px 0px 2px rgba(0, 0, 0, 0.1),
     border: 1px solid #CCCCCC;
 }
 
-[id^="rectangle"].clicked {
-    background-color: #EDEDED;
+/*active 시 배경색 변경*/
+#rectangle19:active,
+#rectangle20:active,
+#rectangle21:active,
+#rectangle45:active,
+#rectangle46:active
+{
+    background: #EDEDED; /* active 시 배경색 변경 */
 }
+
+/*시설hover*/
+/*행정hover*/
+/*복지hover*/
+#welfare:hover ~ .rectangle43,
+#welfare:hover ~ .rectangle44,
+#welfare:hover ~ .rectangle45,
+#welfare:hover ~ .rectangle46,
+#welfare:hover ~ .rectangle47,
+#welfare:hover ~ .rectangle48,
+#welfare:hover ~ #total,
+#welfare:hover ~ #meal,
+#welfare:hover ~ #scholarship,
+#welfare:hover ~ #itService,
+#welfare:hover ~ #education,
+#welfare:hover ~ #other {
+
+}
+
+
+/*교육hover*/
 
 
 
@@ -264,21 +291,23 @@ box-shadow: -4px 0px 2px rgba(0, 0, 0, 0.1),
 
 <!--컨테이너-->
 <div id="Rectangle42"></div>
-    <div id="rectangle19"></div>
-        <a id="facility">시설</a>
-    <a id="rectangle20"></a>
-        <a id="administration">행정</a>
-    <a id="rectangle21"></a>
-        <a id="welfare">복지</a>
-            <a id="rectangle43"></a>
-                <a id="total">전체</a>
-            <a id="rectangle44"></a>
-                <a id="meal">학식</a>
-            <a id="rectangle47"></a>
-                <a id="scholarship">장학금</a>
-            <a id="rectangle48"></a>
-                <a id="itService">IT서비스</a>
-    <a id="rectangle45"></a>
-        <a id="education">교육</a>
-    <a id="rectangle46"></a>
-        <a id="other">기타</a>
+<!--기본 상태-->
+    <div id="rectangle19" href="#"></div>
+        <a id="facility" href="#">시설</a>
+    <a id="rectangle20" href="#"></a>
+        <a id="administration" href="#">행정</a>
+    <a id="rectangle21" href="#"></a>
+        <a id="welfare" href="#">복지</a>
+<!-- 복지 hover 시 -->
+<!--            <a id="rectangle43"></a>-->
+<!--                <a id="total">전체</a>-->
+<!--            <a id="rectangle44"></a>-->
+<!--                <a id="meal">학식</a>-->
+<!--            <a id="rectangle47"></a>-->
+<!--                <a id="scholarship">장학금</a>-->
+<!--            <a id="rectangle48"></a>-->
+<!--                <a id="itService">IT서비스</a>-->
+    <a id="rectangle45" href="#"></a>
+        <a id="education" href="#">교육</a>
+    <a id="rectangle46" href="#"></a>
+        <a id="other" href="#">기타</a>
