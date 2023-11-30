@@ -1,0 +1,21 @@
+{% extends 'post/base.html' %}
+
+{% block head_title %}
+  Update Post-BLOG
+{% endblock %}
+
+{% block main_area %}
+  <h1> Delete Post</h1>
+  <hr>
+    <form method="post" class ="delete-form">
+      {% csrf_token %}
+      <p>정말로 해당 글을 삭제하시나요?</p>
+        <input type="submit" class="btn btn-primary" value="Delete">
+        <a href="{% url 'post_detail' post.pk %}" class="btn btn-outline">Cancel</a>
+
+
+
+    </form>
+{% endblock %}
+
+
