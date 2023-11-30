@@ -1,5 +1,5 @@
 from django.db import models
-from .models import Post, Category, Tag,Comment
+from .models import Post, Category, Tag, Comment
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -100,13 +100,13 @@ def category_page(request, slug):
 def new_comment(request, pk):
     if request.user.is_authenticated:
         post = get_object_or_404(Post, pk=pk)
-
         if request.method == 'POST':
-            comment_form = CommentForm(request.POST)
-            if comment_form.is_valid():
-                comment = comment_form.save(commit=False)
-                comment.post = post
-                comment.author = request.user
+            new_comment = request.POST['new_comment']
+            post_id = request.path.split('/')[3]
+
+            if new_comment:
+                comment = Comment(post_id=post_id, author=request.user, content=new_comment)
+
                 comment.save()
                 return redirect(post.get_absolute_url())  # post or comment
         else:
@@ -128,9 +128,10 @@ class CommentUpdate(LoginRequiredMixin, UpdateView):
 
 
 def delete_comment(request, pk):
-    comment = get_object_or_404(Comment, pk=pk)
-    post = comment.post
+    comment_id = request.path.split('/')[3]
 
+    comment = Comment.objects.filter(id=comment_id)[0]
+    post = comment.post
     if request.user.is_authenticated and request.user == comment.author:
         comment.delete()
         return redirect(post.get_absolute_url())
@@ -138,15 +139,15 @@ def delete_comment(request, pk):
         raise PermissionDenied
 
 
-def delete_comment(request, pk):
-    comment = get_object_or_404(Comment, pk=pk)
-    post = comment.post
+# def delete_comment(request, pk):
+#     comment = get_object_or_404(Comment, pk=pk)
+#     post = comment.post
 
-    if request.user.is_authenticated and request.user == comment.author:
-        comment.delete()
-        return JsonResponse({'status': 'success'})
-    else:
-        return JsonResponse({'status': 'error', 'message': 'Permission denied'}, status=403)
+#     if request.user.is_authenticated and request.user == comment.author:
+#         comment.delete()
+#         return JsonResponse({'status': 'success'})
+#     else:
+#         return JsonResponse({'status': 'error', 'message': 'Permission denied'}, status=403)
 #태그
 def tag_page(request, slug):
     tag = Tag.objects.get(slug=slug)

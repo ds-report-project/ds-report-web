@@ -72,11 +72,11 @@
 
                                  <!-- Comment form-->
                                 {% if user.is_authenticated %}
+
                                 <form class="mb-4" id="comment-form" method="POST" action="{% url 'new_comment' pk=post.pk %}">
                                     {% csrf_token %}
-                                    <div class="form-group">
-                                        {{ comment_form | crispy }}
-                                    </div>
+
+                                    <input name="new_comment" type="text" value="">
                                     <button type = "submit" class = "btn btn-primary"> 입력 </button>
                                 {% else %}
                                     <a role="button" class = "btn btn-sm" href="#" data-toggle="modal" data-target="#loginModal">로그인하고 댓글을 남겨주세요</a>
@@ -109,7 +109,10 @@
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" data-dismiss="modal">취소</button>
-                                                        <a role="button" class="btn btn-sm btn-danger float-end" onclick="deleteComment({{ comment.pk }})" data-toggle="modal" data-target="#deleteCommentModal-{{ comment.pk }}">삭제</a>
+                                                         <form class="mb-4" id="comment-form" method="POST" action="{% url 'delete_comment' pk=comment.pk %}">
+                                                            {% csrf_token %}
+                                                            <button type = "submit" class = "btn btn-sm btn-danger float-end"> 삭제 </button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -184,12 +187,13 @@
 
 {% endblock %}
 
+{% block javascript %}
 <script>
   // Function to handle comment deletion
   function deleteComment(commentId) {
   $.ajax({
     type: 'POST',
-    url: '{% url "delete_comment" commentId %}',
+    url: '{% url 'delete_comment' pk=comment.pk %}',
     data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
     success: function (response) {
       if (response.status === 'success') {
@@ -205,9 +209,13 @@
       alert('An error occurred while trying to delete the comment.');
     }
   });
-}
+  }
 
+    function handleDelete(commentId) {
+        console.log("!!!!!!!!!!!!")
+        console.log(commentId)
+    }
 </script>
 
-
+{% endblock %}
 
