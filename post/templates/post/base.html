@@ -6,6 +6,8 @@
     <title>게시물</title>
     <link rel="stylesheet" href="{% static 'post/bootstrap/bootstrap.min.css' %}" media="screen">
     <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>  
     <style>
 body {
     margin: 0;
@@ -355,7 +357,6 @@ color: #9F9F9F;
 position: fixed;
 }
     </style>
-
 </head>
 
 <body>
@@ -408,10 +409,24 @@ position: fixed;
 
         <!-- 메인 컨테이너 -->
         <div id="main_container">
+            <!-- Search -->
+            {% include 'post/search.html' %}
+            <!-- 검색 결과 표시 -->
+            {% if posts %}
+                <h3>Search Results for "{{ query }}"</h3>
+                <ul>
+                    <!-- 검색한 게시물 -->
+                    {% block search_area %}
+                    {% endblock %}
+                </ul>
+            {% elif query %}
+                <p>No results found for "{{ query }}"</p>
+            {% else %}
                 {% block main_area %}
                 {% endblock %}
+            {% endif %}
         </div>
-
+      
         <!-- 인기글 -->
         <div id="popular"></div>
             <!-- 인기글 코드 추가(block 또는 include 사용) -->
@@ -450,7 +465,6 @@ position: fixed;
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
-
 
 </body>
 

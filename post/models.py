@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django import forms
+import os
 
 class Tag(models.Model):
     name = models.CharField(max_length=50)
@@ -21,6 +23,7 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return f'/post/category/{self.slug}/'
+
 
 class Post(models.Model):
 
@@ -43,14 +46,19 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    category = models.CharField(max_length=255)
+    category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
+    tags = models.ManyToManyField(Tag, blank=True)
     anonymous_nickname = models.CharField(
         max_length=100, blank=True, null=True, choices=ANONYMOUS_NICKNAME_CHOICES
     )
     images=models.ImageField(blank=True,null=True)
     video = models.FileField(blank=True, null=True, upload_to='post_videos/')
     attachment = models.FileField(blank=True, null=True, upload_to='post_attachments/')
-
+    likes = models.ManyToManyField(User, related_name='post_like')
+    
+    def number_of_likes(self):
+        return self.likes.count()
+    
     resolve_actions = models.ManyToManyField(User, through='ResolveAction', related_name='resolved_posts')  # resolve에 필요
     resolve_cache = models.BooleanField(default=False) # resolved 캐시 변수 초기화
 
@@ -63,7 +71,6 @@ class Post(models.Model):
         # true/false 저장
         self.resolve_cache = self.resolve_actions.count() >= 1
         return self.resolve_cache
- 
 
     def get_absolute_url(self):
         return reverse('post_detail', args=[str(self.id)])

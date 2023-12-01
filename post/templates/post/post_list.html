@@ -6,16 +6,16 @@
         <a class="btn btn-info btn-sm float-end" href="{% url 'post_create' %}" role="button"><i class="fa fa-tags"></i>글 등록</a>
     {% endif %}
 
-    <!-- 태그 컨테이너   position: fixed, z-index: 2; 스타일 필수.. -->
+    <!-- 태그 컨테이너 -->
     <div id="tag_container">
-        <!-- 태그 코드 추가(block 또는 include 사용) -->
+        <!-- 태그 코드 -->
     </div>
     <a class="btn btn-info btn-sm float-end" href="#" role="button"></i>해결</a>
     <a class="btn btn-info btn-sm float-end" href="#" role="button"></i>미해결</a>
 
     <h1>게시물
         {% if category %}<span class="badge bg-secondary">{{ category }}</span> {% endif %}
-        {% if tag %}<span class="bg-info text-dark"><i class="fa fa-tags"></i>{{ tag }}({{ tag.post_set.count}})</i></span> {% endif %}
+        {% if tag %} <span class="bg-info text-dark"><i class="fa-fag fa-tags"></i>{{ tag }}({{ tag.post_set.count}})</span> {% endif %}
     </h1>
 
     {% if post_list.exists %}
@@ -38,12 +38,11 @@
                     {% if post.category %}
                         <span class="badge bg-secondary">{{ post.category }}</span>
                     {% else %}
-                        <span class="badge bg-secondary">미분류</span>
+                        <span class="badge bg-secondary">기타</span>
                     {% endif %}
 
                     <h2 class="card-title">{{ post.title }}</h2>
                     <p class="card-text">{{ post.content | truncatewords:10 }}</p>
-
 
                     {% if post.tags.exists %}
                     <i class="fa fa-tags"></i>
@@ -51,6 +50,10 @@
                             <a href="{{ tag.get_absolute_url }}"><span class="badge bg-secondary">{{ tag }}</span></a>
                         {% endfor %}
                     {% endif %}
+
+                    <br/>
+
+                    <strong class="text-secondary">{{ post.number_of_likes }} <i class="fas fa-thumbs-up"></i></strong>
 
                     <br>
                     <br>

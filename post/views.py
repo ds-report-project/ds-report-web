@@ -1,10 +1,14 @@
 from .models import Post, Category, Tag, ResolveAction
-from django.shortcuts import redirect, render, get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
+from django.db import models
+from django.db.models import Q
+from django.contrib import messages
+from django.shortcuts import render, get_object_or_404, redirect
+
 
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
@@ -14,7 +18,7 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         current_user = self.request.user
         if current_user.is_authenticated and (current_user.is_staff or current_user.is_superuser):
             form.instance.author = current_user
-            form.instance.anonymous_nickname = "Default Nickname"
+            form.instance.anonymous_nickname = form.cleaned_data.get('anonymous_nickname', "Default Nickname")
             return super(PostCreate, self).form_valid(form)
         else:
             return redirect('/post/')
@@ -29,26 +33,50 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 class PostList(ListView):
     model = Post
     ordering = '-pk'
+    
+    # def get_context_data(self, **kwargs):
+    #     context = super(PostList, self).get_context_data()
+    #     context['categories'] = Category.objects.all()
+    #     context['no_categories_post_count'] = Post.objects.filter(category=None).count()
+    #     return context
+
     def get_context_data(self, **kwargs):
-        context = super(PostList, self).get_context_data()
-        context['categories'] = Category.objects.all()
-        context['no_categories_post_count'] = Post.objects.filter(category=None).count()
-        return context
+        data = super().get_context_data(**kwargs)
+
+        data['categories'] = Category.objects.all()
+        data['no_categories_post_count'] = Post.objects.filter(category=None).count()
+
+        data['number_of_likes'] = [post.number_of_likes() for post in data['post_list']]
+        return data
+
 
 class PostDetail(DetailView):
     model = Post
+    # def get_context_data(self, **kwargs):
+    #     context = super(PostDetail, self).get_context_data()
+    #     context['categories'] = Category.objects.all()
+    #     context['no_categories_post_count'] = Post.objects.filter(category=None).count()
+    #     return context
 
     def get_context_data(self, **kwargs):
-        context = super(PostDetail, self).get_context_data()
-        context['categories'] = Category.objects.all()
-        context['no_categories_post_count'] = Post.objects.filter(category=None).count()
-        return context
+        data = super().get_context_data(**kwargs)
+
+        data['categories'] = Category.objects.all()
+        data['no_categories_post_count'] = Post.objects.filter(category=None).count()
+
+        likes_connected = get_object_or_404(Post, id=self.kwargs['pk'])
+        liked = False
+        if likes_connected.likes.filter(id=self.request.user.id).exists():
+            liked = True
+        data['number_of_likes'] = likes_connected.number_of_likes()
+        data['post_is_liked'] = liked
+        return data
 
     def post(self, request, *args, **kwargs):
         post = get_object_or_404(Post, pk=kwargs['pk'])
         user = request.user
 
-        # 사용자가 해결됐어요 버튼을 누른적이 없는 경우에만 ResolveAction을 추가
+        # 사용자가 해결됐어요 버튼을 누른 적이 없는 경우에만 ResolveAction을 추가
         if 'resolve_button' in request.POST and not ResolveAction.objects.filter(user=user, post=post).exists():
             ResolveAction.objects.create(user=user, post=post)
         return HttpResponseRedirect(post.get_absolute_url())
@@ -100,6 +128,7 @@ def category_page(request, slug):
     }
     )
 
+
 #태그
 def tag_page(request, slug):
     tag = Tag.objects.get(slug=slug)
@@ -117,6 +146,30 @@ def tag_page(request, slug):
     )
 
 
+#좋아요
+def PostLike(request, pk):
+    post = get_object_or_404(Post, id=request.POST.get('post_id'))
+    if post.likes.filter(id=request.user.id).exists():
+        post.likes.remove(request.user)
+    else:
+        post.likes.add(request.user)
+
+    return HttpResponseRedirect(reverse('post_detail', args=[str(pk)]))
+  
+  
+def post_search(request):
+    query = request.GET.get('q')  # 검색어 가져오기
+
+    # if len(query) == 1 :
+    #     messages.error(request.request, '검색어는 2글자 이상 입력해주세요.')
+    if query:
+        posts = Post.objects.filter(
+            Q(title__icontains=query) | Q(content__icontains=query)
+        )
+    else:
+        posts = Post.objects.none()  # 빈 쿼리셋 반환 (검색어가 없는 경우)
+
+    return render(request, 'post/search_result.html', {'posts': posts, 'query': query})
 
 # 해결 페이지
 def PostResolvedList(request):
