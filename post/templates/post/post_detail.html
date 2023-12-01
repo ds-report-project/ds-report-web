@@ -29,21 +29,21 @@
                         {% endif %}
 
                         <!-- Display Anonymous Nickname -->
-{% if post.anonymous %}
-{% if post.anonymous_nickname %}
-    <div class="text-muted fst-italic mb-2">작성자: {{ post.anonymous_nickname }}</div>
-{% else %}
-    <div class="text-muted fst-italic mb-2">작성자: Anonymous</div>
-{% endif %}
-{% else %}
-<div class="text-muted fst-italic mb-2">작성자: 
-    {% if post.anonymous_nickname %}
-        {{ post.anonymous_nickname }}
-    {% else %}
-        <a href="#">{{ post.author.username | default:"Anonymous" | upper }}</a>
-    {% endif %}
-</div>
-{% endif %}
+                        {% if post.anonymous %}
+                            {% if post.anonymous_nickname %}
+                                <div class="text-muted fst-italic mb-2">작성자: {{ post.anonymous_nickname }}</div>
+                            {% else %}
+                                <div class="text-muted fst-italic mb-2">작성자: 익명</div>
+                            {% endif %}
+                        {% else %}
+                            <div class="text-muted fst-italic mb-2">작성자:
+                                {% if post.anonymous_nickname %}
+                                    {{ post.anonymous_nickname }}
+                                {% else %}
+                                    {{ post.get_anonymous_nickname_display }}
+                                {% endif %}
+                            </div>
+                        {% endif %}
                     </header>
 
                     <section class="mb-5">
