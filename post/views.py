@@ -1,4 +1,4 @@
-from .models import Post, Category, Tag
+from .models import Post, Category, Tag, ResolveAction
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -33,7 +33,7 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 class PostList(ListView):
     model = Post
     ordering = '-pk'
-
+    
     # def get_context_data(self, **kwargs):
     #     context = super(PostList, self).get_context_data()
     #     context['categories'] = Category.objects.all()
@@ -48,7 +48,6 @@ class PostList(ListView):
 
         data['number_of_likes'] = [post.number_of_likes() for post in data['post_list']]
         return data
-
 
 
 class PostDetail(DetailView):
@@ -73,6 +72,14 @@ class PostDetail(DetailView):
         data['post_is_liked'] = liked
         return data
 
+    def post(self, request, *args, **kwargs):
+        post = get_object_or_404(Post, pk=kwargs['pk'])
+        user = request.user
+
+        # 사용자가 해결됐어요 버튼을 누른 적이 없는 경우에만 ResolveAction을 추가
+        if 'resolve_button' in request.POST and not ResolveAction.objects.filter(user=user, post=post).exists():
+            ResolveAction.objects.create(user=user, post=post)
+        return HttpResponseRedirect(post.get_absolute_url())
 
 class PostUpdate(UpdateView):
     model = Post
@@ -121,7 +128,7 @@ def category_page(request, slug):
     }
     )
 
-        
+
 #태그
 def tag_page(request, slug):
     tag = Tag.objects.get(slug=slug)
@@ -164,3 +171,30 @@ def post_search(request):
 
     return render(request, 'post/search_result.html', {'posts': posts, 'query': query})
 
+# 해결 페이지
+def PostResolvedList(request):
+    post_list = Post.objects.all()
+    for post in post_list:
+        status = post.is_resolved()
+        post.resolve_cache = status
+        post.save()
+    post_list = Post.objects.filter(resolve_cache=True)
+    return render(
+        request,
+        'post/post_list.html',
+        {'post_list': post_list}
+    )
+
+# 미해결 페이지
+def PostUnresolvedList(request):
+    post_list = Post.objects.all()
+    for post in post_list:
+        status = post.is_resolved()
+        post.resolve_cache = status
+        post.save()
+    post_list = Post.objects.filter(resolve_cache=False)
+    return render(
+        request,
+        'post/post_list.html',
+        {'post_list': post_list}
+    )

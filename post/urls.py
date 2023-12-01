@@ -13,6 +13,8 @@ urlpatterns = [
     path('category/<str:slug>/', views.category_page),
     path('tag/<str:slug>/', views.tag_page),
     path('post-like/<int:pk>', views.PostLike, name="post_like"),
+    path('resolved/', views.PostResolvedList, name='post_resolved'),
+    path('unresolved/', views.PostUnresolvedList, name='post_unresolved'),  
 ]
 
 # if settings.DEBUG:
