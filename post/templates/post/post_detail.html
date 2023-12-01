@@ -12,8 +12,8 @@
                         <!-- Post title-->
                         <h1 class="fw-bolder mb-1">{{ post.title }}</h1>
 
-                        <!-- Post meta content-->
-                        <div class="text-muted fst-italic mb-2">Posted on {{ post.created_at }} </div>
+                        <!-- Post meta content -->
+<div class="text-muted fst-italic mb-2">{{ post.created_at|date:"Y년 m월 d일 H시 i분" }}</div>
 
                         <!-- Post update icon -->
                         {% if user.is_authenticated and user == post.author %}
@@ -33,11 +33,16 @@
                             {% if post.anonymous_nickname %}
                                 <div class="text-muted fst-italic mb-2">작성자: {{ post.anonymous_nickname }}</div>
                             {% else %}
-                                <div class="text-muted fst-italic mb-2">작성자: Anonymous</div>
+                                <div class="text-muted fst-italic mb-2">작성자: 익명</div>
                             {% endif %}
                         {% else %}
-                            <div class="text-muted fst-italic mb-2">작성자: <a
-                                    href="#">{{ post.author.username | default:"Anonymous" | upper }}</a></div>
+                            <div class="text-muted fst-italic mb-2">작성자:
+                                {% if post.anonymous_nickname %}
+                                    {{ post.anonymous_nickname }}
+                                {% else %}
+                                    {{ post.get_anonymous_nickname_display }}
+                                {% endif %}
+                            </div>
                         {% endif %}
                     </header>
 

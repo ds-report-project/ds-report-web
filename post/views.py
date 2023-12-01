@@ -18,7 +18,7 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         current_user = self.request.user
         if current_user.is_authenticated and (current_user.is_staff or current_user.is_superuser):
             form.instance.author = current_user
-            form.instance.anonymous_nickname = "Default Nickname"
+            form.instance.anonymous_nickname = form.cleaned_data.get('anonymous_nickname', "Default Nickname")
             return super(PostCreate, self).form_valid(form)
         else:
             return redirect('/post/')
