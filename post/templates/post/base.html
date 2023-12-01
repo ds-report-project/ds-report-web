@@ -10,7 +10,8 @@
 body {
     margin: 0;
     padding: 0;
-    overflow: hidden; /* 스크롤바 감춤 */
+    overflow-x:hidden;
+    overflow-y:auto;
 }
 
 #container {
@@ -19,7 +20,7 @@ body {
     position: absolute;
     /*top: 50%;*/
     /*left: 50%;*/
-    /*transform: translate(-50%, -43%);*/
+    /*transform: translate(-50%, -50%);*/
     min-width: 1800px;
 }
 
@@ -31,6 +32,8 @@ body {
     top: 0px;
     background: #FFFFFF;
     box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    z-index: 2;
 }
 #Rectangle29{
     position: absolute;
@@ -41,6 +44,7 @@ body {
 
     background: #FFFFFF;
     box-shadow: 4px 0px 2px rgba(0, 0, 0, 0.1);
+    position: fixed;
 }
         /* Rectangle 37 */
 #rectangle37 {
@@ -51,6 +55,7 @@ body {
     top: 150px;
     background: #FFFFFF;
     border-radius: 16px;
+    position: fixed;
 }
 
 /* Rectangle 32 */
@@ -62,6 +67,7 @@ body {
     top: 78px;
     background: #FFFFFF;
     border-radius: 16px;
+    position: fixed;
 }
 
 #rectangle32:active,
@@ -83,6 +89,7 @@ body {
     top: 222px;
     background: #FFFFFF;
     border-radius: 16px;
+    position: fixed;
 }
 
 /* bar_chart */
@@ -92,6 +99,7 @@ body {
     height: 24px;
     left: 36px;
     top: 154px;
+    position: fixed;
 }
 
 /* 정보 */
@@ -108,6 +116,7 @@ body {
     line-height: 16px;
     text-align: center;
     color: #000000;
+    position: fixed;
 }
 
 /* description */
@@ -117,6 +126,7 @@ body {
     height: 24px;
     left: 36px;
     top: 82px;
+    position: fixed;
 }
 
 /* action_key */
@@ -126,6 +136,7 @@ body {
     height: 24px;
     left: 36px;
     top: 226px;
+    position: fixed;
 }
 
 /* 게시물 */
@@ -142,6 +153,7 @@ body {
     line-height: 16px;
     text-align: center;
     color: #000000;
+    position: fixed;
 }
 
 /* 규정 검색 */
@@ -158,6 +170,7 @@ body {
     line-height: 16px;
     text-align: center;
     color: #000000;
+    position: fixed;
 }
 
 /* 덕성신문고 */
@@ -174,6 +187,8 @@ body {
     line-height: 20px;
     color: #000000;
     cursor: pointer;
+    position: fixed;
+    z-index: 3;
 }
 
 /* 로그아웃 */
@@ -189,6 +204,8 @@ body {
     font-size: 13px;
     line-height: 16px;
     color: #000000;
+    position: fixed;
+    z-index: 3;
 }
 
 /* notifications_active */
@@ -200,6 +217,8 @@ body {
     top: 17px;
     /*background: #D9D9D9;*/
     cursor: pointer;
+    position: fixed;
+    z-index: 3;
 }
 
 
@@ -211,6 +230,8 @@ body {
     height: 24px;
     left: 1649px;
     top: 15px;
+    position: fixed;
+    z-index: 3;
 }
 
 #accountIcon::before {
@@ -221,6 +242,8 @@ body {
     top: 8.33%;
     bottom: 8.33%;
     background: #1C1B1F;
+    position: fixed;
+    z-index: 3;
 }
 [id^="rectangle"] {
     cursor: pointer;
@@ -239,6 +262,8 @@ body {
     border-radius: 19px;
     top:10px;
     left:1656px;
+    position: fixed;
+    z-index: 3;
 }
 
 /* 로그인 */
@@ -254,6 +279,8 @@ body {
     color: #000000;
     top:21px;
     left:1602px;
+    position: fixed;
+    z-index: 3;
 }
 
 /* 회원가입 */
@@ -269,12 +296,14 @@ body {
     color: #FFFFFF;
     top:21px;
     left:1668px;
+    position: fixed;
+    z-index: 4;
 }
 a {
     text-decoration: none;
 }
-#sidebar-container {
-
+#sidebar-container{
+    position: fixed;
 }
 
 .sidebar-content {
@@ -286,11 +315,13 @@ a {
 }
 
 #main_container{
-    width:1080px;
-    height:1020px;
-    top:57px;
-    left:332px;
+    width:850px;
+    height:990px;
+    top:90px;
+    left:512px;
     position: absolute;
+    overflow: hidden;
+    z-index: 1;
 }
 
 #popular{
@@ -304,6 +335,24 @@ top: 221px;
 background: #FFFFFF;
 border: 1px solid #DBDBDB;
 border-radius: 10px;
+position: fixed;
+}
+
+#popular_text{
+
+position: absolute;
+width: 121px;
+height: 19px;
+left: 1456px;
+top: 245px;
+
+font-family: 'Pretendard';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+color: #9F9F9F;
+position: fixed;
 }
     </style>
 
@@ -357,20 +406,20 @@ border-radius: 10px;
             <a id="signupText" href="/accounts/signup/">회원가입</a>
         {% endif %}
 
-
         <!-- 메인 컨테이너 -->
         <div id="main_container">
-<!--                {% block main_area %}-->
-
-<!--                {% endblock %}-->
+                {% block main_area %}
+                {% endblock %}
         </div>
 
         <!-- 인기글 -->
-        <div id="popular">
+        <div id="popular"></div>
+            <!-- 인기글 코드 추가(block 또는 include 사용) -->
+        <div id="popular_text">이번 달 인기글</div>
 
-        </div>
     </div>
 
+<!--    부트스트랩 주석 처리함-->
 <!--    <div id="main-container">-->
 <!--        <div class="container my-3">-->
 <!--            <div class="row">-->
