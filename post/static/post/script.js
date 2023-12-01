@@ -58,7 +58,7 @@ function addClickEvent(boxId, icon) {
     });
 }
 
-// 맨 왼쪽 3개 메뉴 클릭시 색상 변경 함수
+// 맨 왼쪽 3개 메뉴 클릭시 색상 변경 토글 함수
 let sidePrev = null;
 function sideColor(boxId) {
     var box = document.getElementById(boxId);
@@ -87,21 +87,25 @@ function sideClickEvent(boxId, icon) {
     });
 }
 
-// 맨 왼쪽 사이드바 클릭 시 각각 다른 html 불러오기
-function changeSidebar() {
-    var sidebar = document.getElementById("sidebar");
-    var currentSidebar = sidebar.innerHTML;
+// 토글 초기값 지정
+document.addEventListener('DOMContentLoaded', function() {
+    // 여기서 초기값을 지정할 요소의 ID를 사용하여 bgColor 함수 호출
+    bgColor('rectangle19');
+    // 초기값으로 설정한 rectangle19에 대해 클릭 이벤트 핸들러 등록
+    addClickEvent('rectangle19', 'facility');
 
-    // Check the current sidebar and toggle to the other one
-    if (currentSidebar.includes("This is Sidebar 1")) {
-        sidebar.innerHTML = "{% include 'post/sidebar2_post.html' %}";
-    } else {
-        sidebar.innerHTML = "{% include 'post/sidebar_post.html' %}";
-    }
-}
+    sideClickEvent('rectangle32', 'description');
+});
 
 // 게시물, 정보, 검색 선택에 따라 각각 다른 html 로드
 document.addEventListener('DOMContentLoaded', function() {
+    // 배경색 토글 초기값 지정
+    // 여기서 초기값을 지정할 요소의 ID를 사용하여 bgColor 함수 호출
+    bgColor('rectangle19');
+    // 초기값으로 설정한 rectangle19에 대해 클릭 이벤트 핸들러 등록
+    addClickEvent('rectangle19', 'facility');
+    sideColor('rectangle32');
+    sideClickEvent('rectangle32', 'description');
     // Get sidebar elements
     var sidebarPost = document.getElementById('sidebar-post');
     var sidebarInfo = document.getElementById('sidebar-info');
@@ -115,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var rectangle40 = document.getElementById('rectangle40');
     var actionKey = document.getElementById('action_key');
 
-    // Add click event listeners
+
     rectangle32.addEventListener('click', function() {
         toggleSidebarContent('post');
     });
@@ -148,7 +152,6 @@ document.addEventListener('DOMContentLoaded', function() {
         sidebarInfo.classList.remove('active');
         sidebarSearch.classList.remove('active');
 
-        // Toggle the clicked content
         if (contentType === 'post') {
             sidebarPost.classList.add('active');
         } else if (contentType === 'info') {
@@ -160,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// 각 요소에 클릭 이벤트 핸들러 등록
+// 클릭 시 배경색 변경
 addClickEvent('rectangle19', 'facility');
 addClickEvent('rectangle20', 'administration');
 addClickEvent('rectangle21', 'welfare');
@@ -171,7 +174,7 @@ sideClickEvent('rectangle37', 'bar_chart');
 sideClickEvent('rectangle40', 'action_key');
 
 
-// hover
+// hover 시 border
 addHoverEffect('facility','rectangle19');
 addHoverEffect('administration','rectangle20');
 addHoverEffect('welfare','rectangle21');
