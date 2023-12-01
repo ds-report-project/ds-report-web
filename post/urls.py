@@ -11,7 +11,8 @@ urlpatterns = [
     path('delete_post/<int:pk>/', views.PostDelete.as_view(), name='post_delete'),
     path('search/', views.post_search, name='post_search'),
     path('category/<str:slug>/', views.category_page),
-    path('tag/<str:slug>/', views.tag_page)
+    path('tag/<str:slug>/', views.tag_page),
+    path('post-like/<int:pk>', views.PostLike, name="post_like"),
 ]
 
 # if settings.DEBUG:
