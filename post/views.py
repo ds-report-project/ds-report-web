@@ -32,22 +32,36 @@ class PostList(ListView):
     model = Post
     ordering = '-pk'
 
-    def get_context_data(self, **kwargs):
-        context = super(PostList, self).get_context_data()
-        context['categories'] = Category.objects.all()
-        context['no_categories_post_count'] = Post.objects.filter(category=None).count()
-        return context
-
-class PostDetail(DetailView):
-    model = Post
-    def get_context_data(self, **kwargs):
-        context = super(PostDetail, self).get_context_data()
-        context['categories'] = Category.objects.all()
-        context['no_categories_post_count'] = Post.objects.filter(category=None).count()
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super(PostList, self).get_context_data()
+    #     context['categories'] = Category.objects.all()
+    #     context['no_categories_post_count'] = Post.objects.filter(category=None).count()
+    #     return context
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
+
+        data['categories'] = Category.objects.all()
+        data['no_categories_post_count'] = Post.objects.filter(category=None).count()
+
+        data['number_of_likes'] = [post.number_of_likes() for post in data['post_list']]
+        return data
+
+
+
+class PostDetail(DetailView):
+    model = Post
+    # def get_context_data(self, **kwargs):
+    #     context = super(PostDetail, self).get_context_data()
+    #     context['categories'] = Category.objects.all()
+    #     context['no_categories_post_count'] = Post.objects.filter(category=None).count()
+    #     return context
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+
+        data['categories'] = Category.objects.all()
+        data['no_categories_post_count'] = Post.objects.filter(category=None).count()
 
         likes_connected = get_object_or_404(Post, id=self.kwargs['pk'])
         liked = False

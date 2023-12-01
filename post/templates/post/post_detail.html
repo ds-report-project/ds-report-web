@@ -68,9 +68,9 @@
     {% csrf_token %}
 
     {% if post_is_liked %}
-    <button type="submit" name="post_id" value="{{object.id}}" class="btn btn-info">비공감</button>
+    <button type="submit" name="post_id" value="{{object.id}}" class="btn btn-info"><i class="fas fa-thumbs-up"></i></button>
     {% else %}
-    <button type="submit" name="post_id" value="{{object.id}}" class="btn btn-info">공감</button>
+    <button type="submit" name="post_id" value="{{object.id}}" class="btn btn-info"><i class="far fa-thumbs-up"></i></button>
     {% endif %}
   </form>
 {% else %}
