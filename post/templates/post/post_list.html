@@ -6,10 +6,11 @@
         <a class="btn btn-info btn-sm float-end" href="{% url 'post_create' %}" role="button"><i class="fa fa-tags"></i>글 등록</a>
     {% endif %}
 
-    <!-- 태그 컨테이너 -->
+    <!-- TagBar -->
     <div id="tag_container">
-        <!-- 태그 코드 -->
+      {% include 'post/tagbar.html' %}      
     </div>
+
     <a class="btn btn-info btn-sm float-end" href="#" role="button"></i>해결</a>
     <a class="btn btn-info btn-sm float-end" href="#" role="button"></i>미해결</a>
 

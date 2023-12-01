@@ -24,7 +24,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
-    fields = ['title', 'content', 'category', 'anonymous_nickname', 'images', 'video', 'attachment']
+    fields = ['title', 'content', 'category', 'tags', 'anonymous_nickname', 'images', 'video', 'attachment']
 
     def form_valid(self, form):
         current_user = self.request.user
@@ -52,13 +52,15 @@ class PostList(ListView):
     #     context['no_categories_post_count'] = Post.objects.filter(category=None).count()
     #     return context
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs): 
         data = super().get_context_data(**kwargs)
 
         data['categories'] = Category.objects.all()
         data['no_categories_post_count'] = Post.objects.filter(category=None).count()
 
         data['number_of_likes'] = [post.number_of_likes() for post in data['post_list']]
+        
+        data['tags'] = Tag.objects.all()
         return data
 
 
@@ -95,7 +97,7 @@ class PostDetail(DetailView):
 
 class PostUpdate(UpdateView):
     model = Post
-    fields = ['title', 'content', 'category', 'anonymous_nickname', 'images', 'video', 'attachment']
+    fields = ['title', 'content', 'category', 'tags', 'anonymous_nickname', 'images', 'video', 'attachment']
     template_name = 'post/post_update_form.html'
 
     def dispatch(self, request, *args, **kwargs):
@@ -137,6 +139,7 @@ def category_page(request, slug):
         'categories' : Category.objects.all(),
         'no_categories_post_count' : Post.objects.filter(category=None).count(),
         'category' : category,
+        'tags': Tag.objects.all(),
     }
     )
 
@@ -205,7 +208,8 @@ def tag_page(request, slug):
             'post_list': post_list,
             'tag': tag,
             'categories': Category.objects.all(),
-            'no_category_post_count': Post.objects.filter(category=None).count()
+            'no_category_post_count': Post.objects.filter(category=None).count(),
+            'tags': Tag.objects.all(),
         }
     )
 
