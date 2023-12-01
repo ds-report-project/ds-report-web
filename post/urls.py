@@ -15,6 +15,10 @@ urlpatterns = [
     path('category/<str:slug>/', views.category_page),
     path('tag/<str:slug>/', views.tag_page),
     path('?search=<str:slug>/', views.search_page, name='search')
+    path('search/', views.post_search, name='post_search'),
+    path('category/<str:slug>/', views.category_page),
+    path('tag/<str:slug>/', views.tag_page),
+    path('post-like/<int:pk>', views.PostLike, name="post_like"),
 ]
 
 # if settings.DEBUG:

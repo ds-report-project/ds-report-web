@@ -58,11 +58,16 @@
                             {% if post.anonymous_nickname %}
                                 <div class="text-muted fst-italic mb-2">작성자: {{ post.anonymous_nickname }}</div>
                             {% else %}
-                                <div class="text-muted fst-italic mb-2">작성자: Anonymous</div>
+                                <div class="text-muted fst-italic mb-2">작성자: 익명</div>
                             {% endif %}
                         {% else %}
-                            <div class="text-muted fst-italic mb-2">작성자: <a
-                                    href="#">{{ post.author.username | default:"Anonymous" | upper }}</a></div>
+                            <div class="text-muted fst-italic mb-2">작성자:
+                                {% if post.anonymous_nickname %}
+                                    {{ post.anonymous_nickname }}
+                                {% else %}
+                                    {{ post.get_anonymous_nickname_display }}
+                                {% endif %}
+                            </div>
                         {% endif %}
                     </header>
 
@@ -152,6 +157,22 @@
     <a href="{{ post.attachment.url }}" class="btn btn-primary" download>첨부 파일 다운로드</a>
 {% endif %}
 
+<!-- LIKES -->
+{% if user.is_authenticated %}
+  <form action="{% url 'post_like' object.id %}" method="POST">
+    {% csrf_token %}
+
+    {% if post_is_liked %}
+    <button type="submit" name="post_id" value="{{object.id}}" class="btn btn-info"><i class="fas fa-thumbs-up"></i></button>
+    {% else %}
+    <button type="submit" name="post_id" value="{{object.id}}" class="btn btn-info"><i class="far fa-thumbs-up"></i></button>
+    {% endif %}
+  </form>
+{% else %}
+  <a class="btn btn-outline-info" href="{% url 'login' %}?next={{request.path}}">Log in to like this article!</a><br>
+{% endif %}
+
+<strong class="text-secondary">{{ number_of_likes }}공감</strong>
 
 <!--                </article>-->
 
