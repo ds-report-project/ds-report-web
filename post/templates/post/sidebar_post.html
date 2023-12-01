@@ -1,0 +1,179 @@
+<style>
+#Rectangle42 {
+position: absolute;
+width: 240px;
+height: 1023px;
+left: 92px;
+top: 57px;
+
+background: #FFFFFF;
+box-shadow: -4px 0px 2px rgba(0, 0, 0, 0.1),
+            4px 0px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Rectangle 19 */
+#rectangle19 {
+    position: absolute;
+    width: 210px;
+    height: 48px;
+    left: 107px;
+    top: 67px;
+    background: #FFFFFF;
+    border-radius: 26px;
+}
+
+/* Rectangle 20 */
+#rectangle20 {
+    position: absolute;
+    width: 210px;
+    height: 48px;
+    left: 107px;
+    top: 115px;
+    background: #FFFFFF;
+    border-radius: 26px;
+}
+
+/* Rectangle 21 */
+#rectangle21 {
+    position: absolute;
+    width: 210px;
+    height: 48px;
+    left: 107px;
+    top: 163px;
+    background: #FFFFFF;
+    border-radius: 26px;
+}
+
+/* Rectangle 45 */
+#rectangle45 {
+    position: absolute;
+    width: 210px;
+    height: 48px;
+    left: 107px;
+    top: 211px;
+    background: #FFFFFF;
+    border-radius: 26px;
+}
+
+/* Rectangle 46 */
+#rectangle46 {
+    position: absolute;
+    width: 210px;
+    height: 48px;
+    left: 107px;
+    top: 259px;
+    background: #FFFFFF;
+    border-radius: 26px;
+}
+
+/* 시설 */
+#facility {
+    position: absolute;
+    width: 36px;
+    height: 18px;
+    left: 127px;
+    top: 83px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
+}
+
+/* 행정 */
+#administration {
+    position: absolute;
+    width: 36px;
+    height: 18px;
+    left: 127px;
+    top: 131px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
+}
+
+/* 복지 */
+#welfare {
+    position: absolute;
+    width: 36px;
+    height: 18px;
+    left: 127px;
+    top: 179px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
+}
+
+/* 교육 */
+#education {
+    position: absolute;
+    width: 36px;
+    height: 18px;
+    left: 127px;
+    top: 227px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
+}
+
+/* 기타 */
+#other {
+    position: absolute;
+    width: 36px;
+    height: 18px;
+    left: 127px;
+    top: 275px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    color: #000000;
+}
+
+
+[id^="rectangle"] {
+    cursor: pointer;
+}
+
+[id^="rectangle"]:hover {
+    border: 1px solid #CCCCCC;
+}
+
+/*active 시 배경색 변경*/
+#rectangle19:active,
+#rectangle20:active,
+#rectangle21:active,
+#rectangle45:active,
+#rectangle46:active
+{
+    background: #EDEDED; /* active 시 배경색 변경 */
+}
+
+
+</style>
+
+<!--컨테이너-->
+<div id="sidebar">
+    <div id="Rectangle42"></div>
+        <div id="rectangle19" href="#"></div>
+            <a id="facility" href="#">시설</a>
+        <a id="rectangle20" href="#"></a>
+            <a id="administration" href="#">행정</a>
+        <a id="rectangle21" href="#"></a>
+            <a id="welfare" href="#">복지</a>
+        <a id="rectangle45" href="#"></a>
+            <a id="education" href="#">교육</a>
+        <a id="rectangle46" href="#"></a>
+            <a id="other" href="#">기타</a>
+</div>

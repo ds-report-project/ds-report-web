@@ -1,4 +1,6 @@
 {% extends 'post/base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
 
 {% block main_area %}
     <!-- Page content-->
@@ -12,11 +14,46 @@
                         <!-- Post title-->
                         <h1 class="fw-bolder mb-1">{{ post.title }}</h1>
 
-                        <!-- Post meta content -->
-<div class="text-muted fst-italic mb-2">{{ post.created_at|date:"Y년 m월 d일 H시 i분" }}</div>
+                            <!-- Post meta content-->
+                            <div class="\" ass="text-muted fst-italic mb-2">Posted on {{ p.created_at }} </div>
 
+                            <!-- Post update icon -->
+                            {% if user.is_authenticated and user == p.author %}
+                                <a class="btn btn-info btn-sm float-end" href="post/update_post/{{ p.pk }}" role="button">수정</a>
+                            {% endif %}
+
+                            {% if user.is_authenticated and user == p.author %}
+                                <a class="btn btn-info btn-sm float-end" href="post/delete_post/{{ pt.pk }}" role="button">삭제</a>
+                            {% endif %}
+
+                            <!-- Post categories-->
+                            {% if p.category %}
+                            <span class ="badge bg-secondary">{{ p.category }}</span>
+                            {% else %}
+                            <span class ="badge bg-secondary">미분류</span>
+                            {% endif %}
+
+                        </header>
+
+                        <section class="mb-5">
+                            <p class="fs-5 mb-4">{{ p.content }}</p>
+                        </section>
+
+<!--                         다운로드 버튼생성-->
+                        {% if p.file_upload %}
+                            <a href="{{ p.file_upload.url }}" class="btn btn-outline-dark" role="button" download>다운로드</a>
+                        {% endif %}
+                  
                         <!-- Post update icon -->
                         {% if user.is_authenticated and user == post.author %}
+                            <!-- 해결됐어요 버튼 -->
+                            <form method="post" action="{% url 'post_detail' pk=post.pk %}">
+                                {% csrf_token %}
+                                <button type="submit" name="resolve_button" class="btn btn-primary btn-sm float-end"
+                                        {% if post.resolve_cache %}해결됨{% endif %}>
+                                    해결됐어요 ({{ post.resolve_actions.count }}명)
+                                </button>
+                            </form>
                             <a class="btn btn-info btn-sm float-end" href="{% url 'post_update' pk=post.pk %}" role="button">수정</a>
                             <a class="btn btn-info btn-sm float-end" href="{% url 'post_delete' pk=post.pk %}" role="button">삭제</a>
                         {% endif %}
@@ -47,7 +84,72 @@
                     </header>
 
                     <section class="mb-5">
-                        <p class="fs-5 mb-4">{{ post.content }}</p>
+                        <div class="card bg-light">
+                            <div class="card-body">
+
+                                 <!-- Comment form-->
+                                {% if user.is_authenticated %}
+
+                                <form class="mb-4" id="comment-form" method="POST" action="{% url 'new_comment' pk=post.pk %}">
+                                    {% csrf_token %}
+
+                                    <input name="new_comment" type="text" value="">
+                                    <button type = "submit" class = "btn btn-primary"> 입력 </button>
+                                {% else %}
+                                    <a role="button" class = "btn btn-sm" href="#" data-toggle="modal" data-target="#loginModal">로그인하고 댓글을 남겨주세요</a>
+                                {% endif %}
+                                </form>
+
+                                <!-- Single comment-->
+                                {% if post.comment_set.exists %}
+                                    {% for comment in post.comment_set.iterator %}
+                                <div class="d-flex" id="comment={{comment.pk}}">
+                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                                    <div class="ms-3">
+
+                                        {% if user.is_authenticated and comment.author == user %}
+                                            <a role="button" class="btn btn-sm btn-info float-end" id="comment-{{comment.pk}}-update-btn" href="{% url 'update_comment' comment.pk %}">수정</a>
+                                        {% endif %}
+
+                                        <a role="button" class="btn btn-sm btn-danger float-end" data-toggle="modal" data-target="#deleteCommentModal-{{ comment.pk }}">삭제</a>
+
+                                        <!-- Delete Modal -->
+                                        <div class="modal fade" id="deleteCommentModal-{{comment.pk}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">댓글을 삭제하시겠습니까?</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span area-hidden="true">X</span></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        {{comment}}
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" data-dismiss="modal">취소</button>
+                                                         <form class="mb-4" id="comment-form" method="POST" action="{% url 'delete_comment' pk=comment.pk %}">
+                                                            {% csrf_token %}
+                                                            <button type = "submit" class = "btn btn-sm btn-danger float-end"> 삭제 </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="fw-bold">{{comment.author}} & {{ comment.create_at }}</div>
+                                        {{ comment.content | linebreaks }}
+                                        {% if comment.created_at != comment.modified_at %}
+                                            <p class="text-muted"><small> Updated : {{ comment.modified_at }}</small></p>
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                                    {% endfor %}
+                                {% endif %}
+
+                            </div>
+                        </div>
                     </section>
 <!-- 이미지 표시 -->
 {% if post.images %}
@@ -84,39 +186,68 @@
 
 <strong class="text-secondary">{{ number_of_likes }}공감</strong>
 
-                </article>
+<!--                </article>-->
 
-                <!-- Comments section-->
-                <section class="mb-5">
-                    <div class="card bg-light">
-                        <div class="card-body">
-                            <!-- Comment form-->
-                            <form class="mb-4"><textarea class="form-control" rows="3"
-                                                        placeholder="Join the discussion and leave a comment!"></textarea>
-                            </form>
-
-                            <!-- Display comments -->
-                            {% for comment in post.comments.all %}
-                                <div class="d-flex mb-4">
-                                    <!-- Commenter avatar-->
-                                    <div class="flex-shrink-0"><img class="rounded-circle"
-                                                                   src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"
-                                                                   alt="..."/></div>
-                                    <!-- Commenter content-->
-                                    <div class="ms-3">
-                                        <div class="fw-bold">{{ comment.commenter_name }}</div>
-                                        {{ comment.content }}
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-    </div>
+<!--                    &lt;!&ndash; Comments section&ndash;&gt;-->
+<!--                    <section class="mb-5">-->
+<!--                        <div class="card bg-light">-->
+<!--                            <div class="card-body">-->
+<!--                                 Comment form-->
+<!--                                <form class="mb-4"><textarea class="form-control" rows="3"-->
+<!--                                                            placeholder="Join the discussion and leave a comment!"></textarea>-->
+<!--                                </form>-->
+<!--    -->
+<!--                                &lt;!&ndash; Display comments &ndash;&gt;-->
+<!--                                {% for comment in post.comments.all %}-->
+<!--                                    <div class="d-flex mb-4">-->
+<!--                                        &lt;!&ndash; Commenter avatar&ndash;&gt;-->
+<!--                                        <div class="flex-shrink-0"><img class="rounded-circle"-->
+<!--                                                                       src="https://dummyimage.com/50x50/ced4da/6c757d.jpg"-->
+<!--                                                                       alt="..."/></div>-->
+<!--                                        &lt;!&ndash; Commenter content&ndash;&gt;-->
+<!--                                        <div class="ms-3">-->
+<!--                                            <div class="fw-bold">{{ comment.commenter_name }}</div>-->
+<!--                                            {{ comment.content }}-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                {% endfor %}-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </section>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
 {% endblock %}
 
+{% block javascript %}
+<script>
+  // Function to handle comment deletion
+  function deleteComment(commentId) {
+  $.ajax({
+    type: 'POST',
+    url: '{% url 'delete_comment' pk=comment.pk %}',
+    data: { csrfmiddlewaretoken: '{{ csrf_token }}' },
+    success: function (response) {
+      if (response.status === 'success') {
+        // Remove the comment from the UI first
+        $('#comment-' + commentId).remove();
+        // Close the modal
+        $('#deleteCommentModal-' + commentId).modal('hide');
+      } else {
+        alert('Failed to delete comment. ' + response.message);
+      }
+    },
+    error: function () {
+      alert('An error occurred while trying to delete the comment.');
+    }
+  });
+  }
 
+    function handleDelete(commentId) {
+        console.log("!!!!!!!!!!!!")
+        console.log(commentId)
+    }
+</script>
 
+{% endblock %}
