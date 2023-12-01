@@ -46,6 +46,17 @@ class PostDetail(DetailView):
         context['no_categories_post_count'] = Post.objects.filter(category=None).count()
         return context
 
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+
+        likes_connected = get_object_or_404(Post, id=self.kwargs['pk'])
+        liked = False
+        if likes_connected.likes.filter(id=self.request.user.id).exists():
+            liked = True
+        data['number_of_likes'] = likes_connected.number_of_likes()
+        data['post_is_liked'] = liked
+        return data
+
 
 class PostUpdate(UpdateView):
     model = Post
@@ -67,17 +78,6 @@ class PostUpdate(UpdateView):
 class PostDelete(DeleteView):
     model = Post
     success_url = '/post/'
-
-    def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
-
-        likes_connected = get_object_or_404(Post, id=self.kwargs['pk'])
-        liked = False
-        if likes_connected.likes.filter(id=self.request.user.id).exists():
-            liked = True
-        data['number_of_likes'] = likes_connected.number_of_likes()
-        data['post_is_liked'] = liked
-        return data
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user == self.get_object().author:

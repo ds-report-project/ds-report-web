@@ -56,7 +56,7 @@ class Post(models.Model):
     attachment = models.FileField(blank=True, null=True, upload_to='post_attachments/')
     likes = models.ManyToManyField(User, related_name='post_like')
 
-    def number_of_like(self):
+    def number_of_likes(self):
         return self.likes.count()
  
 
