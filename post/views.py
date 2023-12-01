@@ -33,6 +33,8 @@ class PostList(ListView):
         context = super(PostList, self).get_context_data()
         context['categories'] = Category.objects.all()
         context['no_categories_post_count'] = Post.objects.filter(category=None).count()
+
+        context['tags'] = Tag.objects.all()
         return context
 
 class PostDetail(DetailView):
@@ -88,6 +90,7 @@ def category_page(request, slug):
         'categories' : Category.objects.all(),
         'no_categories_post_count' : Post.objects.filter(category=None).count(),
         'category' : category,
+        'tags': Tag.objects.all(),
     }
     )
 
@@ -103,8 +106,8 @@ def tag_page(request, slug):
         {
             'post_list': post_list,
             'tag': tag,
-            'tags': Tag.objects.all(),
             'categories': Category.objects.all(),
-            'no_category_post_count': Post.objects.filter(category=None).count()
+            'no_category_post_count': Post.objects.filter(category=None).count(),
+            'tags': Tag.objects.all(),
         }
     )
