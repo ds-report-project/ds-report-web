@@ -2,10 +2,16 @@
 
 {% block main_area %}
     {% if user.is_authenticated %}
-        {% if user.is_superuser or user.is_staff %}
-            <a class="btn btn-info btn-sm float-end" href="{% url 'post_create' %}" role="button"><i class="fa fa-tags"></i>글 등록</a>
-        {% endif %}
+        <!-- 일반 사용자도 글 작성 가능 -->
+        <a class="btn btn-info btn-sm float-end" href="{% url 'post_create' %}" role="button"><i class="fa fa-tags"></i>글 등록</a>
     {% endif %}
+
+    <!-- 태그 컨테이너 -->
+    <div id="tag_container">
+        <!-- 태그 코드 -->
+    </div>
+    <a class="btn btn-info btn-sm float-end" href="#" role="button"></i>해결</a>
+    <a class="btn btn-info btn-sm float-end" href="#" role="button"></i>미해결</a>
 
     <h1>게시물
         {% if category %}<span class="badge bg-secondary">{{ category }}</span> {% endif %}
@@ -67,8 +73,6 @@
                         <a href="#">{{ post.author.username | default:"Anonymous" | upper }}</a>
                     {% endif %}
                 </div>
-
-               
             </div>
         {% endfor %}
     {% else %}

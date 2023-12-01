@@ -7,43 +7,391 @@
     <link rel="stylesheet" href="{% static 'post/bootstrap/bootstrap.min.css' %}" media="screen">
     <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>  
+    <style>
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+
+#container {
+    width: 1920px;
+    height: 1080px;
+    position: absolute;
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*transform: translate(-50%, -50%);*/
+    min-width: 1800px;
+}
+
+#Rectangle52 {
+    position: absolute;
+    width: 1920px;
+    height: 57px;
+    left: 0px;
+    top: 0px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    z-index: 2;
+}
+#Rectangle29{
+    position: absolute;
+    width: 92px;
+    height: 1023px;
+    left: 0px;
+    top: 57px;
+
+    background: #FFFFFF;
+    box-shadow: 4px 0px 2px rgba(0, 0, 0, 0.1);
+    position: fixed;
+}
+        /* Rectangle 37 */
+#rectangle37 {
+    position: absolute;
+    width: 56px;
+    height: 32px;
+    left: 20px;
+    top: 150px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    position: fixed;
+}
+
+/* Rectangle 32 */
+#rectangle32 {
+    position: absolute;
+    width: 56px;
+    height: 32px;
+    left: 20px;
+    top: 78px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    position: fixed;
+}
+
+#rectangle32:active,
+#rectangle37:active,
+#rectangle40:active,
+#bar_chart:active + #rectangle37,
+#description:active + #rectangle32,
+#action_key:active + #rectangle40
+{
+    background: #EDEDED; /* active 시 배경색 변경 */
+}
+
+/* Rectangle 40 */
+#rectangle40 {
+    position: absolute;
+    width: 56px;
+    height: 32px;
+    left: 20px;
+    top: 222px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    position: fixed;
+}
+
+/* bar_chart */
+#bar_chart {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 36px;
+    top: 154px;
+    position: fixed;
+}
+
+/* 정보 */
+#info {
+    position: absolute;
+    width: 64px;
+    height: 16px;
+    left: 16px;
+    top: 186px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;
+    color: #000000;
+    position: fixed;
+}
+
+/* description */
+#description {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 36px;
+    top: 82px;
+    position: fixed;
+}
+
+/* action_key */
+#action_key {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 36px;
+    top: 226px;
+    position: fixed;
+}
+
+/* 게시물 */
+#post {
+    position: absolute;
+    width: 64px;
+    height: 16px;
+    left: 16px;
+    top: 114px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;
+    color: #000000;
+    position: fixed;
+}
+
+/* 규정 검색 */
+#searchRegulation {
+    position: absolute;
+    width: 64px;
+    height: 16px;
+    left: 16px;
+    top: 258px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;
+    color: #000000;
+    position: fixed;
+}
+
+/* 덕성신문고 */
+#duckSungLogo {
+    position: absolute;
+    width: 90px;
+    height: 20px;
+    left: 66px;
+    top: 19px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 20px;
+    color: #000000;
+    cursor: pointer;
+    position: fixed;
+    z-index: 3;
+}
+
+/* 로그아웃 */
+#logout {
+    position: absolute;
+    width: 55px;
+    height: 16px;
+    left: 1681px;
+    top: 19px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #000000;
+    position: fixed;
+    z-index: 3;
+}
+
+/* notifications_active */
+#notificationsIcon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 36px;
+    top: 17px;
+    /*background: #D9D9D9;*/
+    cursor: pointer;
+    position: fixed;
+    z-index: 3;
+}
+
+
+
+/* account_circle */
+#accountIcon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 1649px;
+    top: 15px;
+    position: fixed;
+    z-index: 3;
+}
+
+#accountIcon::before {
+    content: '';
+    position: absolute;
+    left: 8.33%;
+    right: 8.33%;
+    top: 8.33%;
+    bottom: 8.33%;
+    background: #1C1B1F;
+    position: fixed;
+    z-index: 3;
+}
+[id^="rectangle"] {
+    cursor: pointer;
+}
+
+[id^="rectangle"]:hover {
+    border: 1px solid #CCCCCC;
+}
+
+/* Rectangle 17 */
+#rectangle17 {
+    position: absolute;
+    width: 76px;
+    height: 38px;
+    background: #333333;
+    border-radius: 19px;
+    top:10px;
+    left:1656px;
+    position: fixed;
+    z-index: 3;
+}
+
+/* 로그인 */
+#loginText {
+    position: absolute;
+    width: 44px;
+    height: 16px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #000000;
+    top:21px;
+    left:1602px;
+    position: fixed;
+    z-index: 3;
+}
+
+/* 회원가입 */
+#signupText {
+    position: absolute;
+    width: 55px;
+    height: 16px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 16px;
+    color: #FFFFFF;
+    top:21px;
+    left:1668px;
+    position: fixed;
+    z-index: 4;
+}
+a {
+    text-decoration: none;
+}
+#sidebar-container{
+    position: fixed;
+}
+
+.sidebar-content {
+    display: none;
+}
+
+.sidebar-content.active {
+    display: block;
+}
+
+#main_container{
+    width:850px;
+    height:990px;
+    top:90px;
+    left:512px;
+    position: absolute;
+    overflow: hidden;
+    z-index: 1;
+}
+
+#popular{
+box-sizing: border-box;
+position: absolute;
+width: 300px;
+height: 488px;
+left: 1426px;
+top: 221px;
+
+background: #FFFFFF;
+border: 1px solid #DBDBDB;
+border-radius: 10px;
+position: fixed;
+}
+
+#popular_text{
+
+position: absolute;
+width: 121px;
+height: 19px;
+left: 1456px;
+top: 245px;
+
+font-family: 'Pretendard';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+color: #9F9F9F;
+position: fixed;
+}
+    </style>
 </head>
 
 <body>
-    <!-- NavBar -->
-    {% include 'post/navbar.html' %}
 
-    <!-- Search -->
-    {% include 'post/search.html' %}
+    <div id="container">
+        <!-- 사이드바 -->
+        <div id="Rectangle29"></div>
+            <!-- 게시물 -->
+            <a id="rectangle32"></a>
+            <img src="../../static/post/description.svg" id="description">
+            <div id="post">게시물</div>
+            <!-- 정보 -->
+            <a id="rectangle37"></a>
+            <img src="../../static/post/bar_chart.svg" id="bar_chart">
+            <div id="info">정보</div>
+            <!-- 규정 검색 -->
+            <a id="rectangle40"></a>
+            <img src="../../static/post/action_key.svg" alt="" id="action_key">
+            <div id="searchRegulation">규정 검색</div>
 
-    <!-- Modal -->
-    {% include 'post/modal.html' %}
+        <!-- 게시물 카테고리 사이드바 -->
+        <div id="sidebar-container">
+            <!-- 게시물 -->
+            <div id="sidebar-post" class="sidebar-content">
+                {% include 'post/sidebar_post.html' %}
+            </div>
 
-    <div class="container my-3">
-        <div class="row">
-            <div class="col-md-4 col-lg-3">
-                <!-- Categories Widget -->
-                <div class="card my-4">
-                    <h5 class="card-header">Categories</h5>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <ul class="list-unstyled mb-0">
-                                    {% for category in categories %}
-                                    <li>
-                                        <a href="{{ category.get_absolute_url}}">{{ category }}({{ category.post_set.count }})</a>
-                                    </li>
-                                    {% endfor %}
-                                    <li>
-                                        <a href="/post/category/no_category/">기타({{ no_categories_post_count }})</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <!-- 정보 -->
+            <div id="sidebar-info" class="sidebar-content">
+                {% include 'post/sidebar_info.html' %}
+            </div>
 
-                 <!-- Categories Widget -->
+            <!-- 규정 검색 -->
+            <div id="sidebar-search" class="sidebar-content">
+                {% include 'post/sidebar_search.html' %}
                 <div class="card my-4">
                     <h5 class="card-header">Rules</h5>
                     <div class="card-body">
@@ -65,10 +413,26 @@
 
                     </div>
                 </div>
-             </div>
+            </div>
+        </div>
 
-            <div class="col-md-8 col-lg-9" id="main-area">
-            
+        <!-- 상단바 -->
+        <div id="Rectangle52"></div>
+        <a href="{% url 'post_list' %}"><img src="../../static/post/notification.svg" id="notificationsIcon"></a>
+        <a id="duckSungLogo" href="{% url 'post_list' %}">덕성신문고</a>
+        {% if user.is_authenticated %}
+            <a href="/accounts/logout/"><img src="../../static/post/account_circle.svg" alt="" id="accountIcon"></a>
+            <a id="logout" href="/accounts/logout/">로그아웃</a>
+        {% else %}
+            <a href="/accounts/login/" id="loginText">로그인</a>
+            <a href="/accounts/signup/" id="rectangle17"></a>
+            <a id="signupText" href="/accounts/signup/">회원가입</a>
+        {% endif %}
+
+        <!-- 메인 컨테이너 -->
+        <div id="main_container">
+            <!-- Search -->
+            {% include 'post/search.html' %}
             <!-- 검색 결과 표시 -->
             {% if posts %}
                 <h3>Search Results for "{{ query }}"</h3>
@@ -80,49 +444,57 @@
             {% elif query %}
                 <p>No results found for "{{ query }}"</p>
             {% else %}
-                <!-- 모든 게시물 -->
                 {% block main_area %}
                 {% endblock %}
             {% endif %}
-
-                <!-- Pagination -->
-                <ul class="pagination justify-content-center mb-4">
-                    <li class="page-item">
-                        <a class="page-link" href="#">&larr; Older</a>
-                    </li>
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#">Newer &rarr;</a>
-                    </li>
-                </ul>
-            </div>
-            
         </div>
+      
+        <!-- 인기글 -->
+        <div id="popular"></div>
+            <!-- 인기글 코드 추가(block 또는 include 사용) -->
+        <div id="popular_text">이번 달 인기글</div>
+
     </div>
 
+<!--    부트스트랩 주석 처리함-->
+<!--    <div id="main-container">-->
+<!--        <div class="container my-3">-->
+<!--            <div class="row">-->
+<!--                <div class="col-md-8 col-lg-9 mt-1" id="main-area">-->
+                    <!-- Pagination -->
+<!--                    <ul class="pagination justify-content-center mb-4">-->
+<!--                        <li class="page-item">-->
+<!--                            <a class="page-link" href="#">&larr; Older</a>-->
+<!--                        </li>-->
+<!--                        <li class="page-item disabled">-->
+<!--                            <a class="page-link" href="#">Newer &rarr;</a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
-    <!-- Footer -->
-    {% include 'post/footer.html' %}
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
-
-    <script>
-        document.getElementById('searchForm').addEventListener('submit', function (e) {
-            e.preventDefault();  // Prevent the form from submitting immediately
-            var searchTerm = document.querySelector('[name="searched"]').value;
-            var baseUrl = "{% url 'search' slug='placeholder' %}".replace('placeholder', searchTerm);
-            this.action = baseUrl
-            this.submit();
-        });
-    </script>
-
+        <script>
+            document.getElementById('searchForm').addEventListener('submit', function (e) {
+                e.preventDefault();  // Prevent the form from submitting immediately
+                var searchTerm = document.querySelector('[name="searched"]').value;
+                var baseUrl = "{% url 'search' slug='placeholder' %}".replace('placeholder', searchTerm);
+                this.action = baseUrl
+                this.submit();
+            });
+        </script>
+        <script src="../../static/post/script.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
 
 </body>
 

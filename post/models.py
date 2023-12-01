@@ -43,7 +43,7 @@ class Post(models.Model):
 
     title = models.CharField(max_length=50)
     content = models.TextField(max_length=255)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
@@ -55,10 +55,22 @@ class Post(models.Model):
     video = models.FileField(blank=True, null=True, upload_to='post_videos/')
     attachment = models.FileField(blank=True, null=True, upload_to='post_attachments/')
     likes = models.ManyToManyField(User, related_name='post_like')
-
+    
     def number_of_likes(self):
         return self.likes.count()
- 
+    
+    resolve_actions = models.ManyToManyField(User, through='ResolveAction', related_name='resolved_posts')  # resolve에 필요
+    resolve_cache = models.BooleanField(default=False) # resolved 캐시 변수 초기화
+
+    @property
+    def is_resolved(self):
+        # 캐시된 결과가 있는 경우 해당 결과를 반환.
+        if self.resolve_cache is not None:
+            return self.resolve_cache
+
+        # true/false 저장
+        self.resolve_cache = self.resolve_actions.count() >= 1
+        return self.resolve_cache
 
     def get_absolute_url(self):
         return reverse('post_detail', args=[str(self.id)])
@@ -72,6 +84,15 @@ class Comment(models.Model):
 
         def __str__(self):
             return f'{self.author}::{self.content}'
+          
+# 해결 처리를 위해 해결 버튼 클릭 여부 저장
+class ResolveAction(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'post')
 
         def get_absolute_url(self):
             return f'{self.post.get_absolute_url()}#comment-{self.pk}'
