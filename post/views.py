@@ -1,11 +1,9 @@
 from .models import Post, Category, Tag
-from django.shortcuts import redirect, render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
-from django.urls import reverse
 from django.db import models
 from django.db.models import Q
 from django.contrib import messages
