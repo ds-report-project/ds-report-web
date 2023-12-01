@@ -360,6 +360,7 @@ position: fixed;
 </head>
 
 <body>
+
     <div id="container">
         <!-- 사이드바 -->
         <div id="Rectangle29"></div>
@@ -391,6 +392,27 @@ position: fixed;
             <!-- 규정 검색 -->
             <div id="sidebar-search" class="sidebar-content">
                 {% include 'post/sidebar_search.html' %}
+                <div class="card my-4">
+                    <h5 class="card-header">Rules</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <form id="searchForm" class="d-flex" method="GET" action="{% url 'search' slug='1'%}">
+                                    {% csrf_token %}
+                                    <input class="form-control me-2" type="search" placeholder="Search" name="searched" aria-label="search">
+                                    <button class="btn btn-outline-success" type="submit">Search</button>
+                                </form>
+                            </div>
+                        </div>
+
+                            {% for key, value in request.session.search_context.items %}
+                                <p> </p>
+                                <p>조항:{{ key }} </p>
+                                <p>내용:{{ value }}</p>
+                            {% endfor %}
+
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -453,8 +475,16 @@ position: fixed;
 <!--        </div>-->
 <!--    </div>-->
 
-        <!-- Footer -->
-<!--        {% include 'post/footer.html' %}-->
+
+        <script>
+            document.getElementById('searchForm').addEventListener('submit', function (e) {
+                e.preventDefault();  // Prevent the form from submitting immediately
+                var searchTerm = document.querySelector('[name="searched"]').value;
+                var baseUrl = "{% url 'search' slug='placeholder' %}".replace('placeholder', searchTerm);
+                this.action = baseUrl
+                this.submit();
+            });
+        </script>
         <script src="../../static/post/script.js"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

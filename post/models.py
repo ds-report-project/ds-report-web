@@ -64,7 +64,7 @@ class Post(models.Model):
 
     @property
     def is_resolved(self):
-        # 캐시된 결과가 있는 경우 해당 결과를 반환. 해결됐어요 누른 사용자가 삭제된 경우에도 해결로 분류하기 위함.
+        # 캐시된 결과가 있는 경우 해당 결과를 반환.
         if self.resolve_cache is not None:
             return self.resolve_cache
 
@@ -74,9 +74,17 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post_detail', args=[str(self.id)])
-    
-    pass
 
+class Comment(models.Model):
+        post = models.ForeignKey(Post, on_delete=models.CASCADE)
+        author = models.ForeignKey(User, on_delete=models.CASCADE)
+        content = models.CharField('*댓글을 입력하세요.', max_length=150)
+        created_at = models.DateTimeField(auto_now_add=True)
+        modified_at = models.DateTimeField(auto_now=True)
+
+        def __str__(self):
+            return f'{self.author}::{self.content}'
+          
 # 해결 처리를 위해 해결 버튼 클릭 여부 저장
 class ResolveAction(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -86,6 +94,13 @@ class ResolveAction(models.Model):
     class Meta:
         unique_together = ('user', 'post')
 
+        def get_absolute_url(self):
+            return f'{self.post.get_absolute_url()}#comment-{self.pk}'
 
 
+class Rule(models.Model):
+    name = models.CharField(max_length=50)
+    content = models.TextField(max_length=255)
 
+    def __str__(self):
+            return self.name
