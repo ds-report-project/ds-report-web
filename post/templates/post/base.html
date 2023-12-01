@@ -17,10 +17,10 @@ body {
     width: 1920px;
     height: 1080px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #f0f0f0; /* 원하는 배경색으로 변경 가능 */
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*transform: translate(-50%, -43%);*/
+    min-width: 1800px;
 }
 
 #Rectangle52 {
@@ -94,28 +94,6 @@ body {
     top: 154px;
 }
 
-
-
-/* Bounding box */
-#boundingBox1 {
-    position: absolute;
-    left: 0%;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
-    background: #D9D9D9;
-}
-
-/* bar_chart */
-#bar_chart2 {
-    position: absolute;
-    left: 16.67%;
-    right: 16.67%;
-    top: 16.67%;
-    bottom: 16.67%;
-    background: #1C1B1F;
-}
-
 /* 정보 */
 #info {
     position: absolute;
@@ -141,26 +119,6 @@ body {
     top: 82px;
 }
 
-/* Bounding box */
-#boundingBox2 {
-    position: absolute;
-    left: 0%;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
-    background: #D9D9D9;
-}
-
-/* description */
-#description3 {
-    position: absolute;
-    left: 16.67%;
-    right: 16.67%;
-    top: 8.33%;
-    bottom: 8.33%;
-    background: #1C1B1F;
-}
-
 /* action_key */
 #action_key {
     position: absolute;
@@ -168,26 +126,6 @@ body {
     height: 24px;
     left: 36px;
     top: 226px;
-}
-
-/* Bounding box */
-#boundingBox3 {
-    position: absolute;
-    left: 0%;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
-    background: #D9D9D9;
-}
-
-/* action_key */
-#action_key4 {
-    position: absolute;
-    left: 6.25%;
-    right: 4.17%;
-    top: 6.25%;
-    bottom: 4.17%;
-    background: #1C1B1F;
 }
 
 /* 게시물 */
@@ -335,17 +273,44 @@ body {
 a {
     text-decoration: none;
 }
+#sidebar-container {
 
+}
 
+.sidebar-content {
+    display: none;
+}
 
+.sidebar-content.active {
+    display: block;
+}
 
+#main_container{
+    width:1080px;
+    height:1020px;
+    top:57px;
+    left:332px;
+    position: absolute;
+}
 
+#popular{
+box-sizing: border-box;
+position: absolute;
+width: 300px;
+height: 488px;
+left: 1426px;
+top: 221px;
+
+background: #FFFFFF;
+border: 1px solid #DBDBDB;
+border-radius: 10px;
+}
     </style>
 
 </head>
 
 <body>
-    <div id="#container">
+    <div id="container">
         <!-- 사이드바 -->
         <div id="Rectangle29"></div>
             <!-- 게시물 -->
@@ -362,7 +327,22 @@ a {
             <div id="searchRegulation">규정 검색</div>
 
         <!-- 게시물 카테고리 사이드바 -->
-        {% include 'post/sidebar_post.html' %}
+        <div id="sidebar-container">
+            <!-- 게시물 -->
+            <div id="sidebar-post" class="sidebar-content">
+                {% include 'post/sidebar_post.html' %}
+            </div>
+
+            <!-- 정보 -->
+            <div id="sidebar-info" class="sidebar-content">
+                {% include 'post/sidebar_info.html' %}
+            </div>
+
+            <!-- 규정 검색 -->
+            <div id="sidebar-search" class="sidebar-content">
+                {% include 'post/sidebar_search.html' %}
+            </div>
+        </div>
 
         <!-- 상단바 -->
         <div id="Rectangle52"></div>
@@ -378,35 +358,36 @@ a {
         {% endif %}
 
 
+        <!-- 메인 컨테이너 -->
+        <div id="main_container">
+<!--                {% block main_area %}-->
 
+<!--                {% endblock %}-->
+        </div>
 
-    <div id="main-container">
-        <div class="container my-3">
-            <div class="row">
-                <div class="col-md-8 col-lg-9 mt-1" id="main-area">
+        <!-- 인기글 -->
+        <div id="popular">
 
-                {% block main_area %}
-
-                {% endblock %}
-
-                    <!-- Pagination -->
-                    <ul class="pagination justify-content-center mb-4">
-                        <li class="page-item">
-                            <a class="page-link" href="#">&larr; Older</a>
-                        </li>
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#">Newer &rarr;</a>
-                        </li>
-                    </ul>
-
-                </div>
-
-
-            </div>
         </div>
     </div>
 
-
+<!--    <div id="main-container">-->
+<!--        <div class="container my-3">-->
+<!--            <div class="row">-->
+<!--                <div class="col-md-8 col-lg-9 mt-1" id="main-area">-->
+                    <!-- Pagination -->
+<!--                    <ul class="pagination justify-content-center mb-4">-->
+<!--                        <li class="page-item">-->
+<!--                            <a class="page-link" href="#">&larr; Older</a>-->
+<!--                        </li>-->
+<!--                        <li class="page-item disabled">-->
+<!--                            <a class="page-link" href="#">Newer &rarr;</a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
         <!-- Footer -->
 <!--        {% include 'post/footer.html' %}-->
@@ -420,7 +401,6 @@ a {
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
-    </div>
 
 
 </body>

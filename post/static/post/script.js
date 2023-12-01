@@ -58,7 +58,7 @@ function addClickEvent(boxId, icon) {
     });
 }
 
-// 맨 왼쪽 3개 메뉴 클릭 이벤트 핸들러 함수
+// 맨 왼쪽 3개 메뉴 클릭시 색상 변경 함수
 let sidePrev = null;
 function sideColor(boxId) {
     var box = document.getElementById(boxId);
@@ -86,6 +86,79 @@ function sideClickEvent(boxId, icon) {
         sideColor(boxId);
     });
 }
+
+// 맨 왼쪽 사이드바 클릭 시 각각 다른 html 불러오기
+function changeSidebar() {
+    var sidebar = document.getElementById("sidebar");
+    var currentSidebar = sidebar.innerHTML;
+
+    // Check the current sidebar and toggle to the other one
+    if (currentSidebar.includes("This is Sidebar 1")) {
+        sidebar.innerHTML = "{% include 'post/sidebar2_post.html' %}";
+    } else {
+        sidebar.innerHTML = "{% include 'post/sidebar_post.html' %}";
+    }
+}
+
+// 게시물, 정보, 검색 선택에 따라 각각 다른 html 로드
+document.addEventListener('DOMContentLoaded', function() {
+    // Get sidebar elements
+    var sidebarPost = document.getElementById('sidebar-post');
+    var sidebarInfo = document.getElementById('sidebar-info');
+    var sidebarSearch = document.getElementById('sidebar-search');
+
+    // Get clickable elements
+    var rectangle32 = document.getElementById('rectangle32');
+    var description = document.getElementById('description');
+    var rectangle37 = document.getElementById('rectangle37');
+    var barChart = document.getElementById('bar_chart');
+    var rectangle40 = document.getElementById('rectangle40');
+    var actionKey = document.getElementById('action_key');
+
+    // Add click event listeners
+    rectangle32.addEventListener('click', function() {
+        toggleSidebarContent('post');
+    });
+
+    description.addEventListener('click', function() {
+        toggleSidebarContent('post');
+    });
+    rectangle37.addEventListener('click', function() {
+        toggleSidebarContent('info');
+    });
+
+    barChart.addEventListener('click', function() {
+        toggleSidebarContent('info');
+    });
+
+    rectangle40.addEventListener('click', function() {
+        toggleSidebarContent('search');
+    });
+
+    actionKey.addEventListener('click', function() {
+        toggleSidebarContent('search');
+    });
+
+    sidebarPost.classList.add('active');
+
+    function toggleSidebarContent(contentType) {
+
+        // Reset all sidebar contents
+        sidebarPost.classList.remove('active');
+        sidebarInfo.classList.remove('active');
+        sidebarSearch.classList.remove('active');
+
+        // Toggle the clicked content
+        if (contentType === 'post') {
+            sidebarPost.classList.add('active');
+        } else if (contentType === 'info') {
+            sidebarInfo.classList.add('active');
+        } else if (contentType === 'search') {
+            sidebarSearch.classList.add('active');
+        }
+
+    }
+});
 
 // 각 요소에 클릭 이벤트 핸들러 등록
 addClickEvent('rectangle19', 'facility');
