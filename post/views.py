@@ -4,9 +4,13 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.exceptions import PermissionDenied
-from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.db import models
+from django.db.models import Q
+from django.contrib import messages
+from django.shortcuts import render, get_object_or_404, redirect
+
 
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
@@ -136,6 +140,7 @@ def tag_page(request, slug):
         }
     )
 
+
 #좋아요
 def PostLike(request, pk):
     post = get_object_or_404(Post, id=request.POST.get('post_id'))
@@ -145,3 +150,19 @@ def PostLike(request, pk):
         post.likes.add(request.user)
 
     return HttpResponseRedirect(reverse('post_detail', args=[str(pk)]))
+  
+  
+def post_search(request):
+    query = request.GET.get('q')  # 검색어 가져오기
+
+    # if len(query) == 1 :
+    #     messages.error(request.request, '검색어는 2글자 이상 입력해주세요.')
+    if query:
+        posts = Post.objects.filter(
+            Q(title__icontains=query) | Q(content__icontains=query)
+        )
+    else:
+        posts = Post.objects.none()  # 빈 쿼리셋 반환 (검색어가 없는 경우)
+
+    return render(request, 'post/search_result.html', {'posts': posts, 'query': query})
+
