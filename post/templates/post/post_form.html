@@ -11,11 +11,11 @@
     {% csrf_token %}
 
     {{ form.title.label_tag }}
-    {{ form.title }}
+    <input type="text" name="{{ form.title.name }}" placeholder="게시글 제목">
     <br>
 
     {{ form.content.label_tag }}
-    {{ form.content }}
+    <textarea name="{{ form.content.name }}" placeholder="본문에 태그를 사용해보세요" rows="8" cols="80" maxlength="{{ form.content.field.max_length }}"></textarea>
     <br>
 
     {{ form.category.label_tag }}
@@ -43,6 +43,8 @@
     <br>
 
     <button type="submit">등록</button>
+    <a href="{% url 'post_list' %}"><button type="button">작성 취소</button></a>
+    <a href="{% url 'post_list' %}"><button type="button">목록보기</button></a>
   </form>
 {% endblock %}
 
