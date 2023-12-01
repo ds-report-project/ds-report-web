@@ -12,6 +12,9 @@
     <!-- NavBar -->
     {% include 'post/navbar.html' %}
 
+    <!-- Search -->
+    {% include 'post/search.html' %}
+
     <!-- Modal -->
     {% include 'post/modal.html' %}
 
@@ -41,10 +44,22 @@
              </div>
 
             <div class="col-md-8 col-lg-9" id="main-area">
-
-            {% block main_area %}
-
-            {% endblock %}
+            
+            <!-- 검색 결과 표시 -->
+            {% if posts %}
+                <h3>Search Results for "{{ query }}"</h3>
+                <ul>
+                    <!-- 검색한 게시물 -->
+                    {% block search_area %}
+                    {% endblock %}
+                </ul>
+            {% elif query %}
+                <p>No results found for "{{ query }}"</p>
+            {% else %}
+                <!-- 모든 게시물 -->
+                {% block main_area %}
+                {% endblock %}
+            {% endif %}
 
                 <!-- Pagination -->
                 <ul class="pagination justify-content-center mb-4">

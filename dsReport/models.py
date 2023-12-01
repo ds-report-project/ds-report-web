@@ -42,21 +42,21 @@ class Post(models.Model):
     is_resolved = models.BooleanField(default=False)  # 해결인 경우 True
 
     # 검색
-    @classmethod
-    def search(cls, query):
-        return cls.objects.filter(
-            Q(title__icontains=query) | Q(content__icontains=query)
-        )
+    # @classmethod
+    # def search(cls, query):
+    #     return cls.objects.filter(
+    #         Q(title__icontains=query) | Q(content__icontains=query)
+    #     )
 
     # 공감순 인기글
-    @property
-    def popularity(self):
-        return self.likes.count()
+    # @property
+    # def popularity(self):
+    #     return self.likes.count()
 
-    def check_popularity(self):
-        if self.popularity >= 10:
-            # 여기에 인기글로 등록하는 로직 추가
-            pass
+    # def check_popularity(self):
+    #     if self.popularity >= 10:
+    #         # 여기에 인기글로 등록하는 로직 추가
+    #         pass
 
 
 # 공감 기능(게시물, 댓글)

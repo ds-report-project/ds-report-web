@@ -4,6 +4,10 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.exceptions import PermissionDenied
+from django.db import models
+from django.db.models import Q
+from django.contrib import messages
+from django.shortcuts import render, get_object_or_404, redirect
 
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
@@ -107,3 +111,17 @@ def tag_page(request, slug):
             'no_category_post_count': Post.objects.filter(category=None).count()
         }
     )
+
+def post_search(request):
+    query = request.GET.get('q')  # 검색어 가져오기
+
+    # if len(query) == 1 :
+    #     messages.error(request.request, '검색어는 2글자 이상 입력해주세요.')
+    if query:
+        posts = Post.objects.filter(
+            Q(title__icontains=query) | Q(content__icontains=query)
+        )
+    else:
+        posts = Post.objects.none()  # 빈 쿼리셋 반환 (검색어가 없는 경우)
+
+    return render(request, 'post/search_result.html', {'posts': posts, 'query': query})
