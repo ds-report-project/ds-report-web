@@ -14,7 +14,7 @@ urlpatterns = [
     path('delete_comment/<int:pk>', views.delete_comment, name='delete_comment'),
     path('category/<str:slug>/', views.category_page),
     path('tag/<str:slug>/', views.tag_page),
-    path('?search=<str:slug>/', views.search_page, name='search')
+    path('?search=<str:slug>/', views.search_page, name='search'),
     path('search/', views.post_search, name='post_search'),
     path('category/<str:slug>/', views.category_page),
     path('tag/<str:slug>/', views.tag_page),
