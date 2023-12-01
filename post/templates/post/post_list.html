@@ -6,7 +6,7 @@
         <a class="btn btn-info btn-sm float-end" href="{% url 'post_create' %}" role="button"><i class="fa fa-tags"></i>글 등록</a>
     {% endif %}
 
-    <!-- 태그 컨테이너 -->
+    <!-- 태그 컨테이너   position: fixed, z-index: 2; 스타일 필수.. -->
     <div id="tag_container">
         <!-- 태그 코드 추가(block 또는 include 사용) -->
     </div>
