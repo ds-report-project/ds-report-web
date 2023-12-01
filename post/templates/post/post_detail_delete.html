@@ -15,11 +15,12 @@
     <p>작성자: {{ post.author.username }}</p>
     <p>작성일: {{ post.created_at }}</p>
     <p>카테고리: {{ post.category }}</p>
+    {% if post.images %}
+    <img src="{{ post.images.url }}" alt="Post Image" style="max-width: 100%;">
+{% endif %}
 
 
-    {% if post.file_upload %}
-        <p>첨부 파일: <a href="{{ post.file_upload.url }}" target="_blank">{{ post.file_upload.name }}</a></p>
-    {% endif %}
+ 
 
     <!-- 게시물 수정 및 삭제 링크는 해당 사용자에게만 보이도록 함 -->
     {% if request.user.is_authenticated and p.author == request.user %}
