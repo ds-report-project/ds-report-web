@@ -53,7 +53,7 @@ class Post(models.Model):
     anonymous_nickname = models.CharField(
         max_length=100, blank=True, null=True, choices=ANONYMOUS_NICKNAME_CHOICES
     )
-    images=models.ImageField(blank=True,null=True)
+    images = models.ImageField(blank=True,null=True)
     video = models.FileField(blank=True, null=True, upload_to='post_videos/')
     attachment = models.FileField(blank=True, null=True, upload_to='post_attachments/')
     likes = models.ManyToManyField(User, related_name='post_like')
@@ -86,15 +86,6 @@ class Comment(models.Model):
 
         def __str__(self):
             return f'{self.author}::{self.content}'
-          
-# 해결 처리를 위해 해결 버튼 클릭 여부 저장
-class ResolveAction(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        unique_together = ('user', 'post')
 
         def get_absolute_url(self):
             return f'{self.post.get_absolute_url()}#comment-{self.pk}'
@@ -105,6 +96,15 @@ class Rule(models.Model):
 
     def __str__(self):
             return self.name
+          
+# 해결 처리를 위해 해결 버튼 클릭 여부 저장
+class ResolveAction(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'post')
       
 #카테고리 배열
     # FACILITIES = '시설'

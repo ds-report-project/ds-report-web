@@ -10,7 +10,7 @@ class CommentForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content', 'author', 'category', 'anonymous_nickname', 'image']  
+        fields = ['title', 'content', 'author', 'category', 'anonymous_nickname', 'images']
         widgets = {
             'image': forms.ClearableFileInput(attrs={'multiple': False,'class': 'form-control'}),
         }
