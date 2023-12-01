@@ -124,4 +124,4 @@ def post_search(request):
     else:
         posts = Post.objects.none()  # 빈 쿼리셋 반환 (검색어가 없는 경우)
 
-    return render(request, 'post/base.html', {'posts': posts, 'query': query})
+    return render(request, 'post/search_result.html', {'posts': posts, 'query': query})
