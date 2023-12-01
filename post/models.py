@@ -71,3 +71,11 @@ class Comment(models.Model):
 
         def get_absolute_url(self):
             return f'{self.post.get_absolute_url()}#comment-{self.pk}'
+
+
+class Rule(models.Model):
+    name = models.CharField(max_length=50)
+    content = models.TextField(max_length=255)
+
+    def __str__(self):
+            return self.name

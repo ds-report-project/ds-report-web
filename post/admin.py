@@ -5,9 +5,10 @@ from .models import Comment
 # post/admin.py
 
 admin.site.register(Comment)
-from .models import Post, Category, Tag
+from .models import Post, Category, Tag, Rule
 
 admin.site.register(Post)
+admin.site.register(Rule)
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name', )}

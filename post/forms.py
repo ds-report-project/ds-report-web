@@ -1,4 +1,4 @@
-from .models import Comment
+from .models import Comment, Post, Rule
 from django import forms
 
 
@@ -6,14 +6,18 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('content', )
-from django import forms
-from .models import Post
 
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content', 'author', 'category', 'anonymous_nickname', 'image']  
+        fields = ['title', 'content', 'author', 'category', 'anonymous_nickname', 'images']  
         widgets = {
-            'image': forms.ClearableFileInput(attrs={'multiple': True,'class': 'form-control'}),
+            'image': forms.ClearableFileInput(attrs={'multiple': False,'class': 'form-control'}),
         }
 
+
+
+class RuleForm(forms.ModelForm):
+    class Meta:
+        model = Rule
+        fields = ['name', 'content',]

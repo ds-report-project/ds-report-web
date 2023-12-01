@@ -38,6 +38,29 @@
                         </div>
                     </div>
                 </div>
+
+                 <!-- Categories Widget -->
+                <div class="card my-4">
+                    <h5 class="card-header">Rules</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <form id="searchForm" class="d-flex" method="GET" action="{% url 'search' slug='1'%}">
+                                    {% csrf_token %}
+                                    <input class="form-control me-2" type="search" placeholder="Search" name="searched" aria-label="search">
+                                    <button class="btn btn-outline-success" type="submit">Search</button>
+                                </form>
+                            </div>
+                        </div>
+
+                            {% for key, value in request.session.search_context.items %}
+                                <p> </p>
+                                <p>조항:{{ key }} </p>
+                                <p>내용:{{ value }}</p>
+                            {% endfor %}
+
+                    </div>
+                </div>
              </div>
 
             <div class="col-md-8 col-lg-9" id="main-area">
@@ -73,6 +96,16 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function (e) {
+            e.preventDefault();  // Prevent the form from submitting immediately
+            var searchTerm = document.querySelector('[name="searched"]').value;
+            var baseUrl = "{% url 'search' slug='placeholder' %}".replace('placeholder', searchTerm);
+            this.action = baseUrl
+            this.submit();
+        });
+    </script>
 
 
 </body>
