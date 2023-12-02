@@ -1,148 +1,49 @@
-/* Common Styles */
-.common-style {
-    font-family: 'Pretendard';
-  }
-  
-  /* Absolute Positioning */
-  .position-absolute {
+
+#Line31 {
     position: absolute;
-  }
-  
-  /* Border Box */
-  .box-sizing-border {
-    box-sizing: border-box;
-  }
-  
-  /* Bounding Box */
-  .bounding-box {
-    background: #D9D9D9;
-  }
-  
-  /* Text Styles */
-  .text-style {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-  }
-  
-  .text-bold {
-    font-weight: 600;
-  }
-  
-  .text-muted {
-    color: #888888;
-  }
-  
-  .text-dark {
-    color: #000000;
-  }
-  
-  /* Container Styles */
-  .container {
-    display: flex;
-    align-items: center;
-    padding: 7px 16px;
-    border-radius: 24px;
-  }
-  
-  /* Button Styles */
-  .button {
-    font-size: 14px;
-    line-height: 17px;
-  }
-  
-  /* Line 31 and Line 32 */
-  .line-31, .line-32 {
     width: 830px;
-    border: 1px solid #CCCCCC;
-  }
-  
-  .line-31 {
-    height: 0px;
-    left: 524px;
+    height: 0;
     top: 282px;
-  }
-  
-  .line-32 {
-    height: 0px;
-    left: 524px;
-    top: 658px;
-  }
-  
-  /* 본문에 태그 */
-  .text-content {
-    width: 830px;
-    height: 19px;
-    left: 524px;
-    top: 310px;
-  }
-  
-  /* 첨부 파일 */
-  .attachment {
-    width: 60px;
-    height: 19px;
-    left: 546px;
-    top: 678px;
-  }
-  
-  /* 대체 텍스트 입력 */
-  .alt-text {
-    width: 179px;
-    height: 19px;
-    left: 546px;
-    top: 707px;
-  }
-  
-  /* drive_folder_upload */
-  .drive-upload {
-    width: 16px;
-    height: 16px;
-    left: 524px;
-    top: 680px;
-  }
-  
-  /* Group 17 */
-  .group-17 {
-    width: 125px;
-    height: 146px;
-    left: 686px;
-    top: 204px;
-  }
-  
-  /* Rectangle 53 */
-  .rectangle-53 {
-    width: 125px;
-    height: 146px;
-    left: 686px;
-    top: 204px;
-    background: #FFFFFF;
-    border: 1px solid #DBDBDB;
-    border-radius: 12px;
-  }
-  
-  /* Categories */
-  .text-category {
-    width: 26px;
-    height: 18px;
-  }
-  
-  .global-category { top: 244px; }
-  .science-category { top: 268px; }
-  .ye-dae-category { top: 292px; }
-  .pharmacy-category { top: 316px; }
-  
-  /* Frames */
-  .frame {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .frame-23 { gap: 36px; }
-  .frame-21, .frame-22 { gap: 4px; }
-  
-  /* Buttons */
-  .view-list { background: #ECECEC; color: #000000; }
-  .cancel, .submit { background: #333333; color: #FFFFFF; }
-  
+    right: 524px;
+    bottom: 798px;
+    left: 566px;
+    border: 1px solid #CCCCCC;
+    background: #CCC;
+    box-sizing: border-box;
+}
+
+#Line32{
+  position: absolute;
+  width: 830px;
+  height: 0px;
+  left: 566px;
+ top: 658px;
+ right: 524px;
+ bottom: 422px;
+
+border: 1px solid #CCCCCC;
+box-sizing: border-box;
+}
+
+
+#title{
+  position: absolute;
+  width: 128px;
+  height: 33px;
+  left: 524px;
+  top: 233px;
+  font-family: 'Pretendard' !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 28px !important;
+  line-height: 33px !important;
+  color: #888888 !important;
+
+}
+
+
+
+
+
+
+
