@@ -60,6 +60,22 @@ box-sizing: border-box;
   color: #888888;
   }
 
-
+  #plus{
+    position: absolute;
+  width: 179px;
+  height: 19px;
+  left: 566px;
+  top: 707px;
+  right:1195;
+  
+  font-family: 'Pretendard'!important
+  font-style: normal!important
+  font-weight: 400!important
+  font-size: 16px!important
+  line-height: 19px!important
+  /* identical to box height */
+  
+  color: balck;
+  }
 
 

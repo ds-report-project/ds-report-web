@@ -67,6 +67,25 @@ border: none;
 color: #888888;
 }
 
+#plus{
+  position: absolute;
+width: 179px;
+height: 19px;
+left: 566px;
+top: 680px;
+right:1380;
+bottom:384px;
+font-family: 'Pretendard';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+
+color: balck;
+}
+
+
 </style>
 </head>
 <body>
@@ -101,17 +120,15 @@ color: #888888;
     {{ form.anonymous_nickname }}
     <br>
     <hr id="Line32">
-    {{ form.images.label_tag }}
-    {{ form.images }}
+    <p id="plus"><img src="../../static/post/attachment_btn.svg">이미지{{ form.images }}
     <br>
 
-    {{ form.video.label_tag }}
-    {{ form.video }}
+    <img src="../../static/post/attachment_btn.svg">비디오{{ form.video }}
     <br>
 
-    {{ form.attachment.label_tag }}
+    <img src="../../static/post/attachment_btn.svg">첨부 파일
     {{ form.attachment }}
-    <br>
+    <br></p>
 
    <button type="submit">등록</button>
     <a href="{% url 'post_list' %}"><button type="button">작성 취소</button></a>
