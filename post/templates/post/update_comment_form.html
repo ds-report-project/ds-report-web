@@ -7,7 +7,7 @@
 {% block main_area %}
   <h2>댓글 수정</h2>
 
-  <form method="post">
+  <form method="post" style="position: absolute; left: 400px;">
     {% csrf_token %}
     {{ form }}
     <button type="submit">수정 완료</button>
