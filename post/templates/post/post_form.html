@@ -36,21 +36,36 @@ box-sizing: border-box;
   position: absolute;
   width: 128px;
   height: 33px;
-  left: 524px;
-  top: 233px;
-  
+  left: 566px;
+  top: 176px;
+  right:1268px;
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 500;
   font-size: 28px;
   line-height: 33px;
-  
   color: #888888;
+  border: none; 
 
 }
 
+#content{
+  position: absolute;
+width: 830px;
+height: 329px;
+left: 566px;
+top: 310px;
 
-
+right:566px;
+font-family: 'Pretendard';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+border: none;
+color: #888888;
+}
 
 </style>
 </head>
@@ -70,8 +85,8 @@ box-sizing: border-box;
     
     <br>
 
-    {{ form.content.label_tag }}
-    <textarea name="{{ form.content.name }}" placeholder="본문에 태그를 사용해보세요" rows="8" cols="80" maxlength="{{ form.content.field.max_length }}"></textarea>
+    {% comment %} {{ form.content.label_tag }} {% endcomment %}
+    <p id="content"><textarea name="{{ form.content.name }}" placeholder="본문에 태그를 사용해보세요" rows="8" cols="80" maxlength="{{ form.content.field.max_length }}"></textarea></p>
     <br>
 
     {{ form.category.label_tag }}

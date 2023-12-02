@@ -30,7 +30,7 @@ box-sizing: border-box;
   position: absolute;
   width: 128px;
   height: 33px;
-  left: 524px;
+  left: 566px;
   top: 233px;
   font-family: 'Pretendard' !important;
   font-style: normal !important;
@@ -38,11 +38,27 @@ box-sizing: border-box;
   font-size: 28px !important;
   line-height: 33px !important;
   color: #888888 !important;
+  border:none!important;
 
 }
 
 
-
+#content{
+    position: absolute;
+  width: 830px;
+  height: 19px;
+  left: 566px;
+  top: 310px;
+  left:524px;
+  right:566px;
+  font-family: 'Pretendard'!important;
+  font-style: normal!important;
+  font-weight: 400!important;
+  font-size: 16px!important;
+  line-height: 19px!important;
+ 
+  color: #888888;
+  }
 
 
 
