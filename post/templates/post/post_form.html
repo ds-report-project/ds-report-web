@@ -37,7 +37,7 @@ box-sizing: border-box;
   width: 128px;
   height: 33px;
   left: 566px;
-  top: 176px;
+  top: 233px;
   right:1268px;
   font-family: 'Pretendard';
   font-style: normal;
@@ -85,6 +85,47 @@ line-height: 19px;
 color: balck;
 }
 
+#category {
+  position: absolute;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 18px;
+  color: #000000;
+  left: 566px;
+  top: 178px;
+  right: 1380px;
+bottom:884px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+/* 익명 */
+#nikname{
+  position: absolute;
+  display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 4px;
+
+  width: 26px;
+height: 18px;
+left: 702px;
+  top: 178px;
+  right: 1192px;
+bottom:884px;
+font-family: 'Pretendard';
+font-style: normal;
+font-weight: 600;
+font-size: 15px;
+line-height: 18px;
+/* identical to box height */
+
+color: #000000;
+}
 
 </style>
 </head>
@@ -108,17 +149,21 @@ color: balck;
     <p id="content"><textarea name="{{ form.content.name }}" placeholder="본문에 태그를 사용해보세요" rows="8" cols="80" maxlength="{{ form.content.field.max_length }}"></textarea></p>
     <br>
 
-    {{ form.category.label_tag }}
-    {{ form.category }}
+    
+
+ 
+    <div id="category"><img src="../../static/post/category.svg">{{ form.category }}
+  </div>
     <br>
 
     {{ form.tags.label_tag }}
     {{ form.tags }}
     <br>
 
-    {{ form.anonymous_nickname.label_tag }}
-    {{ form.anonymous_nickname }}
+    <div id="nikname"><img src="../../static/post/account_circle2.svg">
+    {{ form.anonymous_nickname }}</div>
     <br>
+    
     <hr id="Line32">
     <p id="plus"><img src="../../static/post/attachment_btn.svg">이미지{{ form.images }}
     <br>

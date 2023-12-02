@@ -68,14 +68,34 @@ box-sizing: border-box;
   top: 707px;
   right:1195;
   
-  font-family: 'Pretendard'!important
-  font-style: normal!important
-  font-weight: 400!important
-  font-size: 16px!important
-  line-height: 19px!important
+  font-family: 'Pretendard'!important;
+  font-style: normal!important;
+  font-weight: 400!important;
+  font-size: 16px!important;
+  line-height: 19px!important;
   /* identical to box height */
   
   color: balck;
   }
 
-
+  #category{
+    width: 82px;
+    height: 18px;
+    
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    
+    color: #000000;
+    left: 566px;
+    top: 152px;
+    right:1380;
+  
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  }
