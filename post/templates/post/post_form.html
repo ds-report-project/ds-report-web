@@ -10,9 +10,9 @@
     width: 830px;
     height: 0;
     top: 282px;
-    right: 524px;
+    right: 566px;
     bottom: 798px;
-    left: 566px;
+    left: 524px;
     border: 1px solid #CCCCCC;
     background: #CCC;
     box-sizing: border-box;
@@ -22,9 +22,9 @@
   position: absolute;
   width: 830px;
   height: 0px;
-  left: 566px;
+  left: 524px;
  top: 658px;
- right: 524px;
+ right: 566px;
  bottom: 422px;
 
 border: 1px solid #CCCCCC;
@@ -36,7 +36,7 @@ box-sizing: border-box;
   position: absolute;
   width: 128px;
   height: 33px;
-  left: 566px;
+  left: 524px;
   top: 233px;
   right:1268px;
   font-family: 'Pretendard';
@@ -53,7 +53,7 @@ box-sizing: border-box;
   position: absolute;
 width: 830px;
 height: 329px;
-left: 566px;
+left: 524px;
 top: 310px;
 
 right:566px;
@@ -71,7 +71,7 @@ color: #888888;
   position: absolute;
 width: 179px;
 height: 19px;
-left: 566px;
+left: 524px;
 top: 680px;
 right:1380;
 bottom:384px;
@@ -86,14 +86,14 @@ color: balck;
 }
 
 #category {
-  position: absolute;
+  position: absolute; 
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 600;
   font-size: 15px;
   line-height: 18px;
   color: #000000;
-  left: 566px;
+  left: 524px;
   top: 178px;
   right: 1380px;
 bottom:884px;
@@ -113,7 +113,7 @@ gap: 4px;
 
   width: 26px;
 height: 18px;
-left: 702px;
+left: 682px;
   top: 178px;
   right: 1192px;
 bottom:884px;
@@ -126,7 +126,149 @@ line-height: 18px;
 
 color: #000000;
 }
+#tag{
+  position: absolute;
+  display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 4px;
 
+  width: 26px;
+height: 5px;
+left: 900px;
+  top: 178px;
+  right: 1064px;
+bottom:884px;
+font-family: 'Pretendard';
+font-style: normal;
+font-weight: 600;
+font-size: 15px;
+line-height: 18px;
+/* identical to box height */
+
+color: #000000;
+}
+#list{
+  /* Frame 17 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 7px 16px;
+gap: 10px;
+
+position: absolute;
+width: 81px;
+height: 31px;
+left: 1108px;
+top: 234px;
+
+background: #ECECEC;
+border-radius: 24px;
+
+
+/* 목록보기 */
+
+width: 49px;
+height: 17px;
+
+font-family: 'Pretendard';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 17px;
+/* identical to box height */
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+}
+#sub{
+  /* Frame 18 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 7px 16px;
+gap: 10px;
+
+position: absolute;
+width: 57px;
+height: 31px;
+left: 1297px;
+top: 234px;
+
+background: #333333;
+border-radius: 24px;
+
+
+/* 등록 */
+
+width: 25px;
+height: 17px;
+
+font-family: 'Pretendard';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 17px;
+/* identical to box height */
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+}
+#cancel{
+  
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 7px 16px;
+gap: 10px;
+
+position: absolute;
+width: 84px;
+height: 31px;
+left: 1201px;
+top: 234px;
+
+background: #ECECEC;
+border-radius: 24px;
+
+
+width: 52px;
+height: 17px;
+
+font-family: 'Pretendard';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 17px;
+
+
+color: #000000;
+
+flex: none;
+order: 0;
+flex-grow: 0;
+
+}
 </style>
 </head>
 <body>
@@ -140,24 +282,22 @@ color: #000000;
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
-    {% comment %} {{ form.title.label_tag }} {% endcomment %}
+  
     <p id="title"><input type="text" name="{{ form.title.name }}" placeholder="게시글 제목"><hr id="Line31"></p>
     
     <br>
 
-    {% comment %} {{ form.content.label_tag }} {% endcomment %}
+    
     <p id="content"><textarea name="{{ form.content.name }}" placeholder="본문에 태그를 사용해보세요" rows="8" cols="80" maxlength="{{ form.content.field.max_length }}"></textarea></p>
     <br>
 
     
-
- 
     <div id="category"><img src="../../static/post/category.svg">{{ form.category }}
   </div>
     <br>
 
-    {{ form.tags.label_tag }}
-    {{ form.tags }}
+    <div id="tag">
+    {{ form.tags }}</div>
     <br>
 
     <div id="nikname"><img src="../../static/post/account_circle2.svg">
@@ -175,9 +315,10 @@ color: #000000;
     {{ form.attachment }}
     <br></p>
 
-   <button type="submit">등록</button>
-    <a href="{% url 'post_list' %}"><button type="button">작성 취소</button></a>
-    <a href="{% url 'post_list' %}"><button type="button">목록보기</button></a>
+    <div id="sub">
+   <button type="submit">등록</button></div>
+   <div id="cancel"><a href="{% url 'post_list' %}"><button type="button">작성 취소</button></a></div>
+    <div id="list"><a href="{% url 'post_list' %}"><button type="button">목록보기</button></a></div>
   </form>
 {% endblock %}
 
