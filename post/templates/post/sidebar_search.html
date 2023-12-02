@@ -62,8 +62,12 @@ left: 119px;
 top: 84px;
 }
 
-
-
+.card.my-4 {
+    position: absolute;
+    left: 92px;
+    top: 150px;
+    width: 270px;
+}
 
 </style>
 
@@ -75,5 +79,28 @@ top: 84px;
     <div id="search_text">검색어를 입력하세요.</div>
     <!-- 아이콘 -->
     <img id="search_icon" src="../../static/post/sidebar_search.svg">
+
+    <!-- 검색 기능 -->
+    <div class="card my-4">
+        <h5 class="card-header">Rules</h5>
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <form id="searchForm" class="d-flex" method="GET" action="{% url 'search' slug='1'%}">
+                        {% csrf_token %}
+                        <input class="form-control me-2" type="search" placeholder="Search" name="searched" aria-label="search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+
+                {% for key, value in request.session.search_context.items %}
+                    <p> </p>
+                    <p>조항:{{ key }} </p>
+                    <p>내용:{{ value }}</p>
+                {% endfor %}
+
+        </div>
+    </div>
 
 </div>
