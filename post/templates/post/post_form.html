@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{% static 'post/css/form.css' %}">
 <style>
   #Line31 {
-    position: absolute;
+    position: fixed;
     width: 830px;
     height: 0;
     top: 282px;
@@ -19,7 +19,7 @@
 }
 
 #Line32{
-  position: absolute;
+  position: fixed;
   width: 830px;
   height: 0px;
   left: 524px;
@@ -33,7 +33,7 @@ box-sizing: border-box;
 
 
   #title{
-  position: absolute;
+    position: fixed;
   width: 128px;
   height: 33px;
   left: 524px;
@@ -50,7 +50,7 @@ box-sizing: border-box;
 }
 
 #content{
-  position: absolute;
+  position: fixed;
 width: 830px;
 height: 329px;
 left: 524px;
@@ -68,7 +68,7 @@ color: #888888;
 }
 
 #plus{
-  position: absolute;
+  position: fixed;
 width: 179px;
 height: 19px;
 left: 524px;
@@ -86,25 +86,27 @@ color: balck;
 }
 
 #category {
-  position: absolute; 
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 18px;
-  color: #000000;
+  position: fixed;
   left: 524px;
   top: 178px;
   right: 1380px;
-bottom:884px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  bottom: 884px;
+  flex-direction: row; 
+  align-items: center; 
   gap: 4px;
+  color: #000 
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  display: flex;
+  writing-mode: horizontal-tb; 
 }
+
 /* 익명 */
 #nikname{
-  position: absolute;
+  position: fixed;
   display: flex;
 flex-direction: row;
 align-items: center;
@@ -127,7 +129,7 @@ line-height: 18px;
 color: #000000;
 }
 #tag{
-  position: absolute;
+  position: fixed;
   display: flex;
 flex-direction: row;
 align-items: center;
@@ -160,7 +162,7 @@ align-items: center;
 padding: 7px 16px;
 gap: 10px;
 
-position: absolute;
+position: fixed;
 width: 81px;
 height: 31px;
 left: 1108px;
@@ -202,7 +204,7 @@ align-items: center;
 padding: 7px 16px;
 gap: 10px;
 
-position: absolute;
+position: fixed;
 width: 57px;
 height: 31px;
 left: 1297px;
@@ -242,7 +244,7 @@ align-items: center;
 padding: 7px 16px;
 gap: 10px;
 
-position: absolute;
+position: fixed;
 width: 84px;
 height: 31px;
 left: 1201px;
@@ -292,7 +294,7 @@ flex-grow: 0;
     <br>
 
     
-    <div id="category"><img src="../../static/post/category.svg">{{ form.category }}
+    <div id="category"><img src="../../static/post/category.svg">카테고리 선택{{ form.category }}
   </div>
     <br>
 
