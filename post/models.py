@@ -83,6 +83,10 @@ class Comment(models.Model):
         content = models.CharField('*댓글을 입력하세요.', max_length=150)
         created_at = models.DateTimeField(auto_now_add=True)
         modified_at = models.DateTimeField(auto_now=True)
+        clikes = models.ManyToManyField(User, related_name='comment_like')
+
+        def number_of_comment_likes(self):
+            return self.clikes.count()
 
         def __str__(self):
             return f'{self.author}::{self.content}'
