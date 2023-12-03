@@ -5,6 +5,11 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'post/css/form.css' %}">
 <style>
+  button {
+    border: none;
+    outline: none;
+    background: transparent;
+  }
   #Line31 {
     position: fixed;
     width: 830px;
@@ -171,19 +176,9 @@ background: #ECECEC;
 border-radius: 24px;
 
 
-/* 목록보기 */
-
 width: 49px;
 height: 17px;
 
-font-family: 'Pretendard';
-font-style: normal;
-font-weight: 600;
-font-size: 14px;
-line-height: 17px;
-/* identical to box height */
-
-color: #000000;
 
 
 /* Inside auto layout */
@@ -192,50 +187,89 @@ order: 0;
 flex-grow: 0;
 
 }
-#sub{
+#list button{
+  /* 목록보기 */
+
+  width: 81px;
+  height: 31px;
+  left: 1108px;
+  top: 234px;
+  
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+  
+  color: #000000;
+}
+#sub {
   /* Frame 18 */
 
-/* Auto layout */
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 7px 16px;
-gap: 10px;
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 16px;
+  gap: 10px;
 
-position: fixed;
-width: 57px;
-height: 31px;
-left: 1297px;
-top: 234px;
+  position: fixed;
+  width: 57px;
+  height: 31px;
+  left: 1297px;
+  top: 234px;
 
-background: #333333;
-border-radius: 24px;
+  background: #333333;
+  border-radius: 24px;
 
+  /* 등록 */
+  width: 25px;
+  height: 17px;
 
-/* 등록 */
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
 
-width: 25px;
-height: 17px;
+  color: #FFFFFF;
 
-font-family: 'Pretendard';
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+
+  flex-direction: column; /* This was missing */
+}
+
+#sub button {
+  color: white; 
+  width: 57px;
+    height: 31px;
+    color: #FFFFFF;
+    font-family: 'Pretendard';
 font-style: normal;
 font-weight: 600;
 font-size: 14px;
 line-height: 17px;
-/* identical to box height */
-
-color: #FFFFFF;
-
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 0;
-
+}
+#cancel button {
+  width: 84px;
+    height: 31px;
+    color: black;
+    font-family: 'Pretendard';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 17px;
+  
 }
 #cancel{
-  
+  width: 52px;
+  height: 17px; 
 display: flex;
 flex-direction: row;
 justify-content: center;
@@ -244,26 +278,13 @@ padding: 7px 16px;
 gap: 10px;
 
 position: fixed;
-width: 84px;
-height: 31px;
+
 left: 1201px;
 top: 234px;
 
 background: #ECECEC;
 border-radius: 24px;
 
-
-width: 52px;
-height: 17px;
-
-font-family: 'Pretendard';
-font-style: normal;
-font-weight: 600;
-font-size: 14px;
-line-height: 17px;
-
-
-color: #000000;
 
 flex: none;
 order: 0;
