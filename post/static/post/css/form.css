@@ -1,49 +1,54 @@
+button {
+  border: none;
+  outline: none;
+  background: transparent;
+}
 #Line31 {
-    position: absolute;
-    width: 830px;
-    height: 0;
-    top: 282px;
-    right: 566px;
-    bottom: 798px;
-    left: 524px;
-    border: 1px solid #CCCCCC;
-    background: #CCC;
-    box-sizing: border-box;
+  position: fixed;
+  width: 830px;
+  height: 0px;
+  top: 282px;
+  right: 566px;
+  bottom: 798px;
+  left: 524px;
+  border: 1px solid #CCCCCC;
+  background: #CCC;
+  box-sizing: border-box;
 }
 
 #Line32{
-  position: absolute;
-  width: 830px;
-  height: 0px;
-  left: 524px;
- top: 658px;
- right: 566px;
- bottom: 422px;
+position: fixed;
+width: 830px;
+height: 0px;
+left: 524px;
+top: 658px;
+right: 566px;
+bottom: 422px;
 
 border: 1px solid #CCCCCC;
 box-sizing: border-box;
 }
 
 
-  #title{
-  position: absolute;
-  width: 128px;
-  height: 33px;
-  left: 524px;
-  top: 233px;
-  right:1268px;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 28px;
-  line-height: 33px;
-  color: #888888;
-  border: none; 
+#title{
+  position: fixed;
+width: 128px;
+height: 33px;
+left: 524px;
+top: 233px;
+right:1268px;
+font-family: 'Pretendard';
+font-style: normal;
+font-weight: 500;
+font-size: 28px;
+line-height: 33px;
+color: #888888;
+border: none; 
 
 }
 
 #content{
-  position: absolute;
+position: fixed;
 width: 830px;
 height: 329px;
 left: 524px;
@@ -61,12 +66,12 @@ color: #888888;
 }
 
 #plus{
-  position: absolute;
+position: fixed;
 width: 179px;
 height: 19px;
 left: 524px;
 top: 680px;
-right:1380;
+right:1380px;
 bottom:384px;
 font-family: 'Pretendard';
 font-style: normal;
@@ -74,41 +79,55 @@ font-weight: 400;
 font-size: 16px;
 line-height: 19px;
 /* identical to box height */
-
-color: balck;
+color: black;
 }
 
 #category {
-  position: absolute; 
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 18px;
-  color: #000000;
-  left: 524px;
-  top: 178px;
-  right: 1380px;
-bottom:884px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 4px;
+position: fixed;
+left: 524px;
+top: 178px;
+right: 1380px;
+bottom: 884px;
+flex-direction: row; 
+align-items: center; 
+gap: 4px;
+color: #000 
+font-family: Pretendard;
+font-size: 15px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+display: flex;
+writing-mode: horizontal-tb; 
+}
+#category select{
+width: 82px;
+height: 18px;
+color: #000;
+font-family: Pretendard;
+font-size: 15px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+#category-text {
+/* 수정: ID 변경 */
+writing-mode: horizontal-tb;
 }
 /* 익명 */
 #nikname{
-  position: absolute;
-  display: flex;
+position: fixed;
+display: flex;
 flex-direction: row;
 align-items: center;
 padding: 0px;
 gap: 4px;
 
-  width: 26px;
+width: 26px;
 height: 18px;
 left: 682px;
-  top: 178px;
-  right: 1192px;
+top: 178px;
+right: 1192px;
 bottom:884px;
 font-family: 'Pretendard';
 font-style: normal;
@@ -120,18 +139,18 @@ line-height: 18px;
 color: #000000;
 }
 #tag{
-  position: absolute;
-  display: flex;
+position: fixed;
+display: flex;
 flex-direction: row;
 align-items: center;
 padding: 0px;
 gap: 4px;
 
-  width: 26px;
+width: 26px;
 height: 5px;
 left: 900px;
-  top: 178px;
-  right: 1064px;
+top: 178px;
+right: 1064px;
 bottom:884px;
 font-family: 'Pretendard';
 font-style: normal;
@@ -143,7 +162,7 @@ line-height: 18px;
 color: #000000;
 }
 #list{
-  /* Frame 17 */
+/* Frame 17 */
 
 /* Auto layout */
 display: flex;
@@ -153,7 +172,7 @@ align-items: center;
 padding: 7px 16px;
 gap: 10px;
 
-position: absolute;
+position: fixed;
 width: 81px;
 height: 31px;
 left: 1108px;
@@ -163,10 +182,24 @@ background: #ECECEC;
 border-radius: 24px;
 
 
-/* 목록보기 */
-
 width: 49px;
 height: 17px;
+
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+}
+#list button{
+/* 목록보기 */
+
+width: 81px;
+height: 31px;
+left: 1108px;
+top: 234px;
 
 font-family: 'Pretendard';
 font-style: normal;
@@ -176,16 +209,9 @@ line-height: 17px;
 /* identical to box height */
 
 color: #000000;
-
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 0;
-
 }
-#sub{
-  /* Frame 18 */
+#sub {
+/* Frame 18 */
 
 /* Auto layout */
 display: flex;
@@ -195,7 +221,7 @@ align-items: center;
 padding: 7px 16px;
 gap: 10px;
 
-position: absolute;
+position: fixed;
 width: 57px;
 height: 31px;
 left: 1297px;
@@ -204,9 +230,7 @@ top: 234px;
 background: #333333;
 border-radius: 24px;
 
-
 /* 등록 */
-
 width: 25px;
 height: 17px;
 
@@ -219,15 +243,39 @@ line-height: 17px;
 
 color: #FFFFFF;
 
-
 /* Inside auto layout */
 flex: none;
 order: 0;
 flex-grow: 0;
 
+flex-direction: column; /* This was missing */
+}
+
+#sub button {
+color: white; 
+width: 57px;
+  height: 31px;
+  color: #FFFFFF;
+  font-family: 'Pretendard';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 17px;
+}
+#cancel button {
+width: 84px;
+  height: 31px;
+  color: black;
+  font-family: 'Pretendard';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 17px;
+
 }
 #cancel{
-  
+width: 52px;
+height: 17px; 
 display: flex;
 flex-direction: row;
 justify-content: center;
@@ -235,9 +283,8 @@ align-items: center;
 padding: 7px 16px;
 gap: 10px;
 
-position: absolute;
-width: 84px;
-height: 31px;
+position: fixed;
+
 left: 1201px;
 top: 234px;
 
@@ -245,20 +292,12 @@ background: #ECECEC;
 border-radius: 24px;
 
 
-width: 52px;
-height: 17px;
-
-font-family: 'Pretendard';
-font-style: normal;
-font-weight: 600;
-font-size: 14px;
-line-height: 17px;
-
-
-color: #000000;
-
 flex: none;
 order: 0;
 flex-grow: 0;
 
+}
+#title input {
+  border: none; /* 테두리 없애기 */
+  outline: none; /* 포커스 시 발생하는 테두리 제거 */
 }

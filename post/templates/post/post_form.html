@@ -4,294 +4,347 @@
 <head>
     {% load static %}
     <link rel="stylesheet" href="{% static 'post/css/form.css' %}">
-<style>
-  button {
-    border: none;
-    outline: none;
-    background: transparent;
-  }
-  #Line31 {
+  <style>
+    button {
+      border: none;
+      outline: none;
+      background: transparent;
+    }
+    #Line31 {
+      position: fixed;
+      width: 830px;
+      height: 0px;
+      top: 282px;
+      right: 566px;
+      bottom: 798px;
+      left: 524px;
+      border: 1px solid #CCCCCC;
+      background: #CCC;
+      box-sizing: border-box;
+    }
+    
+    #Line32{
     position: fixed;
     width: 830px;
     height: 0px;
-    top: 282px;
-    right: 566px;
-    bottom: 798px;
     left: 524px;
+    top: 658px;
+    right: 566px;
+    bottom: 422px;
+    
     border: 1px solid #CCCCCC;
-    background: #CCC;
     box-sizing: border-box;
-}
-
-#Line32{
-  position: fixed;
-  width: 830px;
-  height: 0px;
-  left: 524px;
- top: 658px;
- right: 566px;
- bottom: 422px;
-
-border: 1px solid #CCCCCC;
-box-sizing: border-box;
-}
-
-
-  #title{
+    }
+    
+    
+    #title{
+      position: fixed;
+    width: 128px;
+    height: 33px;
+    left: 524px;
+    top: 233px;
+    right:1268px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 33px;
+    color: #888888;
+    border: none; 
+    
+    }
+    
+    #content{
     position: fixed;
-  width: 128px;
-  height: 33px;
-  left: 524px;
-  top: 233px;
-  right:1268px;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 28px;
-  line-height: 33px;
-  color: #888888;
-  border: none; 
-
-}
-
-#content{
-  position: fixed;
-width: 830px;
-height: 329px;
-left: 524px;
-top: 310px;
-
-right:566px;
-font-family: 'Pretendard';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 19px;
-/* identical to box height */
-border: none;
-color: #888888;
-}
-
-#plus{
-  position: fixed;
-width: 179px;
-height: 19px;
-left: 524px;
-top: 680px;
-right:1380px;
-bottom:384px;
-font-family: 'Pretendard';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 19px;
-/* identical to box height */
-color: black;
-}
-
-#category {
-  position: fixed;
-  left: 524px;
-  top: 178px;
-  right: 1380px;
-  bottom: 884px;
-  flex-direction: row; 
-  align-items: center; 
-  gap: 4px;
-  color: #000 
-  font-family: Pretendard;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  display: flex;
-  writing-mode: horizontal-tb; 
-}
-
-/* 익명 */
-#nikname{
-  position: fixed;
-  display: flex;
-flex-direction: row;
-align-items: center;
-padding: 0px;
-gap: 4px;
-
-  width: 26px;
-height: 18px;
-left: 682px;
-  top: 178px;
-  right: 1192px;
-bottom:884px;
-font-family: 'Pretendard';
-font-style: normal;
-font-weight: 600;
-font-size: 15px;
-line-height: 18px;
-/* identical to box height */
-
-color: #000000;
-}
-#tag{
-  position: fixed;
-  display: flex;
-flex-direction: row;
-align-items: center;
-padding: 0px;
-gap: 4px;
-
-  width: 26px;
-height: 5px;
-left: 900px;
-  top: 178px;
-  right: 1064px;
-bottom:884px;
-font-family: 'Pretendard';
-font-style: normal;
-font-weight: 600;
-font-size: 15px;
-line-height: 18px;
-/* identical to box height */
-
-color: #000000;
-}
-#list{
-  /* Frame 17 */
-
-/* Auto layout */
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 7px 16px;
-gap: 10px;
-
-position: fixed;
-width: 81px;
-height: 31px;
-left: 1108px;
-top: 234px;
-
-background: #ECECEC;
-border-radius: 24px;
-
-
-width: 49px;
-height: 17px;
-
-
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 0;
-
-}
-#list button{
-  /* 목록보기 */
-
-  width: 81px;
-  height: 31px;
-  left: 1108px;
-  top: 234px;
-  
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
-  /* identical to box height */
-  
-  color: #000000;
-}
-#sub {
-  /* Frame 18 */
-
-  /* Auto layout */
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 7px 16px;
-  gap: 10px;
-
-  position: fixed;
-  width: 57px;
-  height: 31px;
-  left: 1297px;
-  top: 234px;
-
-  background: #333333;
-  border-radius: 24px;
-
-  /* 등록 */
-  width: 25px;
-  height: 17px;
-
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
-  /* identical to box height */
-
-  color: #FFFFFF;
-
-  /* Inside auto layout */
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-
-  flex-direction: column; /* This was missing */
-}
-
-#sub button {
-  color: white; 
-  width: 57px;
-    height: 31px;
-    color: #FFFFFF;
+    width: 830px;
+    height: 329px;
+    left: 524px;
+    top: 310px;
+    
+    right:566px;
     font-family: 'Pretendard';
-font-style: normal;
-font-weight: 600;
-font-size: 14px;
-line-height: 17px;
-}
-#cancel button {
-  width: 84px;
-    height: 31px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+    border: none;
+    color: #888888;
+    }
+    
+    #plus{
+    position: fixed;
+    width: 179px;
+    height: 19px;
+    left: 524px;
+    top: 680px;
+    right:1380px;
+    bottom:384px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
     color: black;
+    }
+    
+    #category {
+    position: fixed;
+    left: 524px;
+    top: 178px;
+    right: 1380px;
+    bottom: 884px;
+    flex-direction: row; 
+    align-items: center; 
+    gap: 4px;
+    color: #000 
+    font-family: Pretendard;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    display: flex;
+    writing-mode: horizontal-tb; 
+    }
+    #category select{
+    width: 82px;
+    height: 18px;
+    color: #000;
+    font-family: Pretendard;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    }
+    #category-text {
+    /* 수정: ID 변경 */
+    writing-mode: horizontal-tb;
+    }
+    /* 익명 */
+    #nikname{
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 4px;
+    
+    width: 26px;
+    height: 18px;
+    left: 682px;
+    top: 178px;
+    right: 1192px;
+    bottom:884px;
     font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    /* identical to box height */
+    
+    color: #000000;
+    }
+    #tag{
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 4px;
+    
+    width: 26px;
+    height: 5px;
+    left: 900px;
+    top: 178px;
+    right: 1064px;
+    bottom:884px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    /* identical to box height */
+    
+    color: #000000;
+    }
+    #list{
+    /* Frame 17 */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 7px 16px;
+    gap: 10px;
+    
+    position: fixed;
+    width: 81px;
+    height: 31px;
+    left: 1108px;
+    top: 234px;
+    
+    background: #ECECEC;
+    border-radius: 24px;
+    
+    
+    width: 49px;
+    height: 17px;
+    
+    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    
+    }
+    #list button{
+    /* 목록보기 */
+    
+    width: 81px;
+    height: 31px;
+    left: 1108px;
+    top: 234px;
+    
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+    
+    color: #000000;
+    }
+    #sub {
+    /* Frame 18 */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 7px 16px;
+    gap: 10px;
+    
+    position: fixed;
+    width: 57px;
+    height: 31px;
+    left: 1297px;
+    top: 234px;
+    
+    background: #333333;
+    border-radius: 24px;
+    
+    /* 등록 */
+    width: 25px;
+    height: 17px;
+    
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+    
+    color: #FFFFFF;
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    
+    flex-direction: column; /* This was missing */
+    }
+    
+    #sub button {
+    color: white; 
+    width: 57px;
+      height: 31px;
+      color: #FFFFFF;
+      font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    
+    }
+    #cancel button {
+    width: 84px;
+      height: 31px;
+      color: black;
+      font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+
+    }
+    #cancel{
+    width: 52px;
+    height: 17px; 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 7px 16px;
+    gap: 10px;
+    
+    position: fixed;
+    
+    left: 1201px;
+    top: 234px;
+    
+    background: #ECECEC;
+    border-radius: 24px;
+    
+    
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+    }
+    #title input {
+      position: fixed;
+      border: none;
+      color: #888;
+
 font-style: normal;
-font-weight: 600;
-font-size: 14px;
-line-height: 17px;
+font-weight: 500;
+
+width: 450px;
+font-family: Pretendard;
+font-size: 28px;
+font-weight: 500;
+line-height: 33px;
+letter-spacing: 0em;
+text-align: left;
+
+    height: 33px; 
+    outline: none;
+    }   
+    #content textarea {
+      position: fixed;
+      border: none;
+      color: #888;
+
+font-style: normal;
+font-weight: 500;
+
+width: 830px;
+color: #888;
+font-family: Pretendard;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+
+   
+    outline: none;
+    }   
+  </style>
   
-}
-#cancel{
-  width: 52px;
-  height: 17px; 
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 7px 16px;
-gap: 10px;
-
-position: fixed;
-
-left: 1201px;
-top: 234px;
-
-background: #ECECEC;
-border-radius: 24px;
-
-
-flex: none;
-order: 0;
-flex-grow: 0;
-
-}
-</style>
 </head>
 <body>
 {% block head_title %}
@@ -314,8 +367,11 @@ flex-grow: 0;
     <br>
 
     
-    <div id="category"><img src="../../static/post/category.svg">카테고리 선택{{ form.category }}
-  </div>
+    <div id="category">
+      <img src="../../static/post/category.svg">
+      <span id="category-text">카테고리 선택</span>
+      {{ form.category }}
+    </div>
     <br>
 
     <div id="tag">
