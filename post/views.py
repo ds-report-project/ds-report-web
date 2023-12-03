@@ -40,11 +40,21 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
     def get_success_url(self):
         return reverse_lazy('post_list')
+    
+    # 인기글
+    def get_context_data(self, **kwargs): 
+        data = super().get_context_data(**kwargs)
+        # 인기글
+        top_5_posts = Post.objects.annotate(like_count=models.Count('likes')).order_by('-like_count')[:5]
+        data['top_5_posts'] = top_5_posts
+
+        return data
 
 
 class PostList(ListView):
     model = Post
     ordering = '-pk'
+    context_object_name = 'post_list'
     
     # def get_context_data(self, **kwargs):
     #     context = super(PostList, self).get_context_data()
@@ -61,6 +71,11 @@ class PostList(ListView):
         data['number_of_likes'] = [post.number_of_likes() for post in data['post_list']]
         
         data['tags'] = Tag.objects.all()
+
+        # 인기글
+        top_5_posts = Post.objects.annotate(like_count=models.Count('likes')).order_by('-like_count')[:5]
+        data['top_5_posts'] = top_5_posts
+
         return data
 
 
@@ -84,6 +99,11 @@ class PostDetail(DetailView):
             liked = True
         data['number_of_likes'] = likes_connected.number_of_likes()
         data['post_is_liked'] = liked
+        
+        # 인기글
+        top_5_posts = Post.objects.annotate(like_count=models.Count('likes')).order_by('-like_count')[:5]
+        data['top_5_posts'] = top_5_posts
+
         return data
 
     def post(self, request, *args, **kwargs):
