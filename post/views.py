@@ -1,4 +1,5 @@
 from .forms import CommentForm
+from django.db import models
 from .models import Post, Category, Tag, ResolveAction, Comment, Rule
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -6,7 +7,6 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
 from django.db.models import Q
-from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 
 
