@@ -45,12 +45,7 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 class PostList(ListView):
     model = Post
     ordering = '-pk'
-    
-    # def get_context_data(self, **kwargs):
-    #     context = super(PostList, self).get_context_data()
-    #     context['categories'] = Category.objects.all()
-    #     context['no_categories_post_count'] = Post.objects.filter(category=None).count()
-    #     return context
+
 
     def get_context_data(self, **kwargs): 
         data = super().get_context_data(**kwargs)
@@ -66,11 +61,6 @@ class PostList(ListView):
 
 class PostDetail(DetailView):
     model = Post
-    # def get_context_data(self, **kwargs):
-    #     context = super(PostDetail, self).get_context_data()
-    #     context['categories'] = Category.objects.all()
-    #     context['no_categories_post_count'] = Post.objects.filter(category=None).count()
-    #     return context
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
@@ -87,13 +77,28 @@ class PostDetail(DetailView):
         return data
 
     def post(self, request, *args, **kwargs):
-        post = get_object_or_404(Post, pk=kwargs['pk'])
-        user = request.user
+        post = self.get_object()
 
-        # 사용자가 해결됐어요 버튼을 누른 적이 없는 경우에만 ResolveAction을 추가
-        if 'resolve_button' in request.POST and not ResolveAction.objects.filter(user=user, post=post).exists():
-            ResolveAction.objects.create(user=user, post=post)
-        return HttpResponseRedirect(post.get_absolute_url())
+        if 'resolve_button' in request.POST: # resolve_button으로 post가 온 경우
+            user = request.user
+            # post.is_resolved = True 버튼을 누르면 해결됨으로 바뀜.
+            # post.save()
+
+            # 이미 Resolve Action이 존재하는지 확인
+            resolve_action_exists = ResolveAction.objects.filter(user=user, post=post).exists()
+
+            if not resolve_action_exists:
+                # Resolve Action이 없는 경우에만 추가
+                resolve_action = ResolveAction.objects.create(user=user, post=post)
+                post.resolve_actions.add(resolve_action)
+
+            # 클릭 수가 3 이상인지 확인
+            post.refresh_from_db()  # 캐시 갱신
+            if post.resolve_actions.count() >= 3:
+                post.is_resolved = True
+                post.save()
+
+        return redirect('post_detail', pk=post.pk)
 
 class PostUpdate(UpdateView):
     model = Post
@@ -275,12 +280,7 @@ def post_search(request):
 
 # 해결 페이지
 def PostResolvedList(request):
-    post_list = Post.objects.all()
-    for post in post_list:
-        status = post.is_resolved()
-        post.resolve_cache = status
-        post.save()
-    post_list = Post.objects.filter(resolve_cache=True)
+    post_list = Post.objects.filter(is_resolved=True)
     return render(
         request,
         'post/post_list.html',
@@ -289,12 +289,7 @@ def PostResolvedList(request):
 
 # 미해결 페이지
 def PostUnresolvedList(request):
-    post_list = Post.objects.all()
-    for post in post_list:
-        status = post.is_resolved()
-        post.resolve_cache = status
-        post.save()
-    post_list = Post.objects.filter(resolve_cache=False)
+    post_list = Post.objects.filter(is_resolved=False)
     return render(
         request,
         'post/post_list.html',

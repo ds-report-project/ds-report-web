@@ -11,16 +11,16 @@
       {% include 'post/tagbar.html' %}
     </div>
 
-    <!-- post List 컨테이너 -->
-    <div id="post_list_container">
-    <a class="btn btn-info btn-sm float-end" href="#" role="button"></i>해결</a>
-    <a class="btn btn-info btn-sm float-end" href="#" role="button"></i>미해결</a>
+    <!-- 해결/미해결 -->
+    <a class="btn btn-info btn-sm float-end" href="{% url 'post_resolved' %}" role="button">해결</a>
+    <a class="btn btn-info btn-sm float-end" href="{% url 'post_unresolved' %}" role="button">미해결</a>
 
     <h1>게시물
         {% if category %}<span class="badge bg-secondary">{{ category }}</span> {% endif %}
         {% if tag %} <span class="bg-info text-dark"><i class="fa-fag fa-tags"></i>{{ tag }}({{ tag.post_set.count}})</span> {% endif %}
     </h1>
 
+    <!-- post List -->
     {% if post_list.exists %}
         {% for post in post_list %}
             <!-- Blog Post -->
@@ -77,7 +77,6 @@
                     {% endif %}
                 </div>
             </div>
-    </div>
         {% endfor %}
     {% else %}
         <h1>게시물이 없습니다.</h1>
