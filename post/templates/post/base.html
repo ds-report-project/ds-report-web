@@ -87,10 +87,21 @@
         </div>
       
         <!-- 인기글 -->
-        <div id="popular"></div>
-            <!-- 인기글 코드 추가 -->
-        <div id="popular_text">이번 달 인기글</div>
-
+        <div id="popular">
+            <div id="popular_text">이번 달 인기글</div>
+            <ul>
+                {% for post in top_5_posts %}
+                    <!-- <div class="post-info post-ranking"> -->
+                    <div>
+                        <a href="{% url 'post_detail' pk=post.pk %}">{{ forloop.counter }}위 {{ post.title }}</a>
+                    </div>
+                    <!-- <div class="post-content post-ranking"> -->
+                    <div>
+                        <a href="{% url 'post_detail' pk=post.pk %}">{{ post.content }}</a>
+                    </div>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 
 <!--    부트스트랩 주석 처리함-->

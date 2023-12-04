@@ -1,50 +1,455 @@
-{% extends 'post/base.html' %}
+{% comment %} {% extends 'post/base.html' %} {% endcomment %}
 
+<html lang="ko">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'post/css/form.css' %}">
+  <style>
+    button {
+      border: none;
+      outline: none;
+      background: transparent;
+    }
+    #Line31 {
+      position: fixed;
+      width: 830px;
+      height: 0px;
+      top: 282px;
+      right: 566px;
+      bottom: 798px;
+      left: 524px;
+      border: 1px solid #CCCCCC;
+      background: #CCC;
+      box-sizing: border-box;
+    }
+    
+    #Line32{
+    position: fixed;
+    width: 830px;
+    height: 0px;
+    left: 524px;
+    top: 658px;
+    right: 566px;
+    bottom: 422px;
+    
+    border: 1px solid #CCCCCC;
+    box-sizing: border-box;
+    }
+    
+    
+    #title{
+      position: fixed;
+    width: 128px;
+    height: 33px;
+    left: 524px;
+    top: 233px;
+    right:1268px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 33px;
+    color: #888888;
+    border: none; 
+    
+    }
+    
+    #content{
+    position: fixed;
+    width: 830px;
+    height: 329px;
+    left: 524px;
+    top: 310px;
+    
+    right:566px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+    border: none;
+    color: #888888;
+    }
+    
+    #plus{
+    position: fixed;
+    width: 179px;
+    height: 19px;
+    left: 524px;
+    top: 680px;
+    right:1380px;
+    bottom:384px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+    color: black;
+ 
+    }
+   
+    #category {
+      align-items: center; 
+    position: fixed;
+    left: 524px;
+    top: 178px;
+    right: 1274px;
+    bottom: 884px;
+
+
+    gap: 4px;
+    color: #000 
+    font-family: Pretendard;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    display: flex;
+  
+    }
+    #category select{
+      left: 524px;
+    top: 178px;
+    right: 1274px;
+    bottom: 884px;
+    width: 82px;
+    height: 18px;
+    color: #000;
+    font-family: Pretendard;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    }
+    #category-text {
+      width: 82px;
+      height: 18px;
+      font-size: 15px;
+    writing-mode: vertical-lr;
+    }
+    /* 익명 */
+    #nikname{
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 4px;
+    
+    width: 26px;
+    height: 18px;
+    left: 720px;
+    top: 168px;
+    right: 1222px;
+    bottom: 880px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    /* identical to box height */
+    
+    color: #000000;
+    }
+    #nikname img {
+      margin-right: 4px; /* 간격 조절 */
+    }
+    #nickname select {
+      position: fixed;
+      width: 26px;
+      height: 18px;
+      left: 702px;
+      top: 178px;
+      right: 1192px;
+      bottom: 884px;
+      color: #000;
+      font-family: Pretendard;
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+  }
+
+    #tag{
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 4px;
+    
+    width: 26px;
+    height: 5px;
+    left: 900px;
+    top: 178px;
+    right: 1064px;
+    bottom:884px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    /* identical to box height */
+    
+    color: #000000;
+    }
+  
+    #tag select {
+     positon:fixed;
+      width: 81px;
+      height: 18px;
+      left: 900px;
+      top: 178px;
+      right: 1064px;
+      bottom:884px;
+      color: #000;
+      font-family: Pretendard;
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+  }
+    #list{
+    /* Frame 17 */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 7px 16px;
+    gap: 10px;
+    
+    position: fixed;
+    width: 81px;
+    height: 31px;
+    left: 1108px;
+    top: 234px;
+    
+    background: #ECECEC;
+    border-radius: 24px;
+    
+    
+    width: 49px;
+    height: 17px;
+    
+    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    
+    }
+    #list button{
+    /* 목록보기 */
+    
+    width: 81px;
+    height: 31px;
+    left: 1108px;
+    top: 234px;
+    
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+    
+    color: #000000;
+    }
+    #sub {
+    /* Frame 18 */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 7px 16px;
+    gap: 10px;
+    
+    position: fixed;
+    width: 57px;
+    height: 31px;
+    left: 1297px;
+    top: 234px;
+    
+    background: #333333;
+    border-radius: 24px;
+    
+    /* 등록 */
+    width: 25px;
+    height: 17px;
+    
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    /* identical to box height */
+    
+    color: #FFFFFF;
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    
+    flex-direction: column; /* This was missing */
+    }
+    
+    #sub button {
+    color: white; 
+    width: 57px;
+      height: 31px;
+      color: #FFFFFF;
+      font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    
+    }
+    #cancel button {
+    width: 84px;
+      height: 31px;
+      color: black;
+      font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+
+    }
+    #cancel{
+    width: 52px;
+    height: 17px; 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 7px 16px;
+    gap: 10px;
+    
+    position: fixed;
+    
+    left: 1201px;
+    top: 234px;
+    
+    background: #ECECEC;
+    border-radius: 24px;
+    
+    
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+    }
+    #title input {
+      left: 524px;
+    top: 233px;
+    right:1268px;
+      position: fixed;
+      border: none;
+      color: #888;
+
+font-style: normal;
+font-weight: 500;
+
+width: 450px;
+font-family: Pretendard;
+font-size: 28px;
+font-weight: 500;
+line-height: 33px;
+letter-spacing: 0em;
+text-align: left;
+
+    height: 33px; 
+    outline: none;
+    }   
+    #content textarea {
+      position: fixed;
+      border: none;
+      color: black;
+
+font-style: normal;
+font-weight: 500;
+
+height: 329px;
+left: 524px;
+top: 310px;
+width: 830px;
+color: #888;
+font-family: Pretendard;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+
+   
+    outline: none;
+    resize: none;
+    }   
+  </style>
+  
+</head>
+<body>
 {% block head_title %}
-  Create Post
+ 
 {% endblock %}
 
 {% block main_area %}
-  <h1>Create New Post</h1>
-  <hr>
+  
+  
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
-    {{ form.title.label_tag }}
-    <input type="text" name="{{ form.title.name }}" placeholder="게시글 제목">
+  
+    <p id="title"><input type="text" name="{{ form.title.name }}" placeholder="게시글 제목"><hr id="Line31"></p>
+    
     <br>
 
-    {{ form.content.label_tag }}
-    <textarea name="{{ form.content.name }}" placeholder="본문에 태그를 사용해보세요" rows="8" cols="80" maxlength="{{ form.content.field.max_length }}"></textarea>
+    
+    <p id="content"><textarea name="{{ form.content.name }}" placeholder="본문에 태그를 사용해보세요" rows="8" cols="80" maxlength="{{ form.content.field.max_length }}"></textarea></p>
     <br>
 
-    {{ form.category.label_tag }}
-    {{ form.category }}
+    
+    <div id="category">
+      <img src="../../static/post/category.svg"><span id="category-text">카테고리</span>
+      {{ form.category }}  
+    </div>
     <br>
 
-    {{ form.tags.label_tag }}
-    {{ form.tags }}
+    <div id="tag">
+      
+      {{ form.tags }}
+    </div>
     <br>
 
-    {{ form.anonymous_nickname.label_tag }}
-    {{ form.anonymous_nickname }}
+
+    <div id="nikname">
+      <img src="../../static/post/account_circle2.svg">
+      {{ form.anonymous_nickname }}
+    </div>
+    
+    <hr id="Line32">
+    <p id="plus"><img src="../../static/post/attachment_btn.svg">이미지{{ form.images }}
     <br>
 
-    {{ form.images.label_tag }}
-    {{ form.images }}
+    <img src="../../static/post/attachment_btn.svg">비디오{{ form.video }}
     <br>
 
-    {{ form.video.label_tag }}
-    {{ form.video }}
-    <br>
-
-    {{ form.attachment.label_tag }}
+    <img src="../../static/post/attachment_btn.svg">첨부 파일
     {{ form.attachment }}
-    <br>
+    <br></p>
 
-    <button type="submit">등록</button>
-    <a href="{% url 'post_list' %}"><button type="button">작성 취소</button></a>
-    <a href="{% url 'post_list' %}"><button type="button">목록보기</button></a>
+    <div id="sub">
+   <button type="submit">등록</button></div>
+   <div id="cancel"><a href="{% url 'post_list' %}"><button type="button">작성 취소</button></a></div>
+    <div id="list"><a href="{% url 'post_list' %}"><button type="button">목록보기</button></a></div>
   </form>
 {% endblock %}
 
