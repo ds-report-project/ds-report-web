@@ -109,12 +109,13 @@
                         {% if post.anonymous_nickname %}
                             {{ post.anonymous_nickname }}
                         {% else %}
-                            {{ "Anonymous" | upper }}
+                            {{ "익명" | upper }}
                         {% endif %}
                     {% else %}
-                        <a href="#">{{ post.author.username | default:"Anonymous" | upper }}</a>
+                        <a href="#">{{ post.author.username | default:"익명" | upper }}</a>
                     {% endif %}
                 </div>
+                
             </div>
     </div>
         {% endfor %}
