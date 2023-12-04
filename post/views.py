@@ -279,7 +279,7 @@ def post_search(request):
 
 # 해결 페이지
 def PostResolvedList(request):
-    post_list = Post.objects.filter(is_resolved=True)
+    post_list = Post.objects.filter(is_resolved=True).order_by('-pk')
     return render(
         request,
         'post/post_list.html',
@@ -288,7 +288,7 @@ def PostResolvedList(request):
 
 # 미해결 페이지
 def PostUnresolvedList(request):
-    post_list = Post.objects.filter(is_resolved=False)
+    post_list = Post.objects.filter(is_resolved=False).order_by('-pk')
     return render(
         request,
         'post/post_list.html',
