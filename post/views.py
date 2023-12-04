@@ -79,7 +79,7 @@ class PostDetail(DetailView):
     def post(self, request, *args, **kwargs):
         post = self.get_object()
 
-        if 'resolve_button' in request.POST: # resolve_button으로 post가 온 경우
+        if 'resolve_button' in request.POST and request.user.is_authenticated: # resolve_button으로 post가 온 경우
             user = request.user
             # post.is_resolved = True 버튼을 누르면 해결됨으로 바뀜.
             # post.save()
@@ -93,7 +93,6 @@ class PostDetail(DetailView):
                 post.resolve_actions.add(resolve_action)
 
             # 클릭 수가 3 이상인지 확인
-            post.refresh_from_db()  # 캐시 갱신
             if post.resolve_actions.count() >= 3:
                 post.is_resolved = True
                 post.save()
