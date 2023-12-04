@@ -91,7 +91,7 @@ class Rule(models.Model):
 # 해결 처리를 위해 해결 버튼 클릭 여부 저장
 class ResolveAction(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey('Post', on_delete=models.CASCADE)
     class Meta:
         unique_together = ('user', 'post')
       

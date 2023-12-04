@@ -81,21 +81,31 @@ class PostDetail(DetailView):
 
         if 'resolve_button' in request.POST and request.user.is_authenticated: # resolve_button으로 post가 온 경우
             user = request.user
-            # post.is_resolved = True 버튼을 누르면 해결됨으로 바뀜.
-            # post.save()
 
             # 이미 Resolve Action이 존재하는지 확인
             resolve_action_exists = ResolveAction.objects.filter(user=user, post=post).exists()
 
-            if not resolve_action_exists:
+            if (resolve_action_exists == False):
                 # Resolve Action이 없는 경우에만 추가
-                resolve_action = ResolveAction.objects.create(user=user, post=post)
-                post.resolve_actions.add(resolve_action)
+                post.resolve_actions.add(request.user)
 
-            # 클릭 수가 3 이상인지 확인
-            if post.resolve_actions.count() >= 3:
-                post.is_resolved = True
-                post.save()
+                # 확인 코드
+                # if resolve_action: print("resolve_action 생성됨==================================")
+                # user_of_resolve_action = resolve_action.user
+                # post_of_resolve_action = resolve_action.post
+                # # 출력
+                # print("User:", user_of_resolve_action)
+                # print("Post:", post_of_resolve_action)
+
+                # 클릭 수가 3 이상인지 확인
+                if post.resolve_actions.count() >= 3:
+                    post.is_resolved = True
+                    post.save()
+            else:
+                existing_resolve_action = ResolveAction.objects.filter(user=request.user, post=post).first()
+                if existing_resolve_action: # 이미 있는 경우 삭제.
+                    existing_resolve_action.delete()
+                redirect('post_detail', pk=post.pk)
 
         return redirect('post_detail', pk=post.pk)
 
