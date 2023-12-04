@@ -1,9 +1,48 @@
 {% extends 'post/base.html' %}
-
+<html lang="ko">
+<head>
+  
+  <style>
+    #write button {
+        width: 88px;
+        height: 32px;
+        top: 221px;
+        left: 1261px;
+        border-radius: 24px;
+        background: #333333;
+    }
+    
+    #wrtie-text {
+        font-family: Pretendard;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 17px;
+        letter-spacing: 0em;
+        text-align: left;
+        background: #FFFFFF;
+        width: 37px;
+        height: 17px;
+        top: 229px;
+        left: 1296px;
+        color:white;
+    }
+    
+   #write{
+        /* Rectangle 51 */
+        position: fixed;
+        width: 88px;
+        height: 32px;
+        left: 1261px;
+        top: 221px;
+        background: #333333;
+        border-radius: 24px;
+    }
+    
+  </style>
 {% block main_area %}
     {% if user.is_authenticated %}
         <!-- 일반 사용자도 글 작성 가능 -->
-        <a class="btn btn-info btn-sm float-end" href="{% url 'post_create' %}" role="button"><i class="fa fa-tags"></i>글 등록</a>
+        <div id="write"><a class="btn btn-info btn-sm float-end" href="{% url 'post_create' %}" role="button"><i class="fa fa-tags"></i> <img src="../../static/post/edit.svg"><span id="write-text">글쓰기</span></a></div>
     {% endif %}
 
     <!-- Tag Bar -->
