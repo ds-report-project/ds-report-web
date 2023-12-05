@@ -57,7 +57,7 @@
         <a href="{% url 'post_list' %}"><img src="../../static/post/notification.svg" id="notificationsIcon"></a>
         <a id="duckSungLogo" href="{% url 'post_list' %}">덕성신문고</a>
         {% if user.is_authenticated %}
-            <a href="/accounts/logout/"><img src="../../static/post/account_circle.svg" alt="" id="accountIcon"></a>
+            <a href="#"><img src="../../static/post/account_circle.svg" alt="" id="accountIcon"></a>
             <a id="logout" href="/accounts/logout/">로그아웃</a>
         {% else %}
             <a href="/accounts/login/" id="loginText">로그인</a>

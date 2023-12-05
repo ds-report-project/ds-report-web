@@ -44,17 +44,18 @@
                         {% if p.file_upload %}
                             <a href="{{ p.file_upload.url }}" class="btn btn-outline-dark" role="button" download>다운로드</a>
                         {% endif %}
-                  
+
+                        <!-- 해결됐어요 버튼 -->
+                        <form method="post" action="{% url 'post_detail' pk=post.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" name="resolve_button" class="btn btn-primary btn-sm float-end">
+                                {% if post.is_resolved %}해결됨{% else %}
+                                해결됐어요 ({{ post.resolve_actions.count }}명){% endif %}
+                            </button>
+                        </form>
+
                         <!-- Post update icon -->
                         {% if user.is_authenticated and user == post.author %}
-                            <!-- 해결됐어요 버튼 -->
-                            <form method="post" action="{% url 'post_detail' pk=post.pk %}">
-                                {% csrf_token %}
-                                <button type="submit" name="resolve_button" class="btn btn-primary btn-sm float-end"
-                                        {% if post.resolve_cache %}해결됨{% endif %}>
-                                    해결됐어요 ({{ post.resolve_actions.count }}명)
-                                </button>
-                            </form>
                             <a class="btn btn-info btn-sm float-end" href="{% url 'post_update' pk=post.pk %}" role="button">수정</a>
                             <a class="btn btn-info btn-sm float-end" href="{% url 'post_delete' pk=post.pk %}" role="button">삭제</a>
                         {% endif %}
@@ -219,5 +220,4 @@
         console.log(commentId)
     }
 </script>
-
 {% endblock %}

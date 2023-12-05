@@ -1,23 +1,12 @@
-from django.db import models
-from .models import Post, Category, Tag, Comment, Rule
-from django.shortcuts import redirect
-from django.urls import reverse, reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.core.exceptions import PermissionDenied
-from django.shortcuts import render, get_object_or_404, redirect
 from .forms import CommentForm
-from django.http import JsonResponse
-from django.http import HttpResponseRedirect
-from .models import Post, Category, Tag, ResolveAction
+from django.db import models
+from .models import Post, Category, Tag, ResolveAction, Comment, Rule
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
-from django.db import models
 from django.db.models import Q
-from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 
 
@@ -81,11 +70,6 @@ class PostList(ListView):
 
 class PostDetail(DetailView):
     model = Post
-    # def get_context_data(self, **kwargs):
-    #     context = super(PostDetail, self).get_context_data()
-    #     context['categories'] = Category.objects.all()
-    #     context['no_categories_post_count'] = Post.objects.filter(category=None).count()
-    #     return context
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
@@ -107,13 +91,37 @@ class PostDetail(DetailView):
         return data
 
     def post(self, request, *args, **kwargs):
-        post = get_object_or_404(Post, pk=kwargs['pk'])
-        user = request.user
+        post = self.get_object()
 
-        # 사용자가 해결됐어요 버튼을 누른 적이 없는 경우에만 ResolveAction을 추가
-        if 'resolve_button' in request.POST and not ResolveAction.objects.filter(user=user, post=post).exists():
-            ResolveAction.objects.create(user=user, post=post)
-        return HttpResponseRedirect(post.get_absolute_url())
+        if 'resolve_button' in request.POST and request.user.is_authenticated: # resolve_button으로 post가 온 경우
+            user = request.user
+
+            # 이미 Resolve Action이 존재하는지 확인
+            resolve_action_exists = ResolveAction.objects.filter(user=user, post=post).exists()
+
+            if (resolve_action_exists == False):
+                # Resolve Action이 없는 경우에만 추가
+                post.resolve_actions.add(request.user)
+
+                # 확인 코드
+                # if resolve_action: print("resolve_action 생성됨==================================")
+                # user_of_resolve_action = resolve_action.user
+                # post_of_resolve_action = resolve_action.post
+                # # 출력
+                # print("User:", user_of_resolve_action)
+                # print("Post:", post_of_resolve_action)
+
+                # 클릭 수가 3 이상인지 확인
+                if post.resolve_actions.count() >= 3:
+                    post.is_resolved = True
+                    post.save()
+            else:
+                existing_resolve_action = ResolveAction.objects.filter(user=request.user, post=post).first()
+                if existing_resolve_action: # 이미 있는 경우 삭제.
+                    existing_resolve_action.delete()
+                redirect('post_detail', pk=post.pk)
+
+        return redirect('post_detail', pk=post.pk)
 
 class PostUpdate(UpdateView):
     model = Post
@@ -295,12 +303,7 @@ def post_search(request):
 
 # 해결 페이지
 def PostResolvedList(request):
-    post_list = Post.objects.all()
-    for post in post_list:
-        status = post.is_resolved()
-        post.resolve_cache = status
-        post.save()
-    post_list = Post.objects.filter(resolve_cache=True)
+    post_list = Post.objects.filter(is_resolved=True).order_by('-pk')
     return render(
         request,
         'post/post_list.html',
@@ -309,12 +312,7 @@ def PostResolvedList(request):
 
 # 미해결 페이지
 def PostUnresolvedList(request):
-    post_list = Post.objects.all()
-    for post in post_list:
-        status = post.is_resolved()
-        post.resolve_cache = status
-        post.save()
-    post_list = Post.objects.filter(resolve_cache=False)
+    post_list = Post.objects.filter(is_resolved=False).order_by('-pk')
     return render(
         request,
         'post/post_list.html',
