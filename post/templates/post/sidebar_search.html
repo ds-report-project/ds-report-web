@@ -85,13 +85,13 @@ top: 84px;
 
     <!-- 검색 기능 -->
     <div class="card my-4">
-        <h5 class="card-header">Rules</h5>
+        <h5 class="card-header">규정 검색</h5>
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-8">
                     <form id="searchForm" class="d-flex" method="GET" action="{% url 'search' slug='1'%}">
                         {% csrf_token %}
-                        <input class="form-control me-2" type="search" placeholder="Search" name="searched" aria-label="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" name="searched" aria-label="search" style="width: 150px;">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
@@ -99,8 +99,8 @@ top: 84px;
 
                 {% for key, value in request.session.search_context.items %}
                     <p> </p>
-                    <p>조항:{{ key }} </p>
-                    <p>내용:{{ value }}</p>
+                    <p>조항: {{ key }} </p>
+                    <p>규정: {{ value }}</p>
                 {% endfor %}
 
         </div>
