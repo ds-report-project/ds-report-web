@@ -23,10 +23,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
     fields = ['title', 'content', 'category', 'tags', 'anonymous_nickname', 'images', 'video', 'attachment']
-
+        
     def form_valid(self, form):
         current_user = self.request.user
-        if current_user.is_authenticated and (current_user.is_staff or current_user.is_superuser):
+        if current_user.is_authenticated:
             form.instance.author = current_user
             form.instance.anonymous_nickname = form.cleaned_data.get('anonymous_nickname', "Default Nickname")
             return super(PostCreate, self).form_valid(form)
