@@ -1,3 +1,12 @@
+from django.db import models
+from django.views import View
+from .models import Post, Category, Tag, Comment, Rule
+from django.shortcuts import redirect
+from django.urls import reverse, reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.core.exceptions import PermissionDenied
+from django.shortcuts import render, get_object_or_404, redirect
 from .forms import CommentForm
 from django.db import models
 from .models import Post, Category, Tag, ResolveAction, Comment, Rule
@@ -14,10 +23,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
     fields = ['title', 'content', 'category', 'tags', 'anonymous_nickname', 'images', 'video', 'attachment']
-
+        
     def form_valid(self, form):
         current_user = self.request.user
-        if current_user.is_authenticated and (current_user.is_staff or current_user.is_superuser):
+        if current_user.is_authenticated:
             form.instance.author = current_user
             form.instance.anonymous_nickname = form.cleaned_data.get('anonymous_nickname', "Default Nickname")
             return super(PostCreate, self).form_valid(form)
@@ -83,6 +92,13 @@ class PostDetail(DetailView):
             liked = True
         data['number_of_likes'] = likes_connected.number_of_likes()
         data['post_is_liked'] = liked
+
+        comment_id = self.kwargs['pk']
+        if Comment.objects.filter(id=comment_id).exists():
+            comment_likes_connected = get_object_or_404(Comment, id=self.kwargs['pk'])
+            data['number_of_comment_likes'] = comment_likes_connected.number_of_comment_likes()
+        else:
+            data['number_of_comment_likes'] = 0
         
         # 인기글
         top_5_posts = Post.objects.annotate(like_count=models.Count('likes')).order_by('-like_count')[:5]
@@ -276,7 +292,7 @@ def search_page(request, slug):
 #         return context
 
 
-#좋아요
+#포스트 공감
 def PostLike(request, pk):
     post = get_object_or_404(Post, id=request.POST.get('post_id'))
     if post.likes.filter(id=request.user.id).exists():
@@ -285,8 +301,17 @@ def PostLike(request, pk):
         post.likes.add(request.user)
 
     return HttpResponseRedirect(reverse('post_detail', args=[str(pk)]))
-  
-  
+
+#댓글 공감
+def CommentLike(request, pk):
+    comment = get_object_or_404(Comment, id=request.POST.get('comment_id'))
+    if comment.clikes.filter(id=request.user.id).exists():
+        comment.clikes.remove(request.user)
+    else:
+        comment.clikes.add(request.user)
+
+    return HttpResponseRedirect(reverse('post_detail', args=[str(pk)]))
+
 def post_search(request):
     query = request.GET.get('q')  # 검색어 가져오기
 

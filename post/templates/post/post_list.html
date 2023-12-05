@@ -103,18 +103,26 @@
                     <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
 
+        
                 <div class="card-footer text-muted">
-                    Posted on {{ post.created_at }} by
-                    {% if post.anonymous %}
-                        {% if post.anonymous_nickname %}
-                            {{ post.anonymous_nickname }}
-                        {% else %}
-                            {{ "Anonymous" | upper }}
-                        {% endif %}
-                    {% else %}
-                        <a href="#">{{ post.author.username | default:"Anonymous" | upper }}</a>
-                    {% endif %}
+                 <!-- Display Anonymous Nickname -->
+                 {% if post.anonymous %}
+                 {% if post.anonymous_nickname %}
+                     <div class="text-muted fst-italic mb-2">작성자: {{ post.anonymous_nickname }}</div>
+                 {% else %}
+                     <div class="text-muted fst-italic mb-2">작성자: 익명</div>
+                 {% endif %}
+             {% else %}
+                 <div class="text-muted fst-italic mb-2">작성자:
+                     {% if post.anonymous_nickname %}
+                         {{ post.anonymous_nickname }}
+                     {% else %}
+                         {{ post.get_anonymous_nickname_display }}
+                     {% endif %}
+                 </div>
+             {% endif %}
                 </div>
+                
             </div>
         {% endfor %}
     {% else %}
