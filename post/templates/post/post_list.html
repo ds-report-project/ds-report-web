@@ -103,18 +103,7 @@
                     <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
 
-                {% comment %} <div class="card-footer text-muted">
-                    Posted on {{ post.created_at }} by
-                    {% if post.anonymous %}
-                        {% if post.anonymous_nickname %}
-                            {{ post.anonymous_nickname }}
-                        {% else %}
-                            {{ "익명" | upper }}
-                        {% endif %}
-                    {% else %}
-                        <a href="#">{{ post.author.username | default:"익명" | upper }}</a>
-                    {% endif %}
-                </div> {% endcomment %}
+        
                 <div class="card-footer text-muted">
                  <!-- Display Anonymous Nickname -->
                  {% if post.anonymous %}
@@ -131,7 +120,8 @@
                          {{ post.get_anonymous_nickname_display }}
                      {% endif %}
                  </div>
-             {% endif %}</div>
+             {% endif %}
+                </div>
                 
             </div>
         {% endfor %}
