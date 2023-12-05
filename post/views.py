@@ -1,4 +1,6 @@
 from django.db import models
+from django.views import View
+
 from .models import Post, Category, Tag, Comment, Rule
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
@@ -80,18 +82,12 @@ class PostDetail(DetailView):
         data['number_of_likes'] = likes_connected.number_of_likes()
         data['post_is_liked'] = liked
 
-        comment_id = self.kwargs['pk']  # URL에서 댓글 ID 가져오기
-        # 댓글이 존재하는지 확인 후 데이터 가져오기
+        comment_id = self.kwargs['pk']
         if Comment.objects.filter(id=comment_id).exists():
             comment_likes_connected = get_object_or_404(Comment, id=self.kwargs['pk'])
-            comment_liked = False
-            if comment_likes_connected.clikes.filter(id=self.request.user.id).exists():
-                comment_liked = True
             data['number_of_comment_likes'] = comment_likes_connected.number_of_comment_likes()
-            data['comment_is_liked'] = comment_liked
         else:
             data['number_of_comment_likes'] = 0
-            data['comment_is_liked'] = False
 
         return data
 
