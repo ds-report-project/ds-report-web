@@ -12,7 +12,7 @@ urlpatterns = [
     path('delete_post/<int:pk>/', views.PostDelete.as_view(), name='post_delete'),
     path('update_comment/<int:pk>/', views.CommentUpdate.as_view(), name='update_comment'),
     path('delete_comment/<int:pk>', views.delete_comment, name='delete_comment'),
-    path('category/<str:slug>/', views.category_page),
+    path('category/<str:slug>/', views.category_page, name='category_page'),
     path('tag/<str:slug>/', views.tag_page),
     path('?search=<str:slug>/', views.search_page, name='search'),
     path('search/', views.post_search, name='post_search'),
@@ -22,7 +22,6 @@ urlpatterns = [
     path('resolved/', views.PostResolvedList, name='post_resolved'),
     path('unresolved/', views.PostUnresolvedList, name='post_unresolved'),
     path('contact/', include('contact_number.urls')),
-    path('accounts/', include('accounts.urls')),
 ]
 
 # if settings.DEBUG:

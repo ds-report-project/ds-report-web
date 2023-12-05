@@ -1,16 +1,75 @@
+{#    <style>#}
+{#/*게시물 검색*/#}
+{#    .search_rect{#}
+{#        /* Rectangle 18 */#}
+{##}
+{#        box-sizing: border-box;#}
+{##}
+        {#position: absolute;#}
+{#        width: 323px;#}
+{#        height: 32px;#}
+        {#left: 913px;#}
+        {#top: 221px;#}
+{##}
+{#        background: #FFFFFF;#}
+{#        border: 1px solid #CCCCCC;#}
+{#        border-radius: 19px;#}
+{##}
+{#    }#}
+{#    .post_search_input{#}
+{#        /* 검색어를 입력하세요. */#}
+{##}
+        {#position: absolute;#}
+{#        width: 250px;#}
+        {#left: 954px;#}
+        {#top: 229px;#}
+{##}
+{#        font-family: 'Pretendard';#}
+{#        font-style: normal;#}
+{#        font-weight: 400;#}
+{#        font-size: 13px;#}
+{#        line-height: 16px;#}
+{#        border: none;#}
+{#        background: transparent;#}
+{#        /* identical to box height */#}
+{##}
+{#        color: #9F9F9F;#}
+{##}
+{##}
+{#    }#}
+{#    .post_search_btn{#}
+{#        /* search */#}
+{##}
+        {#position: absolute;#}
+        {#left: 48.23%;#}
+        {#right: 50.83%;#}
+        {#top: 21.11%;#}
+        {#bottom: 77.22%;#}
+{#        border: none;#}
+{#        background: transparent;#}
+{##}
+{#    }#}
+{#    input::placeholder {color:#9F9F9F;}#}
+{#    input::-webkit-input-placeholder {color:#9F9F9F;}#}
+{#    input:-ms-input-placeholder {color:#9F9F9F;}#}
+{#    </style>#}
+{#{% load static %}#}
+{#    <form class="search_rect" action="{% url 'post_search' %}" method="GET"> <!-- 액션 추가 -->#}
+{#        <input class="post_search_input" type="search" name="q" placeholder="검색어를 입력하세요" aria-label="Search" value="{{ query }}">#}
+{#        <button class="post_search_btn" type="submit"><img src="{% static 'post/search.svg' %}"></button>#}
+{#    </form>#}
 
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <form class="d-flex" action="{% url 'post_search' %}" method="GET"> <!-- 액션 추가 -->
-                        <input class="form-control me-2" type="search" name="q" placeholder="검색어를 입력하세요" aria-label="Search" value="{{ query }}">
-                        <button class="btn btn-outline-primary" type="submit">검색</button>
+                        <input class="form-control me-2" type="search" name="q" placeholder="검색어를 입력하세요." aria-label="Search" value="{{ query }}">
+                        <button class="btn btn-outline-primary" type="submit">search</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</nav> 
+</nav>

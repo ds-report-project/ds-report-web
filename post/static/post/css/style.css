@@ -1,3 +1,14 @@
+@font-face {
+	font-family: 'Pretendard';
+	font-weight: 45 920;
+	font-style: normal;
+	font-display: swap;
+	src: url('../../fonts/PretendardVariable.woff2') format('woff2-variations');
+}
+
+*{
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
 body {
     margin: 0;
     padding: 0;
@@ -128,6 +139,7 @@ body {
     left: 36px;
     top: 226px;
     position: fixed;
+    cursor: pointer;
 }
 
 /* 게시물 */
@@ -391,3 +403,4 @@ a {
     font-size: 14px;
     width:80px;
 }
+

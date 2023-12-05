@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('sidebar-info').classList.add('active');
         document.getElementById('sidebar-post').classList.remove('active');
         document.getElementById('sidebar-search').classList.remove('active');
+        document.getElementById('post-search').classList.remove('active');
     }
     // 게시물 페이지
     else if (currentPath === '/post/') {
@@ -33,6 +34,11 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('sidebar-post').classList.add('active');
         document.getElementById('sidebar-info').classList.remove('active');
         document.getElementById('sidebar-search').classList.remove('active');
+        document.getElementById('post-search').classList.add('active');
+    }
+    else{
+        // 검색창 비활성화
+        document.getElementById('post-search').classList.remove('active');
     }
 });
 
