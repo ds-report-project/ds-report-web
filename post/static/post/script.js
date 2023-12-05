@@ -27,14 +27,21 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('sidebar-search').classList.remove('active');
         document.getElementById('post-search').classList.remove('active');
     }
-    // 게시물 페이지
-    else if (currentPath === '/post/') {
+    else if (currentPath === '/post/'){
+        document.getElementById('post-search').classList.add('active');
         document.getElementById('rectangle32').style.backgroundColor = '#EDEDED';
         document.getElementById('rectangle37').style.backgroundColor = '#FFFFFF';
         document.getElementById('sidebar-post').classList.add('active');
         document.getElementById('sidebar-info').classList.remove('active');
         document.getElementById('sidebar-search').classList.remove('active');
-        document.getElementById('post-search').classList.add('active');
+    }
+    // 게시물 페이지
+    else if (currentPath.startsWith('/post/')) {
+        document.getElementById('rectangle32').style.backgroundColor = '#EDEDED';
+        document.getElementById('rectangle37').style.backgroundColor = '#FFFFFF';
+        document.getElementById('sidebar-post').classList.add('active');
+        document.getElementById('sidebar-info').classList.remove('active');
+        document.getElementById('sidebar-search').classList.remove('active');
     }
     else{
         // 검색창 비활성화
