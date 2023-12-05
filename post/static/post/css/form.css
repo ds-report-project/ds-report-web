@@ -2,9 +2,10 @@ button {
   border: none;
   outline: none;
   background: transparent;
+
 }
 #Line31 {
-  position: fixed;
+  position: absolute;
   width: 830px;
   height: 0px;
   top: 282px;
@@ -17,7 +18,7 @@ button {
 }
 
 #Line32{
-position: fixed;
+  position: absolute;
 width: 830px;
 height: 0px;
 left: 524px;
@@ -31,11 +32,11 @@ box-sizing: border-box;
 
 
 #title{
-  position: fixed;
+  position: absolute;
 width: 128px;
 height: 33px;
-left: 524px;
-top: 233px;
+left: 0px;
+top: 0px;
 right:1268px;
 font-family: 'Pretendard';
 font-style: normal;
@@ -48,11 +49,11 @@ border: none;
 }
 
 #content{
-position: fixed;
+  position: absolute;
 width: 830px;
 height: 329px;
-left: 524px;
-top: 310px;
+left: 0px;
+top: 0px;
 
 right:566px;
 font-family: 'Pretendard';
@@ -66,7 +67,7 @@ color: #888888;
 }
 
 #plus{
-position: fixed;
+  position: absolute;
 width: 179px;
 height: 19px;
 left: 524px;
@@ -85,7 +86,7 @@ color: black;
 
 #category {
   align-items: center; 
-position: fixed;
+  position: absolute;
 left: 524px;
 top: 178px;
 right: 1274px;
@@ -93,7 +94,7 @@ bottom: 884px;
 
 
 gap: 4px;
-color: #000 
+color: #000;
 font-family: Pretendard;
 font-size: 15px;
 font-style: normal;
@@ -103,6 +104,7 @@ display: flex;
 
 }
 #category select{
+  
   left: 524px;
 top: 178px;
 right: 1274px;
@@ -124,7 +126,7 @@ writing-mode: vertical-lr;
 }
 /* 익명 */
 #nikname{
-position: fixed;
+  position: absolute;
 display: flex;
 flex-direction: row;
 align-items: center;
@@ -137,7 +139,7 @@ left: 720px;
 top: 168px;
 right: 1222px;
 bottom: 880px;
-font-family: 'Pretendard';
+font-family: Pretendard;
 font-style: normal;
 font-weight: 600;
 font-size: 15px;
@@ -150,7 +152,7 @@ color: #000000;
   margin-right: 4px; /* 간격 조절 */
 }
 #nickname select {
-  position: fixed;
+  position: absolute;
   width: 26px;
   height: 18px;
   left: 702px;
@@ -164,9 +166,37 @@ color: #000000;
   font-weight: 600;
   line-height: normal;
 }
+#tag-text {
+width: 45px;
+height: 18px;
+font-size: 15px;
+writing-mode: vertical-lr;
 
+}
+
+#tag select {
+position: absolute;
+width: 81px;
+height: 70px;
+top:-45px;
+left:50px;
+color: #000;
+font-family: Pretendard;
+font-size: 15px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+appearance: none;
+-webkit-appearance: none;
+-moz-appearance: none;
+background: none;
+border: 1px solid #000;
+padding: 45px;
+cursor: pointer;
+}
 #tag{
-position: fixed;
+
+position: absolute;
 display: flex;
 flex-direction: row;
 align-items: center;
@@ -174,11 +204,11 @@ padding: 0px;
 gap: 4px;
 
 width: 26px;
-height: 5px;
+height: 18px;
 left: 900px;
-top: 178px;
-right: 1064px;
-bottom:884px;
+top: 168px;
+right: 1222px;
+bottom: 900px;
 font-family: 'Pretendard';
 font-style: normal;
 font-weight: 600;
@@ -187,53 +217,6 @@ line-height: 18px;
 /* identical to box height */
 
 color: #000000;
-}
-
-#tag select {
- positon:fixed;
-  width: 81px;
-  height: 18px;
-  left: 900px;
-  top: 178px;
-  right: 1064px;
-  bottom:884px;
-  color: #000;
-  font-family: Pretendard;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
-#list{
-/* Frame 17 */
-
-/* Auto layout */
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 7px 16px;
-gap: 10px;
-
-position: fixed;
-width: 81px;
-height: 31px;
-left: 1108px;
-top: 234px;
-
-background: #ECECEC;
-border-radius: 24px;
-
-
-width: 49px;
-height: 17px;
-
-
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 0;
 
 }
 #list button{
@@ -253,6 +236,37 @@ line-height: 17px;
 
 color: #000000;
 }
+
+#list{
+width: 81px;
+height: 31px;
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 7px 16px;
+gap: 10px;
+
+position: absolute;
+
+left: 1108px;
+top: 234px;
+
+background: #ECECEC;
+border-radius: 24px;
+
+
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+}
+
+
 #sub {
 /* Frame 18 */
 
@@ -264,7 +278,7 @@ align-items: center;
 padding: 7px 16px;
 gap: 10px;
 
-position: fixed;
+position: absolute;
 width: 57px;
 height: 31px;
 left: 1297px;
@@ -274,8 +288,8 @@ background: #333333;
 border-radius: 24px;
 
 /* 등록 */
-width: 25px;
-height: 17px;
+width: 57px;
+height: 31px;
 
 font-family: 'Pretendard';
 font-style: normal;
@@ -318,8 +332,8 @@ line-height: 17px;
 
 }
 #cancel{
-width: 52px;
-height: 17px; 
+  width: 84px;
+  height: 31px;
 display: flex;
 flex-direction: row;
 justify-content: center;
@@ -327,7 +341,7 @@ align-items: center;
 padding: 7px 16px;
 gap: 10px;
 
-position: fixed;
+position: absolute;
 
 left: 1201px;
 top: 234px;
@@ -345,7 +359,7 @@ flex-grow: 0;
   left: 524px;
 top: 233px;
 right:1268px;
-  position: fixed;
+position: absolute;
   border: none;
   color: #888;
 
@@ -364,10 +378,10 @@ height: 33px;
 outline: none;
 }   
 #content textarea {
-  position: fixed;
+
   border: none;
   color: black;
-
+  position: absolute;
 font-style: normal;
 font-weight: 500;
 
@@ -385,4 +399,4 @@ line-height: normal;
 
 outline: none;
 resize: none;
-}   
+}  

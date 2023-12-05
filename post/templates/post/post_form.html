@@ -1,17 +1,22 @@
-{% comment %} {% extends 'post/base.html' %} {% endcomment %}
-
 <html lang="ko">
 <head>
     {% load static %}
+    <title>게시물</title>
     <link rel="stylesheet" href="{% static 'post/css/form.css' %}">
+    <link rel="stylesheet" href="{% static 'post/css/style.css' %}">
+   
+    <link rel="stylesheet" href="{% static 'post/bootstrap/bootstrap.min.css' %}" media="screen">
+    <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
+
   <style>
     button {
       border: none;
       outline: none;
       background: transparent;
+
     }
     #Line31 {
-      position: fixed;
+      position: absolute;
       width: 830px;
       height: 0px;
       top: 282px;
@@ -24,7 +29,7 @@
     }
     
     #Line32{
-    position: fixed;
+      position: absolute;
     width: 830px;
     height: 0px;
     left: 524px;
@@ -38,8 +43,8 @@
     
     
     #title{
-      position: fixed;
-    width: 128px;
+      position: absolute;
+    width: 500px;
     height: 33px;
     left: 524px;
     top: 233px;
@@ -50,12 +55,12 @@
     font-size: 28px;
     line-height: 33px;
     color: #888888;
-    border: none; 
+    border:none; 
     
     }
     
     #content{
-    position: fixed;
+      position: absolute;
     width: 830px;
     height: 329px;
     left: 524px;
@@ -73,7 +78,7 @@
     }
     
     #plus{
-    position: fixed;
+      position: absolute;
     width: 179px;
     height: 19px;
     left: 524px;
@@ -92,15 +97,15 @@
    
     #category {
       align-items: center; 
-    position: fixed;
+      position: absolute;
     left: 524px;
-    top: 178px;
+    top: 160px;
     right: 1274px;
     bottom: 884px;
 
 
     gap: 4px;
-    color: #000 
+    color: #000;
     font-family: Pretendard;
     font-size: 15px;
     font-style: normal;
@@ -110,6 +115,7 @@
   
     }
     #category select{
+      
       left: 524px;
     top: 178px;
     right: 1274px;
@@ -131,7 +137,7 @@
     }
     /* 익명 */
     #nikname{
-    position: fixed;
+      position: absolute;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -144,7 +150,7 @@
     top: 168px;
     right: 1222px;
     bottom: 880px;
-    font-family: 'Pretendard';
+    font-family: Pretendard;
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
@@ -157,7 +163,7 @@
       margin-right: 4px; /* 간격 조절 */
     }
     #nickname select {
-      position: fixed;
+      position: absolute;
       width: 26px;
       height: 18px;
       left: 702px;
@@ -171,79 +177,59 @@
       font-weight: 600;
       line-height: normal;
   }
-
-    #tag{
-    position: fixed;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0px;
-    gap: 4px;
-    
-    width: 26px;
-    height: 5px;
-    left: 900px;
-    top: 178px;
-    right: 1064px;
-    bottom:884px;
-    font-family: 'Pretendard';
+  #tag-text {
+    width: 45px;
+    height: 18px;
+    font-size: 15px;
+  writing-mode: vertical-lr;
+  }
+  
+  #tag select {
+    position: absolute;
+    width: 81px;
+    height: 70px;
+    top:-45px;
+    left:50px;
+    color: #000;
+    font-family: Pretendard;
+    font-size: 15px;
     font-style: normal;
     font-weight: 600;
-    font-size: 15px;
-    line-height: 18px;
-    /* identical to box height */
-    
-    color: #000000;
-    }
+    line-height: normal;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: none;
+    border: 1px solid #000;
+    padding: 45px;
+    cursor: pointer;
+}
+#tag{
+
+    position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 4px;
   
-    #tag select {
-     positon:fixed;
-      width: 81px;
-      height: 18px;
-      left: 900px;
-      top: 178px;
-      right: 1064px;
-      bottom:884px;
-      color: #000;
-      font-family: Pretendard;
-      font-size: 15px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-  }
-    #list{
-    /* Frame 17 */
-    
-    /* Auto layout */
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 7px 16px;
-    gap: 10px;
-    
-    position: fixed;
-    width: 81px;
-    height: 31px;
-    left: 1108px;
-    top: 234px;
-    
-    background: #ECECEC;
-    border-radius: 24px;
-    
-    
-    width: 49px;
-    height: 17px;
-    
-    
-    
-    /* Inside auto layout */
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    
-    }
-    #list button{
+  width: 26px;
+  height: 18px;
+  left: 900px;
+  top: 168px;
+  right: 1222px;
+  bottom: 900px;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 18px;
+  /* identical to box height */
+  
+  color: #000000;
+ 
+}
+#list button{
     /* 목록보기 */
     
     width: 81px;
@@ -259,8 +245,39 @@
     /* identical to box height */
     
     color: #000000;
-    }
-    #sub {
+}
+
+#list{
+  width: 81px;
+  height: 31px;
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 16px;
+  gap: 10px;
+  
+  position: absolute;
+
+  left: 1108px;
+  top: 234px;
+  
+  background: #ECECEC;
+  border-radius: 24px;
+  
+
+  
+  
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  
+}
+ 
+
+#sub {
     /* Frame 18 */
     
     /* Auto layout */
@@ -271,7 +288,7 @@
     padding: 7px 16px;
     gap: 10px;
     
-    position: fixed;
+    position: absolute;
     width: 57px;
     height: 31px;
     left: 1297px;
@@ -281,8 +298,8 @@
     border-radius: 24px;
     
     /* 등록 */
-    width: 25px;
-    height: 17px;
+    width: 57px;
+    height: 31px;
     
     font-family: 'Pretendard';
     font-style: normal;
@@ -299,9 +316,9 @@
     flex-grow: 0;
     
     flex-direction: column; /* This was missing */
-    }
+}
     
-    #sub button {
+#sub button {
     color: white; 
     width: 57px;
       height: 31px;
@@ -312,8 +329,8 @@
     font-size: 14px;
     line-height: 17px;
     
-    }
-    #cancel button {
+}
+#cancel button {
     width: 84px;
       height: 31px;
       color: black;
@@ -323,10 +340,10 @@
     font-size: 14px;
     line-height: 17px;
 
-    }
-    #cancel{
-    width: 52px;
-    height: 17px; 
+}
+#cancel{
+      width: 84px;
+      height: 31px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -334,7 +351,7 @@
     padding: 7px 16px;
     gap: 10px;
     
-    position: fixed;
+    position: absolute;
     
     left: 1201px;
     top: 234px;
@@ -347,18 +364,17 @@
     order: 0;
     flex-grow: 0;
 
-    }
-    #title input {
+}
+#title input {
       left: 524px;
     top: 233px;
     right:1268px;
-      position: fixed;
+    position: absolute;
       border: none;
       color: #888;
 
 font-style: normal;
 font-weight: 500;
-
 width: 450px;
 font-family: Pretendard;
 font-size: 28px;
@@ -367,14 +383,14 @@ line-height: 33px;
 letter-spacing: 0em;
 text-align: left;
 
-    height: 33px; 
+    height: 50px; 
     outline: none;
-    }   
-    #content textarea {
-      position: fixed;
+}   
+#content textarea {
+    
       border: none;
       color: black;
-
+      position: absolute;
 font-style: normal;
 font-weight: 500;
 
@@ -382,7 +398,7 @@ height: 329px;
 left: 524px;
 top: 310px;
 width: 830px;
-color: #888;
+
 font-family: Pretendard;
 font-size: 16px;
 font-style: normal;
@@ -392,28 +408,119 @@ line-height: normal;
    
     outline: none;
     resize: none;
-    }   
+}   
+#title input,
+#content textarea {
+        border: none !important;
+        border-bottom: 1px solid #ccc !important;
+        outline: none !important;
+}
+#title:focus,
+#content:focus {
+        border: none;
+}
+#Rectangle42 {
+      position: fixed;
+      width: 240px;
+      height: 1023px;
+      left: 92px;
+      top: 57px;
+      background: #FFFFFF;
+      box-shadow: -4px 0px 2px rgba(0, 0, 0, 0.1), 4px 0px 2px rgba(0, 0, 0, 0.1);
+}
+[id^="rectangle"] {
+    cursor: pointer;
+}
+
+[id^="rectangle"]:hover {
+    border: 1px solid #CCCCCC;
+}
+
+/*active 시 배경색 변경*/
+#rectangle19:active,
+#rectangle20:active,
+#rectangle21:active,
+#rectangle45:active,
+#rectangle46:active
+{
+    background: #EDEDED; /* active 시 배경색 변경 */
+}
   </style>
-  
+  <link rel="stylesheet" href="{% static 'post/bootstrap/bootstrap.min.css' %}" media="screen">
+  <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
+
+  <!-- Bootstrap5.x 적용 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-
+  4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-{% block head_title %}
- 
-{% endblock %}
 
-{% block main_area %}
-  
+ 
+
+
+
+<div id="container">
+  <!-- 사이드바 -->
+  <div id="Rectangle29"></div>
+      <!-- 게시물 -->
+      <a id="rectangle32"></a>
+      <img src="../../static/post/description.svg" id="description">
+      <div id="post">게시물</div>
+      <!-- 정보 -->
+      <a id="rectangle37"></a>
+      <img src="../../static/post/bar_chart.svg" id="bar_chart">
+      <div id="info">정보</div>
+      <!-- 규정 검색 -->
+      <a id="rectangle40"></a>
+      <img src="../../static/post/action_key.svg" alt="" id="action_key">
+      <div id="searchRegulation">규정 검색</div>
+
+  <!-- 게시물 카테고리 사이드바 -->
+  <div id="sidebar-container">
+      <!-- 게시물 -->
+      <div id="sidebar-post" class="sidebar-content">
+          {% include 'post/sidebar_post.html' %}
+      </div>
+
+      <!-- 정보 -->
+      <div id="sidebar-info" class="sidebar-content">
+          {% include 'post/sidebar_info.html' %}
+      </div>
+
+      <!-- 규정 검색 -->
+      <div id="sidebar-search" class="sidebar-content">
+          {% include 'post/sidebar_search.html' %}
+      </div>
+
+  </div>
+
+  <!-- 상단바 -->
+  <div id="Rectangle52"></div>
+  <a href="{% url 'post_list' %}"><img src="../../static/post/notification.svg" id="notificationsIcon"></a>
+  <a id="duckSungLogo" href="{% url 'post_list' %}">덕성신문고</a>
+  {% if user.is_authenticated %}
+      <a href="#"><img src="../../static/post/account_circle.svg" alt="" id="accountIcon"></a>
+      <a id="logout" href="/accounts/logout/">로그아웃</a>
+  {% else %}
+      <a href="/accounts/login/" id="loginText">로그인</a>
+      <a href="/accounts/signup/" id="rectangle17"></a>
+      <a id="signupText" href="/accounts/signup/">회원가입</a>
+  {% endif %}
+
+
   
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
   
-    <p id="title"><input type="text" name="{{ form.title.name }}" placeholder="게시글 제목"><hr id="Line31"></p>
+    <input id="title" type="text" name="{{ form.title.name }}" placeholder="게시글 제목"><hr id="Line31">
     
     <br>
 
     
-    <p id="content"><textarea name="{{ form.content.name }}" placeholder="본문에 태그를 사용해보세요" rows="8" cols="80" maxlength="{{ form.content.field.max_length }}"></textarea></p>
+   <textarea id="content" name="{{ form.content.name }}" placeholder="본문에 태그를 사용해보세요" rows="8" cols="80" maxlength="{{ form.content.field.max_length }}"></textarea>
     <br>
 
     
@@ -423,8 +530,7 @@ line-height: normal;
     </div>
     <br>
 
-    <div id="tag">
-      
+    <div id="tag"><span id="tag-text">태그</span>
       {{ form.tags }}
     </div>
     <br>
@@ -451,7 +557,36 @@ line-height: normal;
    <div id="cancel"><a href="{% url 'post_list' %}"><button type="button">작성 취소</button></a></div>
     <div id="list"><a href="{% url 'post_list' %}"><button type="button">목록보기</button></a></div>
   </form>
-{% endblock %}
+
+   
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-
+    HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <script>
+            document.getElementById('searchForm').addEventListener('submit', function (e) {
+                e.preventDefault();  // Prevent the form from submitting immediately
+                var searchTerm = document.querySelector('[name="searched"]').value;
+                var baseUrl = "{% url 'search' slug='placeholder' %}".replace('placeholder', searchTerm);
+                this.action = baseUrl
+                this.submit();
+            });
+        </script>
+        <script src="../../static/post/script.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+
+</body>
+
+</html>
+
 
 
 

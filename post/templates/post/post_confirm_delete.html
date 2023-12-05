@@ -1,21 +1,460 @@
-{% extends 'post/base.html' %}
 
-{% block head_title %}
-  Update Post-BLOG
-{% endblock %}
+<html lang="ko">
+<head>
+  {% load static %}
+  <title>게시물 삭제 확인</title>
+  <link rel="stylesheet" href="{% static 'post/css/form.css' %}">
+  <link rel="stylesheet" href="{% static 'post/css/style.css' %}">
+ 
+  <link rel="stylesheet" href="{% static 'post/bootstrap/bootstrap.min.css' %}" media="screen">
+  <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
 
-{% block main_area %}
-  <h1> Delete Post</h1>
+  <link rel="stylesheet" href="{% static 'post/bootstrap/bootstrap.min.css' %}" media="screen">
+  <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
+
+  <!-- Bootstrap5.x 적용 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-
+  4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x:hidden;
+      overflow-y:auto;
+  }
+  
+  #container {
+      width: 1920px;
+      height: 1080px;
+      position: absolute;
+      /*top: 50%;*/
+      /*left: 50%;*/
+      /*transform: translate(-50%, -50%);*/
+      min-width: 1800px;
+  }
+  
+  #Rectangle52 {
+      position: absolute;
+      width: 1920px;
+      height: 57px;
+      left: 0px;
+      top: 0px;
+      background: #FFFFFF;
+      box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      z-index: 2;
+  }
+  #Rectangle29{
+      position: absolute;
+      width: 92px;
+      height: 1023px;
+      left: 0px;
+      top: 57px;
+  
+      background: #FFFFFF;
+      box-shadow: 4px 0px 2px rgba(0, 0, 0, 0.1);
+      position: fixed;
+  }
+          /* Rectangle 37 */
+  #rectangle37 {
+      position: absolute;
+      width: 56px;
+      height: 32px;
+      left: 20px;
+      top: 150px;
+      background: #FFFFFF;
+      border-radius: 16px;
+      position: fixed;
+  }
+  
+  /* Rectangle 32 */
+  #rectangle32 {
+      position: absolute;
+      width: 56px;
+      height: 32px;
+      left: 20px;
+      top: 78px;
+      background: #FFFFFF;
+      border-radius: 16px;
+      position: fixed;
+  }
+  
+  #rectangle32:active,
+  #rectangle37:active,
+  #rectangle40:active,
+  #bar_chart:active + #rectangle37,
+  #description:active + #rectangle32,
+  #action_key:active + #rectangle40
+  {
+      background: #EDEDED; /* active 시 배경색 변경 */
+  }
+  
+  /* Rectangle 40 */
+  #rectangle40 {
+      position: absolute;
+      width: 56px;
+      height: 32px;
+      left: 20px;
+      top: 222px;
+      background: #FFFFFF;
+      border-radius: 16px;
+      position: fixed;
+  }
+  
+  /* bar_chart */
+  #bar_chart {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      left: 36px;
+      top: 154px;
+      position: fixed;
+  }
+  
+  /* 정보 */
+  #info {
+      position: absolute;
+      width: 64px;
+      height: 16px;
+      left: 16px;
+      top: 186px;
+      font-family: 'Pretendard';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 16px;
+      text-align: center;
+      color: #000000;
+      position: fixed;
+  }
+  
+  /* description */
+  #description {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      left: 36px;
+      top: 82px;
+      position: fixed;
+  }
+  
+  /* action_key */
+  #action_key {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      left: 36px;
+      top: 226px;
+      position: fixed;
+  }
+  
+  /* 게시물 */
+  #post {
+      position: absolute;
+      width: 64px;
+      height: 16px;
+      left: 16px;
+      top: 114px;
+      font-family: 'Pretendard';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 16px;
+      text-align: center;
+      color: #000000;
+      position: fixed;
+  }
+  
+  /* 규정 검색 */
+  #searchRegulation {
+      position: absolute;
+      width: 64px;
+      height: 16px;
+      left: 16px;
+      top: 258px;
+      font-family: 'Pretendard';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 16px;
+      text-align: center;
+      color: #000000;
+      position: fixed;
+  }
+  
+  /* 덕성신문고 */
+  #duckSungLogo {
+      position: absolute;
+      width: 90px;
+      height: 20px;
+      left: 66px;
+      top: 19px;
+      font-family: 'Pretendard';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 17px;
+      line-height: 20px;
+      color: #000000;
+      cursor: pointer;
+      position: fixed;
+      z-index: 3;
+  }
+  
+  /* 로그아웃 */
+  #logout {
+      position: absolute;
+      width: 55px;
+      height: 16px;
+      left: 1681px;
+      top: 19px;
+      font-family: 'Pretendard';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 16px;
+      color: #000000;
+      position: fixed;
+      z-index: 3;
+  }
+  
+  /* notifications_active */
+  #notificationsIcon {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      left: 36px;
+      top: 17px;
+      /*background: #D9D9D9;*/
+      cursor: pointer;
+      position: fixed;
+      z-index: 3;
+  }
+  
+  
+  
+  /* account_circle */
+  #accountIcon {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      left: 1649px;
+      top: 15px;
+      position: fixed;
+      z-index: 3;
+  }
+  
+  #accountIcon::before {
+      content: '';
+      position: absolute;
+      left: 8.33%;
+      right: 8.33%;
+      top: 8.33%;
+      bottom: 8.33%;
+      background: #1C1B1F;
+      position: fixed;
+      z-index: 3;
+  }
+  [id^="rectangle"] {
+      cursor: pointer;
+  }
+  
+  [id^="rectangle"]:hover {
+      border: 1px solid #CCCCCC;
+  }
+  
+  /* Rectangle 17 */
+  #rectangle17 {
+      position: absolute;
+      width: 76px;
+      height: 38px;
+      background: #333333;
+      border-radius: 19px;
+      top:10px;
+      left:1656px;
+      position: fixed;
+      z-index: 3;
+  }
+  
+  /* 로그인 */
+  #loginText {
+      position: absolute;
+      width: 44px;
+      height: 16px;
+      font-family: 'Pretendard';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 16px;
+      color: #000000;
+      top:21px;
+      left:1602px;
+      position: fixed;
+      z-index: 3;
+  }
+  
+  /* 회원가입 */
+  #signupText {
+      position: absolute;
+      width: 55px;
+      height: 16px;
+      font-family: 'Pretendard';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 13px;
+      line-height: 16px;
+      color: #FFFFFF;
+      top:21px;
+      left:1668px;
+      position: fixed;
+      z-index: 4;
+  }
+  a {
+      text-decoration: none;
+  }
+  #sidebar-container{
+      position: fixed;
+  }
+  
+  .sidebar-content {
+      display: none;
+  }
+  
+  .sidebar-content.active {
+      display: block;
+  }
+  
+  #main_container{
+      width:850px;
+      height:990px;
+      top:90px;
+      left:512px;
+      position: absolute;
+      overflow: hidden;
+      z-index: 1;
+  }
+  
+  
+  /* 인기글 */
+  #popular{
+      box-sizing: border-box;
+      position: absolute;
+      width: 300px;
+      height: 488px;
+      left: 1426px;
+      top: 221px;
+  
+      background: #FFFFFF;
+      border: 1px solid #DBDBDB;
+      border-radius: 10px;
+      position: fixed;
+  }
+  
+  #popular_text{
+      position: absolute;
+      width: 121px;
+      height: 19px;
+      left: 1456px;
+      top: 245px;
+  
+      font-family: 'Pretendard';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 19px;
+      color: #9F9F9F;
+      position: fixed;
+  }
+  
+  /* 인기글 스타일 */
+  .post-info {
+      position: absolute;
+      width: 140px;
+      font-family: 'Pretendard';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      color: #000000;
+  }
+  
+  .post-content {
+      position: absolute;
+      width: 223px;
+      height: 19px;
+      font-family: 'Pretendard';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 19px;
+      color: #676767;
+  }
+  
+  /* 인기글 순위 클래스 */
+  .post-ranking {
+      top: 20px; /* 순위별 위치 조정 */
+  }
+  </style>
+</head>
+<body>
+
   <hr>
+  <div id="container">
+    <!-- 사이드바 -->
+    <div id="Rectangle29"></div>
+        <!-- 게시물 -->
+      <a id="rectangle32"></a>
+      <img src="{% static 'post/description.svg' %}" id="description">
+      <div id="post">게시물</div>
+      <!-- 정보 -->
+      <a id="rectangle37"></a>
+      <img src="{% static 'post/bar_chart.svg' %}" id="bar_chart">
+      <div id="info">정보</div>
+      <!-- 규정 검색 -->
+      <a id="rectangle40"></a>
+      <img src="{% static 'post/action_key.svg' %}" alt="" id="action_key">
+      <div id="searchRegulation">규정 검색</div>
+  
+    <!-- 게시물 카테고리 사이드바 -->
+    <div id="sidebar-container">
+        <!-- 게시물 -->
+        <div id="sidebar-post" class="sidebar-content">
+            {% include 'post/sidebar_post.html' %}
+        </div>
+  
+        <!-- 정보 -->
+        <div id="sidebar-info" class="sidebar-content">
+            {% include 'post/sidebar_info.html' %}
+        </div>
+  
+        <!-- 규정 검색 -->
+        <div id="sidebar-search" class="sidebar-content">
+            {% include 'post/sidebar_search.html' %}
+        </div>
+  
+    </div>
+  
+ <!-- 상단바 -->
+ <div id="Rectangle52"></div>
+ <a href="{% url 'post_list' %}"><img src="{% static 'post/notification.svg' %}" id="notificationsIcon"></a>
+ <a id="duckSungLogo" href="{% url 'post_list' %}">덕성신문고</a>
+ {% if user.is_authenticated %}
+     <a href="#"><img src={% static 'post/account_cirlce.svg' %} alt="" id="accountIcon"></a>
+     <a id="logout" href="/accounts/logout/">로그아웃</a>
+ {% else %}
+     <a href="/accounts/login/" id="loginText">로그인</a>
+     <a href="/accounts/signup/" id="rectangle17"></a>
+     <a id="signupText" href="/accounts/signup/">회원가입</a>
+ {% endif %}
+
     <form method="post" class ="delete-form">
       {% csrf_token %}
       <p>정말로 해당 글을 삭제하시나요?</p>
         <input type="submit" class="btn btn-primary" value="Delete">
         <a href="{% url 'post_detail' post.pk %}" class="btn btn-outline">Cancel</a>
 
-
-
     </form>
-{% endblock %}
 
+  </body>
 
