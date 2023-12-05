@@ -3,10 +3,12 @@
 <head>
     {% load static %}
     <title>게시물</title>
-
-    <link rel="stylesheet" href="{% static 'post/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'post/css/form.css' %}">
+    <link rel="stylesheet" href="{% static 'post/css/style.css' %}">
    
+    <link rel="stylesheet" href="{% static 'post/bootstrap/bootstrap.min.css' %}" media="screen">
+    <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
+
   <style>
     button {
       border: none;
@@ -104,7 +106,7 @@
 
 
     gap: 4px;
-    color: #000 
+    color: #000;
     font-family: Pretendard;
     font-size: 15px;
     font-style: normal;
@@ -149,7 +151,7 @@
     top: 168px;
     right: 1222px;
     bottom: 880px;
-    font-family: 'Pretendard';
+    font-family: Pretendard;
     font-style: normal;
     font-weight: 600;
     font-size: 15px;
@@ -410,6 +412,32 @@ line-height: normal;
     outline: none;
     resize: none;
     }   
+    #Rectangle42 {
+      position: fixed;
+      width: 240px;
+      height: 1023px;
+      left: 92px;
+      top: 57px;
+      background: #FFFFFF;
+      box-shadow: -4px 0px 2px rgba(0, 0, 0, 0.1), 4px 0px 2px rgba(0, 0, 0, 0.1);
+  }
+  [id^="rectangle"] {
+    cursor: pointer;
+}
+
+[id^="rectangle"]:hover {
+    border: 1px solid #CCCCCC;
+}
+
+/*active 시 배경색 변경*/
+#rectangle19:active,
+#rectangle20:active,
+#rectangle21:active,
+#rectangle45:active,
+#rectangle46:active
+{
+    background: #EDEDED; /* active 시 배경색 변경 */
+}
   </style>
   <link rel="stylesheet" href="{% static 'post/bootstrap/bootstrap.min.css' %}" media="screen">
   <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
@@ -474,44 +502,7 @@ line-height: normal;
       <a id="signupText" href="/accounts/signup/">회원가입</a>
   {% endif %}
 
-  <!-- 메인 컨테이너 -->
-  {% comment %} <div id="main_container">
-      <!-- Search 검색창 -->
-      {% include 'post/search.html' %}
 
-      <!-- 검색 결과 표시 -->
-      {% if posts %}
-          <h3>Search Results for "{{ query }}"</h3>
-          <ul>
-              <!-- 검색한 게시물 -->
-              {% block search_area %}
-              {% endblock %}
-          </ul>
-      {% elif query %}
-          <p>No results found for "{{ query }}"</p>
-      {% else %}
-          {% block main_area %}
-          {% endblock %}
-      {% endif %}
-  </div> {% endcomment %}
-
-  <!-- 인기글 -->
-  <div id="popular">
-      <div id="popular_text">이번 달 인기글</div>
-      <ul>
-          {% for post in top_5_posts %}
-              <!-- <div class="post-info post-ranking"> -->
-              <div>
-                  <a href="{% url 'post_detail' pk=post.pk %}">{{ forloop.counter }}위 {{ post.title }}</a>
-              </div>
-              <!-- <div class="post-content post-ranking"> -->
-              <div>
-                  <a href="{% url 'post_detail' pk=post.pk %}">{{ post.content }}</a>
-              </div>
-          {% endfor %}
-      </ul>
-  </div>
-</div>
   
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
@@ -560,7 +551,34 @@ line-height: normal;
     <div id="list"><a href="{% url 'post_list' %}"><button type="button">목록보기</button></a></div>
   </form>
 
+   
 
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-
+    HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+        <script>
+            document.getElementById('searchForm').addEventListener('submit', function (e) {
+                e.preventDefault();  // Prevent the form from submitting immediately
+                var searchTerm = document.querySelector('[name="searched"]').value;
+                var baseUrl = "{% url 'search' slug='placeholder' %}".replace('placeholder', searchTerm);
+                this.action = baseUrl
+                this.submit();
+            });
+        </script>
+        <script src="../../static/post/script.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+
+</body>
+
+</html>
 
 
 

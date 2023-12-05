@@ -35,8 +35,8 @@ box-sizing: border-box;
   position: absolute;
 width: 128px;
 height: 33px;
-left: 524px;
-top: 233px;
+left: 0px;
+top: 0px;
 right:1268px;
 font-family: 'Pretendard';
 font-style: normal;
@@ -52,8 +52,8 @@ border: none;
   position: absolute;
 width: 830px;
 height: 329px;
-left: 524px;
-top: 310px;
+left: 0px;
+top: 0px;
 
 right:566px;
 font-family: 'Pretendard';
@@ -94,7 +94,7 @@ bottom: 884px;
 
 
 gap: 4px;
-color: #000 
+color: #000;
 font-family: Pretendard;
 font-size: 15px;
 font-style: normal;
@@ -104,6 +104,7 @@ display: flex;
 
 }
 #category select{
+  
   left: 524px;
 top: 178px;
 right: 1274px;
@@ -138,7 +139,7 @@ left: 720px;
 top: 168px;
 right: 1222px;
 bottom: 880px;
-font-family: 'Pretendard';
+font-family: Pretendard;
 font-style: normal;
 font-weight: 600;
 font-size: 15px;
@@ -174,59 +175,48 @@ writing-mode: vertical-lr;
 }
 
 #tag select {
-  position: fixed;
-  width: 81px;
-  height: 70px;
-  left: 950px;
-top: 150px;
-right: 1064px;
-bottom:900px;
-
-  color: #000;
-  font-family: Pretendard;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background: none;
-  border: 1px solid #000;
-  padding: 4px;
-  cursor: pointer;
-}
-
-#list{
-/* Frame 17 */
-
-/* Auto layout */
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 7px 16px;
-gap: 10px;
-
 position: absolute;
 width: 81px;
-height: 31px;
-left: 1108px;
-top: 234px;
+height: 70px;
+top:-45px;
+left:50px;
+color: #000;
+font-family: Pretendard;
+font-size: 15px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+appearance: none;
+-webkit-appearance: none;
+-moz-appearance: none;
+background: none;
+border: 1px solid #000;
+padding: 45px;
+cursor: pointer;
+}
+#tag{
 
-background: #ECECEC;
-border-radius: 24px;
+position: absolute;
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 4px;
 
+width: 26px;
+height: 18px;
+left: 900px;
+top: 168px;
+right: 1222px;
+bottom: 900px;
+font-family: 'Pretendard';
+font-style: normal;
+font-weight: 600;
+font-size: 15px;
+line-height: 18px;
+/* identical to box height */
 
-width: 49px;
-height: 17px;
-
-
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 0;
+color: #000000;
 
 }
 #list button{
@@ -246,6 +236,37 @@ line-height: 17px;
 
 color: #000000;
 }
+
+#list{
+width: 81px;
+height: 31px;
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 7px 16px;
+gap: 10px;
+
+position: absolute;
+
+left: 1108px;
+top: 234px;
+
+background: #ECECEC;
+border-radius: 24px;
+
+
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+}
+
+
 #sub {
 /* Frame 18 */
 
@@ -267,8 +288,8 @@ background: #333333;
 border-radius: 24px;
 
 /* 등록 */
-width: 25px;
-height: 17px;
+width: 57px;
+height: 31px;
 
 font-family: 'Pretendard';
 font-style: normal;
@@ -311,8 +332,8 @@ line-height: 17px;
 
 }
 #cancel{
-width: 52px;
-height: 17px; 
+  width: 84px;
+  height: 31px;
 display: flex;
 flex-direction: row;
 justify-content: center;
@@ -338,7 +359,7 @@ flex-grow: 0;
   left: 524px;
 top: 233px;
 right:1268px;
-  position: fixed;
+position: absolute;
   border: none;
   color: #888;
 
@@ -357,10 +378,10 @@ height: 33px;
 outline: none;
 }   
 #content textarea {
-  position: fixed;
+
   border: none;
   color: black;
-
+  position: absolute;
 font-style: normal;
 font-weight: 500;
 
@@ -378,4 +399,4 @@ line-height: normal;
 
 outline: none;
 resize: none;
-}   
+}  
