@@ -113,30 +113,30 @@
                                             <a role="button" class="btn btn-sm btn-info float-end" id="comment-{{comment.pk}}-update-btn" href="{% url 'update_comment' comment.pk %}">수정</a>
                                         {% endif %}
 
-                                        <a role="button" class="btn btn-sm btn-danger float-end" data-toggle="modal" data-target="#deleteCommentModal-{{ comment.pk }}">삭제</a>
+                                       <!-- 모달 열릴 때 backdrop 사용하지 않도록 설정 -->
+                                        <a role="button" class="btn btn-sm btn-danger float-end" data-toggle="modal" data-target="#deleteCommentModal-{{ comment.pk }}" data-backdrop="false">삭제</a>
 
                                         <!-- Delete Modal -->
                                         <div class="modal fade" id="deleteCommentModal-{{comment.pk}}" tabindex="-1" role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title">댓글을 삭제하시겠습니까?</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span area-hidden="true">X</span></button>
+                                                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         {{comment}}
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" data-dismiss="modal">취소</button>
-                                                         <form class="mb-4" id="comment-form" method="POST" action="{% url 'delete_comment' pk=comment.pk %}">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                                                        <form class="mb-4" id="comment-form" method="POST" action="{% url 'delete_comment' pk=comment.pk %}">
                                                             {% csrf_token %}
-                                                            <button type = "submit" class = "btn btn-sm btn-danger float-end"> 삭제 </button>
+                                                            <button type="submit" class="btn btn-danger">삭제</button>
                                                         </form>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
 
 
                                         <div class="fw-bold">{{comment.author}} & {{ comment.create_at }}</div>
@@ -188,7 +188,7 @@
 
 <strong class="text-secondary">{{ number_of_likes }}공감</strong>
 
-                </article>
+</article>
 {% endblock %}
 
 {% block javascript %}

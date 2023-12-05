@@ -22,6 +22,7 @@ urlpatterns = [
     path('resolved/', views.PostResolvedList, name='post_resolved'),
     path('unresolved/', views.PostUnresolvedList, name='post_unresolved'),
     path('contact/', include('contact_number.urls')),
+    path('accounts/', include('accounts.urls')),
 ]
 
 # if settings.DEBUG:
