@@ -45,10 +45,10 @@
     
     #title{
       position: absolute;
-    width: 128px;
+    width: 500px;
     height: 33px;
-    left: 0px;
-    top: 0px;
+    left: 524px;
+    top: 233px;
     right:1268px;
     font-family: 'Pretendard';
     font-style: normal;
@@ -56,7 +56,7 @@
     font-size: 28px;
     line-height: 33px;
     color: #888888;
-    border: none; 
+    border:none; 
     
     }
     
@@ -64,8 +64,8 @@
       position: absolute;
     width: 830px;
     height: 329px;
-    left: 0px;
-    top: 0px;
+    left: 524px;
+    top: 310px;
     
     right:566px;
     font-family: 'Pretendard';
@@ -100,7 +100,7 @@
       align-items: center; 
       position: absolute;
     left: 524px;
-    top: 178px;
+    top: 160px;
     right: 1274px;
     bottom: 884px;
 
@@ -386,11 +386,11 @@ line-height: 33px;
 letter-spacing: 0em;
 text-align: left;
 
-    height: 33px; 
+    height: 50px; 
     outline: none;
     }   
     #content textarea {
-   
+    
       border: none;
       color: black;
       position: absolute;
@@ -412,6 +412,13 @@ line-height: normal;
     outline: none;
     resize: none;
     }   
+    #title input,
+#content textarea {
+    border: none;
+    border-bottom: 1px solid #ccc; 
+    outline: none;
+}
+
     #Rectangle42 {
       position: fixed;
       width: 240px;
@@ -508,12 +515,12 @@ line-height: normal;
     {% csrf_token %}
 
   
-    <p id="title"><input type="text" name="{{ form.title.name }}" placeholder="게시글 제목"><hr id="Line31"></p>
+    <input id="title" type="text" name="{{ form.title.name }}" placeholder="게시글 제목"><hr id="Line31">
     
     <br>
 
     
-    <p id="content"><textarea name="{{ form.content.name }}" placeholder="본문에 태그를 사용해보세요" rows="8" cols="80" maxlength="{{ form.content.field.max_length }}"></textarea></p>
+   <textarea id="content" name="{{ form.content.name }}" placeholder="본문에 태그를 사용해보세요" rows="8" cols="80" maxlength="{{ form.content.field.max_length }}"></textarea>
     <br>
 
     
