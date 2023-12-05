@@ -184,29 +184,27 @@
 
   }
   
-    #tag select {
-      position: fixed;
-      width: 81px;
-      height: 70px;
-      left: 950px;
-    top: 150px;
-    right: 1064px;
-    bottom:900px;
+  #tag select {
+    position: relative; 
+    width: 81px;
+    height: 70px;
+    left: 10px;
+ top:0px;
+    color: #000;
+    font-family: Pretendard;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: none;
+    border: 1px solid #000;
+    padding: 45px;
+    cursor: pointer;
+}
 
-      color: #000;
-      font-family: Pretendard;
-      font-size: 15px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-      appearance: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      background: none;
-      border: 1px solid #000;
-      padding: 4px;
-      cursor: pointer;
-  }
   #list button{
     /* 목록보기 */
     
@@ -401,10 +399,95 @@ line-height: normal;
 <body>
 {% block head_title %}
  
-{% endblock %}
 
-{% block main_area %}
-  
+{% comment %} 
+
+<div id="container">
+  <!-- 사이드바 -->
+  <div id="Rectangle29"></div>
+      <!-- 게시물 -->
+      <a id="rectangle32"></a>
+      <img src="../../static/post/description.svg" id="description">
+      <div id="post">게시물</div>
+      <!-- 정보 -->
+      <a id="rectangle37"></a>
+      <img src="../../static/post/bar_chart.svg" id="bar_chart">
+      <div id="info">정보</div>
+      <!-- 규정 검색 -->
+      <a id="rectangle40"></a>
+      <img src="../../static/post/action_key.svg" alt="" id="action_key">
+      <div id="searchRegulation">규정 검색</div>
+
+  <!-- 게시물 카테고리 사이드바 -->
+  <div id="sidebar-container">
+      <!-- 게시물 -->
+      <div id="sidebar-post" class="sidebar-content">
+          {% include 'post/sidebar_post.html' %}
+      </div>
+
+      <!-- 정보 -->
+      <div id="sidebar-info" class="sidebar-content">
+          {% include 'post/sidebar_info.html' %}
+      </div>
+
+      <!-- 규정 검색 -->
+      <div id="sidebar-search" class="sidebar-content">
+          {% include 'post/sidebar_search.html' %}
+      </div>
+
+  </div>
+
+  <!-- 상단바 -->
+  <div id="Rectangle52"></div>
+  <a href="{% url 'post_list' %}"><img src="../../static/post/notification.svg" id="notificationsIcon"></a>
+  <a id="duckSungLogo" href="{% url 'post_list' %}">덕성신문고</a>
+  {% if user.is_authenticated %}
+      <a href="#"><img src="../../static/post/account_circle.svg" alt="" id="accountIcon"></a>
+      <a id="logout" href="/accounts/logout/">로그아웃</a>
+  {% else %}
+      <a href="/accounts/login/" id="loginText">로그인</a>
+      <a href="/accounts/signup/" id="rectangle17"></a>
+      <a id="signupText" href="/accounts/signup/">회원가입</a>
+  {% endif %}
+
+  <!-- 메인 컨테이너 -->
+  <div id="main_container">
+      <!-- Search 검색창 -->
+      {% include 'post/search.html' %}
+
+      <!-- 검색 결과 표시 -->
+      {% if posts %}
+          <h3>Search Results for "{{ query }}"</h3>
+          <ul>
+              <!-- 검색한 게시물 -->
+              {% block search_area %}
+              {% endblock %}
+          </ul>
+      {% elif query %}
+          <p>No results found for "{{ query }}"</p>
+      {% else %}
+          {% block main_area %}
+          {% endblock %}
+      {% endif %}
+  </div>
+
+  <!-- 인기글 -->
+  <div id="popular">
+      <div id="popular_text">이번 달 인기글</div>
+      <ul>
+          {% for post in top_5_posts %}
+              <!-- <div class="post-info post-ranking"> -->
+              <div>
+                  <a href="{% url 'post_detail' pk=post.pk %}">{{ forloop.counter }}위 {{ post.title }}</a>
+              </div>
+              <!-- <div class="post-content post-ranking"> -->
+              <div>
+                  <a href="{% url 'post_detail' pk=post.pk %}">{{ post.content }}</a>
+              </div>
+          {% endfor %}
+      </ul>
+  </div>
+</div>  {% endcomment %}
   
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
