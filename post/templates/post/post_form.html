@@ -1,4 +1,3 @@
-{% comment %} {% extends 'post/base.html' %} {% endcomment %}
 
 <html lang="ko">
 <head>
@@ -46,8 +45,8 @@
       position: absolute;
     width: 128px;
     height: 33px;
-    left: 524px;
-    top: 233px;
+    left: 0px;
+    top: 0px;
     right:1268px;
     font-family: 'Pretendard';
     font-style: normal;
@@ -63,8 +62,8 @@
       position: absolute;
     width: 830px;
     height: 329px;
-    left: 524px;
-    top: 310px;
+    left: 0px;
+    top: 0px;
     
     right:566px;
     font-family: 'Pretendard';
@@ -115,6 +114,7 @@
   
     }
     #category select{
+      
       left: 524px;
     top: 178px;
     right: 1274px;
@@ -185,11 +185,11 @@
   }
   
   #tag select {
-    position: relative; 
+    position: absolute;
     width: 81px;
     height: 70px;
-    left: 10px;
- top:0px;
+ top:-45px;
+    left:50px;
     color: #000;
     font-family: Pretendard;
     font-size: 15px;
@@ -204,7 +204,31 @@
     padding: 45px;
     cursor: pointer;
 }
+#tag{
 
+    position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 4px;
+  
+  width: 26px;
+  height: 18px;
+  left: 900px;
+  top: 168px;
+  right: 1222px;
+  bottom: 900px;
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 18px;
+  /* identical to box height */
+  
+  color: #000000;
+ 
+}
   #list button{
     /* 목록보기 */
     
@@ -345,7 +369,7 @@
       left: 524px;
     top: 233px;
     right:1268px;
-      position: fixed;
+    position: absolute;
       border: none;
       color: #888;
 
@@ -364,10 +388,10 @@ text-align: left;
     outline: none;
     }   
     #content textarea {
-      position: fixed;
+   
       border: none;
       color: black;
-
+      position: absolute;
 font-style: normal;
 font-weight: 500;
 
@@ -397,10 +421,10 @@ line-height: normal;
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-{% block head_title %}
+
  
 
-{% comment %} 
+
 
 <div id="container">
   <!-- 사이드바 -->
@@ -451,7 +475,7 @@ line-height: normal;
   {% endif %}
 
   <!-- 메인 컨테이너 -->
-  <div id="main_container">
+  {% comment %} <div id="main_container">
       <!-- Search 검색창 -->
       {% include 'post/search.html' %}
 
@@ -469,7 +493,7 @@ line-height: normal;
           {% block main_area %}
           {% endblock %}
       {% endif %}
-  </div>
+  </div> {% endcomment %}
 
   <!-- 인기글 -->
   <div id="popular">
@@ -487,7 +511,7 @@ line-height: normal;
           {% endfor %}
       </ul>
   </div>
-</div>  {% endcomment %}
+</div>
   
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
@@ -535,7 +559,9 @@ line-height: normal;
    <div id="cancel"><a href="{% url 'post_list' %}"><button type="button">작성 취소</button></a></div>
     <div id="list"><a href="{% url 'post_list' %}"><button type="button">목록보기</button></a></div>
   </form>
-{% endblock %}
+
+
+
 
 
 
