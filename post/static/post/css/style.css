@@ -375,3 +375,19 @@ a {
 .post-ranking {
     top: 20px; /* 순위별 위치 조정 */
 }
+
+.form-rule{
+    width: 130px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+}
+.btn-rule{
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    width:80px;
+}

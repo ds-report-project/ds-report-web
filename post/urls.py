@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -20,7 +20,8 @@ urlpatterns = [
     path('tag/<str:slug>/', views.tag_page),
     path('post-like/<int:pk>', views.PostLike, name="post_like"),
     path('resolved/', views.PostResolvedList, name='post_resolved'),
-    path('unresolved/', views.PostUnresolvedList, name='post_unresolved'),  
+    path('unresolved/', views.PostUnresolvedList, name='post_unresolved'),
+    path('contact/', include('contact_number.urls')),
 ]
 
 # if settings.DEBUG:
