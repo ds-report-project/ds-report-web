@@ -404,17 +404,17 @@
     <!-- 사이드바 -->
     <div id="Rectangle29"></div>
         <!-- 게시물 -->
-        <a id="rectangle32"></a>
-        <img src="../../static/post/description.svg" id="description">
-        <div id="post">게시물</div>
-        <!-- 정보 -->
-        <a id="rectangle37"></a>
-        <img src="../../static/post/bar_chart.svg" id="bar_chart">
-        <div id="info">정보</div>
-        <!-- 규정 검색 -->
-        <a id="rectangle40"></a>
-        <img src="../../static/post/action_key.svg" alt="" id="action_key">
-        <div id="searchRegulation">규정 검색</div>
+      <a id="rectangle32"></a>
+      <img src="{% static 'post/description.svg' %}" id="description">
+      <div id="post">게시물</div>
+      <!-- 정보 -->
+      <a id="rectangle37"></a>
+      <img src="{% static 'post/bar_chart.svg' %}" id="bar_chart">
+      <div id="info">정보</div>
+      <!-- 규정 검색 -->
+      <a id="rectangle40"></a>
+      <img src="{% static 'post/action_key.svg' %}" alt="" id="action_key">
+      <div id="searchRegulation">규정 검색</div>
   
     <!-- 게시물 카테고리 사이드바 -->
     <div id="sidebar-container">
@@ -435,18 +435,18 @@
   
     </div>
   
-    <!-- 상단바 -->
-    <div id="Rectangle52"></div>
-    <a href="{% url 'post_list' %}"><img src="../../static/post/notification.svg" id="notificationsIcon"></a>
-    <a id="duckSungLogo" href="{% url 'post_list' %}">덕성신문고</a>
-    {% if user.is_authenticated %}
-        <a href="#"><img src="../../static/post/account_circle.svg" alt="" id="accountIcon"></a>
-        <a id="logout" href="/accounts/logout/">로그아웃</a>
-    {% else %}
-        <a href="/accounts/login/" id="loginText">로그인</a>
-        <a href="/accounts/signup/" id="rectangle17"></a>
-        <a id="signupText" href="/accounts/signup/">회원가입</a>
-    {% endif %}
+ <!-- 상단바 -->
+ <div id="Rectangle52"></div>
+ <a href="{% url 'post_list' %}"><img src="{% static 'post/notification.svg' %}" id="notificationsIcon"></a>
+ <a id="duckSungLogo" href="{% url 'post_list' %}">덕성신문고</a>
+ {% if user.is_authenticated %}
+     <a href="#"><img src={% static 'post/account_cirlce.svg' %} alt="" id="accountIcon"></a>
+     <a id="logout" href="/accounts/logout/">로그아웃</a>
+ {% else %}
+     <a href="/accounts/login/" id="loginText">로그인</a>
+     <a href="/accounts/signup/" id="rectangle17"></a>
+     <a id="signupText" href="/accounts/signup/">회원가입</a>
+ {% endif %}
 
     <form method="post" class ="delete-form">
       {% csrf_token %}
