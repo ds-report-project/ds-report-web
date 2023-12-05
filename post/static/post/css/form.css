@@ -2,9 +2,10 @@ button {
   border: none;
   outline: none;
   background: transparent;
+
 }
 #Line31 {
-  position: fixed;
+  position: absolute;
   width: 830px;
   height: 0px;
   top: 282px;
@@ -17,7 +18,7 @@ button {
 }
 
 #Line32{
-position: fixed;
+  position: absolute;
 width: 830px;
 height: 0px;
 left: 524px;
@@ -31,7 +32,7 @@ box-sizing: border-box;
 
 
 #title{
-  position: fixed;
+  position: absolute;
 width: 128px;
 height: 33px;
 left: 524px;
@@ -48,7 +49,7 @@ border: none;
 }
 
 #content{
-position: fixed;
+  position: absolute;
 width: 830px;
 height: 329px;
 left: 524px;
@@ -66,7 +67,7 @@ color: #888888;
 }
 
 #plus{
-position: fixed;
+  position: absolute;
 width: 179px;
 height: 19px;
 left: 524px;
@@ -85,7 +86,7 @@ color: black;
 
 #category {
   align-items: center; 
-position: fixed;
+  position: absolute;
 left: 524px;
 top: 178px;
 right: 1274px;
@@ -124,7 +125,7 @@ writing-mode: vertical-lr;
 }
 /* 익명 */
 #nikname{
-position: fixed;
+  position: absolute;
 display: flex;
 flex-direction: row;
 align-items: center;
@@ -150,7 +151,7 @@ color: #000000;
   margin-right: 4px; /* 간격 조절 */
 }
 #nickname select {
-  position: fixed;
+  position: absolute;
   width: 26px;
   height: 18px;
   left: 702px;
@@ -164,46 +165,38 @@ color: #000000;
   font-weight: 600;
   line-height: normal;
 }
-
-#tag{
-position: fixed;
-display: flex;
-flex-direction: row;
-align-items: center;
-padding: 0px;
-gap: 4px;
-
-width: 26px;
-height: 5px;
-left: 900px;
-top: 178px;
-right: 1064px;
-bottom:884px;
-font-family: 'Pretendard';
-font-style: normal;
-font-weight: 600;
+#tag-text {
+width: 45px;
+height: 18px;
 font-size: 15px;
-line-height: 18px;
-/* identical to box height */
+writing-mode: vertical-lr;
 
-color: #000000;
 }
 
 #tag select {
- positon:fixed;
+  position: fixed;
   width: 81px;
-  height: 18px;
-  left: 900px;
-  top: 178px;
-  right: 1064px;
-  bottom:884px;
+  height: 70px;
+  left: 950px;
+top: 150px;
+right: 1064px;
+bottom:900px;
+
   color: #000;
   font-family: Pretendard;
   font-size: 15px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: none;
+  border: 1px solid #000;
+  padding: 4px;
+  cursor: pointer;
 }
+
 #list{
 /* Frame 17 */
 
@@ -215,7 +208,7 @@ align-items: center;
 padding: 7px 16px;
 gap: 10px;
 
-position: fixed;
+position: absolute;
 width: 81px;
 height: 31px;
 left: 1108px;
@@ -264,7 +257,7 @@ align-items: center;
 padding: 7px 16px;
 gap: 10px;
 
-position: fixed;
+position: absolute;
 width: 57px;
 height: 31px;
 left: 1297px;
@@ -327,7 +320,7 @@ align-items: center;
 padding: 7px 16px;
 gap: 10px;
 
-position: fixed;
+position: absolute;
 
 left: 1201px;
 top: 234px;
