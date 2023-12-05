@@ -38,7 +38,23 @@
                         <section class="mb-5">
                             <p class="fs-5 mb-4">{{ post.content }}</p>
                         </section>
-                        
+                        <!-- 이미지 표시 -->
+{% if post.images %}
+<img src="{{ post.images.url }}" alt="Post Image" class="img-fluid" style="max-width: 30%; max-height: 30%;">
+{% endif %}
+
+<!-- 동영상 표시 -->
+{% if post.video %}
+<video width="320" height="240" controls>
+    <source src="{{ post.video.url }}" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+{% endif %}
+
+<!-- 첨부 파일 다운로드 버튼 -->
+{% if post.attachment %}
+<a href="{{ post.attachment.url }}" class="btn btn-primary" download>첨부 파일 다운로드</a>
+{% endif %}
 
 <!--                         다운로드 버튼생성-->
                         {% if p.file_upload %}
@@ -153,23 +169,7 @@
                             </div>
                         </div>
                     </section>
-<!-- 이미지 표시 -->
-{% if post.images %}
-    <img src="{{ post.images.url }}" alt="Post Image" class="img-fluid" style="max-width: 30%; max-height: 30%;">
-{% endif %}
 
-<!-- 동영상 표시 -->
-{% if post.video %}
-    <video width="320" height="240" controls>
-        <source src="{{ post.video.url }}" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-{% endif %}
-
-<!-- 첨부 파일 다운로드 버튼 -->
-{% if post.attachment %}
-    <a href="{{ post.attachment.url }}" class="btn btn-primary" download>첨부 파일 다운로드</a>
-{% endif %}
 
 <!-- LIKES -->
 {% if user.is_authenticated %}
