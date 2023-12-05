@@ -17,6 +17,7 @@ class PostForm(forms.ModelForm):
 
 
 
+
 class RuleForm(forms.ModelForm):
     class Meta:
         model = Rule

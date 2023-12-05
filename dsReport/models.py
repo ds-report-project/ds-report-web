@@ -41,13 +41,6 @@ class Post(models.Model):
     likes = models.ManyToManyField(User, related_name='liked_posts', blank=True) # 게시물 공감
     is_resolved = models.BooleanField(default=False)  # 해결인 경우 True
 
-    # 검색
-    # @classmethod
-    # def search(cls, query):
-    #     return cls.objects.filter(
-    #         Q(title__icontains=query) | Q(content__icontains=query)
-    #     )
-
     # 공감순 인기글
     # @property
     # def popularity(self):

@@ -18,6 +18,7 @@ class Category(models.Model):
 
     name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
+
     def __str__(self):
         return self.name
 
@@ -57,22 +58,12 @@ class Post(models.Model):
     video = models.FileField(blank=True, null=True, upload_to='post_videos/')
     attachment = models.FileField(blank=True, null=True, upload_to='post_attachments/')
     likes = models.ManyToManyField(User, related_name='post_like')
-    
+
+    resolve_actions = models.ManyToManyField(User, through='ResolveAction', related_name='resolved_posts')  # resolve에 필요
+    is_resolved = models.BooleanField(default=False) # resolved 여부 저장 변수
+
     def number_of_likes(self):
         return self.likes.count()
-    
-    resolve_actions = models.ManyToManyField(User, through='ResolveAction', related_name='resolved_posts')  # resolve에 필요
-    resolve_cache = models.BooleanField(default=False) # resolved 캐시 변수 초기화
-
-    @property
-    def is_resolved(self):
-        # 캐시된 결과가 있는 경우 해당 결과를 반환.
-        if self.resolve_cache is not None:
-            return self.resolve_cache
-
-        # true/false 저장
-        self.resolve_cache = self.resolve_actions.count() >= 1
-        return self.resolve_cache
 
     def get_absolute_url(self):
         return reverse('post_detail', args=[str(self.id)])
@@ -106,10 +97,8 @@ class Rule(models.Model):
           
 # 해결 처리를 위해 해결 버튼 클릭 여부 저장
 class ResolveAction(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    post = models.ForeignKey('Post', on_delete=models.CASCADE)
     class Meta:
         unique_together = ('user', 'post')
       
