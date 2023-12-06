@@ -1,48 +1,40 @@
 {% extends 'post/base.html' %}
 <html lang="ko">
 <head>
-  
   <style>
-    #write button {
+    #write.btn.btn-dark {
         width: 88px;
         height: 32px;
-        top: 221px;
-        left: 1261px;
-        border-radius: 24px;
-        background: #333333;
+        position: absolute;
+        top: 10px; /* 조정할 상단 여백 값 */
+        right: 10px; /* 조정할 오른쪽 여백 값 */
     }
     
-    #wrtie-text {
-        font-family: Pretendard;
-        font-size: 14px;
+    #write button { 
+        width: 57px;
+        height: 31px;
+        color: #FFFFFF;
+        font-family: 'Pretendard';
+        font-style: normal;
         font-weight: 600;
+        font-size: 14px;
         line-height: 17px;
-        letter-spacing: 0em;
-        text-align: left;
-        background: #FFFFFF;
-        width: 37px;
-        height: 17px;
-        top: 229px;
-        left: 1296px;
-        color:white;
+    }
+    .btn-secondary.btn-sm.float-end {
+        margin-right: 10px; /* 조절할 여백 값 */
+    }
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
     
-   #write{
-        /* Rectangle 51 */
-        position: fixed;
-        width: 88px;
-        height: 32px;
-        left: 1261px;
-        top: 221px;
-        background: #333333;
-        border-radius: 24px;
-    }
-
   </style>
+</head>
 {% block main_area %}
     {% if user.is_authenticated %}
         <!-- 일반 사용자도 글 작성 가능 -->
-        <div id="write"><a class="btn btn-info btn-sm float-end" href="{% url 'post_create' %}" role="button"><i class="fa fa-tags"></i> <img src="../../static/post/edit.svg"><span id="write-text">글쓰기</span></a></div>
+        <a id="write" class="btn btn-dark btn-sm float-end" href="{% url 'post_create' %}" role="button"><img src="../../static/post/edit.svg"><span id="write-text">글쓰기</span></a>
     {% endif %}
 
     <!-- Tag Bar -->
@@ -51,10 +43,11 @@
     </div>
 
     <!-- 해결/미해결 -->
-    <a class="btn btn-info btn-sm float-end" href="{% url 'post_resolved' %}" role="button">해결</a>
-    <a class="btn btn-info btn-sm float-end" href="{% url 'post_unresolved' %}" role="button">미해결</a>
+    <a class="btn btn-secondary btn-sm float-end" href="{% url 'post_resolved' %}" role="button" style="margin-left: 10px;">해결</a>
 
-    <h1>게시물
+    <a class="btn btn-secondary btn-sm float-end" href="{% url 'post_unresolved' %}" role="button">미해결</a>
+
+    <h1>
         {% if category %}<span class="badge bg-secondary">{{ category }}</span> {% endif %}
         {% if tag %} <span class="bg-info text-dark"><i class="fa-fag fa-tags"></i>{{ tag }}({{ tag.post_set.count}})</span> {% endif %}
     </h1>
@@ -87,7 +80,7 @@
                     <p class="card-text">{{ post.content | truncatewords:10 }}</p>
 
                     {% if post.tags.exists %}
-                    <i class="fa fa-tags"></i>
+                        <i class="fa fa-tags"></i>
                         {% for tag in post.tags.iterator %}
                             <a href="{{ tag.get_absolute_url }}"><span class="badge bg-secondary">{{ tag }}</span></a>
                         {% endfor %}
@@ -103,29 +96,35 @@
                     <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
 
-        
                 <div class="card-footer text-muted">
-                 <!-- Display Anonymous Nickname -->
-                 {% if post.anonymous %}
-                 {% if post.anonymous_nickname %}
-                     <div class="text-muted fst-italic mb-2">작성자: {{ post.anonymous_nickname }}</div>
-                 {% else %}
-                     <div class="text-muted fst-italic mb-2">작성자: 익명</div>
-                 {% endif %}
-             {% else %}
-                 <div class="text-muted fst-italic mb-2">작성자:
-                     {% if post.anonymous_nickname %}
-                         {{ post.anonymous_nickname }}
-                     {% else %}
-                         {{ post.get_anonymous_nickname_display }}
-                     {% endif %}
-                 </div>
-             {% endif %}
+                    <!-- Display Anonymous Nickname -->
+                    {% if post.anonymous %}
+                        {% if post.anonymous_nickname %}
+                            <div class="text-muted fst-italic mb-2">{{ post.anonymous_nickname }}</div>
+                        {% else %}
+                            <div class="text-muted fst-italic mb-2"> 익명</div>
+                        {% endif %}
+                    {% else %}
+                        <div class="text-muted fst-italic mb-2">
+                            {% if post.anonymous_nickname %}
+                                {{ post.anonymous_nickname }}
+                            {% else %}
+                                {{ post.get_anonymous_nickname_display }}
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    <div class="text-muted fst-italic mb-2">
+                        {{ post.created_at|date:"Y-m-d H:i:s" }}
+                    </div>
                 </div>
-                
             </div>
         {% endfor %}
-    {% else %}
+    
+    
+    
+    
+    
+        {% else %}
         <h1>게시물이 없습니다.</h1>
     {% endif %}
 {% endblock %}

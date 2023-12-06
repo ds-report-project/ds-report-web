@@ -1,10 +1,10 @@
 <div class="btn-group " role="group" aria-label="Button group with nested dropdown">
     {% for tag in tags|slice:":10" %}
-        <a href="{{ tag.get_absolute_url }}" class="btn btn-primary">{{ tag }}</a>
+        <a href="{{ tag.get_absolute_url }}" class="btn btn-outline-secondary">{{ tag }}</a>
     {% endfor %}
 
   <div class="btn-group" role="group">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
       더보기
     </button>
     <ul class="dropdown-menu">
