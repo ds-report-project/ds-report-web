@@ -463,17 +463,17 @@ line-height: normal;
   <!-- 사이드바 -->
   <div id="Rectangle29"></div>
       <!-- 게시물 -->
-      <a id="rectangle32"></a>
-      <img src="{% static 'post/description.svg' %}" id="description">
-      <div id="post">게시물</div>
-      <!-- 정보 -->
-      <a id="rectangle37"></a>
-      <img src="{% static 'post/bar_chart.svg' %}" id="bar_chart">
-      <div id="info">정보</div>
-      <!-- 규정 검색 -->
-      <a id="rectangle40"></a>
-      <img src="{% static 'post/action_key.svg' %}" alt="" id="action_key">
-      <div id="searchRegulation">규정 검색</div>
+    <a id="rectangle32" href="{% url 'post_list' %}"></a>
+    <a href="{% url 'post_list' %}"><img src="{% static 'post/description.svg' %}" id="description"></a>
+    <div id="post">게시물</div>
+    <!-- 정보 -->
+    <a id="rectangle37" href="{% url 'contact' %}"></a>
+    <a href="{% url 'contact' %}"><img src="{% static 'post/bar_chart.svg' %}" id="bar_chart"></a>
+    <div id="info">정보</div>
+    <!-- 규정 검색 -->
+    <a id="rectangle40"></a>
+    <img src="{% static 'post/action_key.svg' %}" alt="" id="action_key">
+    <div id="searchRegulation">규정 검색</div>
 
   <!-- 게시물 카테고리 사이드바 -->
   <div id="sidebar-container">
@@ -499,15 +499,13 @@ line-height: normal;
   <a href="{% url 'post_list' %}"><img src="{% static 'post/notification.svg' %}" id="notificationsIcon"></a>
   <a id="duckSungLogo" href="{% url 'post_list' %}">덕성신문고</a>
   {% if user.is_authenticated %}
-      <a href="#"><img src="{% static 'post/account_cirlce.svg' %}" alt="" id="accountIcon"></a>
+      <a href="#"><img src="{% static 'post/account_circle.svg' %}" alt="" id="accountIcon"></a>
       <a id="logout" href="/accounts/logout/">로그아웃</a>
   {% else %}
       <a href="/accounts/login/" id="loginText">로그인</a>
       <a href="/accounts/signup/" id="rectangle17"></a>
       <a id="signupText" href="/accounts/signup/">회원가입</a>
   {% endif %}
-
- 
 
   <!-- 인기글 -->
   <div id="popular">
@@ -567,7 +565,7 @@ line-height: normal;
        <div id="list"><a href="{% url 'post_list' %}"><button type="button">목록보기</button></a></div>
   </form>
 
-
+</div>
 
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
 
@@ -580,7 +578,7 @@ line-height: normal;
                 this.submit();
             });
         </script>
-        <script src="../../static/post/script.js"></script>
+        <script src="{% static 'post/script.js' %}"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
             crossorigin="anonymous"></script>

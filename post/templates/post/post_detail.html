@@ -39,24 +39,24 @@
                             <p class="fs-5 mb-4">{{ post.content }}</p>
                         </section>
                         <!-- 이미지 표시 -->
-{% if post.images %}
-<img src="{{ post.images.url }}" alt="Post Image" class="img-fluid" style="max-width: 30%; max-height: 30%;">
-{% endif %}
+                        {% if post.images %}
+                        <img src="{{ post.images.url }}" alt="Post Image" class="img-fluid" style="max-width: 30%; max-height: 30%;">
+                        {% endif %}
 
-<!-- 동영상 표시 -->
-{% if post.video %}
-<video width="320" height="240" controls>
-    <source src="{{ post.video.url }}" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
-{% endif %}
+                        <!-- 동영상 표시 -->
+                        {% if post.video %}
+                        <video width="320" height="240" controls>
+                            <source src="{{ post.video.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        {% endif %}
 
-<!-- 첨부 파일 다운로드 버튼 -->
-{% if post.attachment %}
-<a href="{{ post.attachment.url }}" class="btn btn-primary" download>첨부 파일 다운로드</a>
-{% endif %}
+                        <!-- 첨부 파일 다운로드 버튼 -->
+                        {% if post.attachment %}
+                        <a href="{{ post.attachment.url }}" class="btn btn-primary" download>첨부 파일 다운로드</a>
+                        {% endif %}
 
-<!--                         다운로드 버튼생성-->
+                        <!-- 다운로드 버튼생성-->
                         {% if p.file_upload %}
                             <a href="{{ p.file_upload.url }}" class="btn btn-outline-dark" role="button" download>다운로드</a>
                         {% endif %}
@@ -198,40 +198,10 @@
                             </div>
                         </div>
                     </section>
-
-
-<!-- LIKES -->
-{% if user.is_authenticated %}
-  <form action="{% url 'post_like' object.id %}" method="POST">
-    {% csrf_token %}
-
-    {% if post_is_liked %}
-    <button type="submit" name="post_id" value="{{object.id}}" class="btn btn-info"><i class="fas fa-thumbs-up"></i></button>
-    {% else %}
-    <button type="submit" name="post_id" value="{{object.id}}" class="btn btn-info"><i class="far fa-thumbs-up"></i></button>
-    {% endif %}
-  </form>
-{% else %}
-  <a class="btn btn-outline-info" href="/accounts/login?next={{request.path}}">Log in to like this article!</a><br>
-{% endif %}
-
-<strong class="text-secondary">{{ number_of_likes }}공감</strong>
-
-</article>
-
-<!-- 동영상 표시 -->
-{% if post.video %}
-    <video width="320" height="240" controls>
-        <source src="{{ post.video.url }}" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-{% endif %}
-
-<!-- 첨부 파일 다운로드 버튼 -->
-{% if post.attachment %}
-    <a href="{{ post.attachment.url }}" class="btn btn-primary" download>첨부 파일 다운로드</a>
-{% endif %}
                 </article>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascript %}
