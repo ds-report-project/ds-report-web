@@ -204,6 +204,7 @@ body {
     cursor: pointer;
     position: fixed;
     z-index: 3;
+    text-decoration: none;
 }
 
 /* 로그아웃 */
@@ -222,6 +223,7 @@ body {
     color: #000000;
     position: fixed;
     z-index: 3;
+    text-decoration: none;
 }
 
 /* notifications_active */
