@@ -538,12 +538,12 @@ line-height: normal;
     {% csrf_token %}
 
   
-    <input id="title" type="text" name="{{ form.title.name }}" placeholder="게시글 제목"><hr id="Line31">
+    <input id="title" type="text" class="input-field" name="{{ form.title.name }}" placeholder="게시글 제목"><hr id="Line31">
     
     <br>
 
     
-   <textarea id="content" name="{{ form.content.name }}" placeholder="본문에 태그를 사용해보세요" rows="8" cols="80" maxlength="{{ form.content.field.max_length }}"></textarea>
+   <textarea id="content" class="input-field" name="{{ form.content.name }}" placeholder="본문에 태그를 사용해보세요" rows="8" cols="80" maxlength="{{ form.content.field.max_length }}"></textarea>
     <br>
 
     
@@ -607,6 +607,19 @@ line-height: normal;
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
+
+            <script>
+              document.addEventListener('DOMContentLoaded', function () {
+                var inputFields = document.querySelectorAll('.input-field');
+            
+                inputFields.forEach(function (inputField) {
+                  inputField.addEventListener('input', function () {
+                    
+                    inputField.style.color = 'black';
+                  });
+                });
+              });
+            </script>
 
 </body>
 
