@@ -65,7 +65,6 @@
     height: 329px;
     left: 524px;
     top: 310px;
-    
     right:566px;
     font-family: 'Pretendard';
     font-style: normal;
@@ -95,7 +94,8 @@
  
     }
    
- #category {
+
+    #category {
       position: absolute;
     display: flex;
     flex-direction: row;
@@ -103,6 +103,7 @@
     padding: 0px;
     gap: 4px;
 
+    
     width: 26px;
     height: 18px;
     left: 524px;
@@ -119,27 +120,25 @@
     color: #000000;
   
     }
-    #category select{
-      
+    #category select {
       left: 524px;
-    top: 178px;
-    right: 1274px;
-    bottom: 884px;
-    width: 82px;
-    height: 18px;
-    color: #000;
-    font-family: Pretendard;
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+      top: 160px;
+      width: 82px;
+      height: 18px;
+      color: #000;
+      font-family: Pretendard;
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
     }
     #category-text {
-      width: 82px;
+      width: 70px;
       height: 18px;
       font-size: 15px;
     writing-mode: vertical-lr;
     }
+   
     /* 익명 */
     #nikname{
       position: absolute;
@@ -193,7 +192,7 @@
     position: absolute;
     width: 90px;
     height: 70px;
-    top:-45px;
+    top:-25px;
     left:50px;
     color: #000;
     font-family: Pretendard;
@@ -252,75 +251,39 @@
     color: #000000;
 }
 
-#list{
+#list {
+  /* 목록보기 */
   width: 81px;
   height: 31px;
-  /* Auto layout */
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 7px 16px;
   gap: 10px;
-  
   position: absolute;
-
   left: 1108px;
   top: 234px;
-  
   background: #ECECEC;
   border-radius: 24px;
-  
-
-  
-  
-  /* Inside auto layout */
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  
 }
  
 
 #sub {
-    /* Frame 18 */
-    
-    /* Auto layout */
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 7px 16px;
-    gap: 10px;
-    
-    position: absolute;
-    width: 57px;
-    height: 31px;
-    left: 1297px;
-    top: 234px;
-    
-    background: #333333;
-    border-radius: 24px;
-    
-    /* 등록 */
-    width: 57px;
-    height: 31px;
-    
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
-    /* identical to box height */
-    
-    color: #FFFFFF;
-    
-    /* Inside auto layout */
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    
-    flex-direction: column; /* This was missing */
+  /* 등록 */
+  width: 57px;
+  height: 31px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 16px;
+  gap: 10px;
+  position: absolute;
+  left: 1297px;
+  top: 234px;
+  background: #333333;
+  border-radius: 24px;
 }
     
 #sub button {
@@ -346,29 +309,20 @@
     line-height: 17px;
 
 }
-#cancel{
-      width: 84px;
-      height: 31px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 7px 16px;
-    gap: 10px;
-    
-    position: absolute;
-    
-    left: 1201px;
-    top: 234px;
-    
-    background: #ECECEC;
-    border-radius: 24px;
-    
-    
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-
+#cancel {
+  width: 84px;
+  height: 31px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 16px;
+  gap: 10px;
+  position: absolute;
+  left: 1201px;
+  top: 234px;
+  background: #ECECEC;
+  border-radius: 24px;
 }
 #title input {
       left: 524px;
@@ -377,7 +331,6 @@
     position: absolute;
       border: none;
       color: #888;
-
 font-style: normal;
 font-weight: 500;
 width: 450px;
@@ -387,7 +340,7 @@ font-weight: 500;
 line-height: 33px;
 letter-spacing: 0em;
 text-align: left;
-
+border:none;
     height: 50px; 
     outline: none;
 }   
@@ -449,6 +402,21 @@ input:-ms-input-placeholder {color:#888888;}
   #duckSungLogo, #sidebar-post a, #sidebar-info a, #sidebar-search a {
     text-decoration: none;
   }
+
+
+  #title input,
+#content textarea {
+    border: none !important;
+    border-bottom: 1px solid #ccc !important;
+    outline: none !important;
+}
+
+#title:focus,
+#content:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
 
 
   </style>
@@ -530,12 +498,12 @@ input:-ms-input-placeholder {color:#888888;}
     {% csrf_token %}
 
   
-    <input id="title" type="text" name="{{ form.title.name }}" placeholder="게시글 제목"><hr id="Line31">
+    <input id="title" type="text" class="input-field" name="{{ form.title.name }}" placeholder="게시글 제목"><hr id="Line31">
     
     <br>
 
     
-   <textarea id="content" name="{{ form.content.name }}" placeholder="본문에 태그를 사용해보세요" rows="8" cols="80" maxlength="{{ form.content.field.max_length }}"></textarea>
+   <textarea id="content" class="input-field" name="{{ form.content.name }}" placeholder="본문에 태그를 사용해보세요" rows="8" cols="80" maxlength="{{ form.content.field.max_length }}"></textarea>
     <br>
 
     
@@ -600,6 +568,24 @@ input:-ms-input-placeholder {color:#888888;}
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
+
+            <script>
+          
+              document.addEventListener('DOMContentLoaded', function () {
+                var inputFields = document.querySelectorAll('.input-field');
+            
+                inputFields.forEach(function (inputField) {
+                  inputField.addEventListener('input', function () {
+                    inputField.style.color = 'black';
+                  });
+            
+      
+                });
+              });
+             
+            </script>
+            
+          
 
 </body>
 
