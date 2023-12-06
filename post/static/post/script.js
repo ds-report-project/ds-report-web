@@ -121,6 +121,11 @@ function sideClickEvent(boxId, icon) {
         document.getElementById('rectangle37').style.backgroundColor = '#FFFFFF';
         document.getElementById('rectangle32').style.backgroundColor = '#FFFFFF';
     });
+    icon.addEventListener('click', function() {
+        box.style.backgroundColor = '#EDEDED';
+        document.getElementById('rectangle37').style.backgroundColor = '#FFFFFF';
+        document.getElementById('rectangle32').style.backgroundColor = '#FFFFFF';
+    });
 }
 
 // 토글 초기값 지정
