@@ -71,7 +71,7 @@ class Post(models.Model):
 class Comment(models.Model):
         post = models.ForeignKey(Post, on_delete=models.CASCADE)
         author = models.ForeignKey(User, on_delete=models.CASCADE)
-        content = models.CharField('*댓글을 입력하세요.', max_length=150)
+        content = models.CharField('수정할 댓글 입력 ', max_length=150)
         created_at = models.DateTimeField(auto_now_add=True)
         modified_at = models.DateTimeField(auto_now=True)
         clikes = models.ManyToManyField(User, related_name='comment_like')
