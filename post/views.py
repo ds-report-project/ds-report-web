@@ -17,7 +17,7 @@ from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
-
+from django.shortcuts import render
 
 
 class PostCreate(LoginRequiredMixin,CreateView):
@@ -75,6 +75,7 @@ class PostList(ListView):
         data['top_5_posts'] = top_5_posts
 
         return data
+
 
 
 class PostDetail(DetailView):
