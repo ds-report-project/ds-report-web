@@ -1,4 +1,5 @@
 {% extends 'post/base.html' %}
+{% load static %}
 <html lang="ko">
 <head>
   <style>
@@ -76,7 +77,7 @@
 {% block main_area %}
     {% if user.is_authenticated %}
         <!-- 일반 사용자도 글 작성 가능 -->
-        <a id="write" class="btn btn-dark btn-sm float-end" href="{% url 'post_create' %}" role="button"><img src="../../static/post/edit.svg"><span id="write-text">글쓰기</span></a>
+        <a id="write" class="btn btn-dark btn-sm float-end" href="{% url 'post_create' %}" role="button"><img src="{% static 'post/edit.svg' %}"><span id="write-text">글쓰기</span></a>
     {% endif %}
 
     <!-- Tag Bar -->
@@ -88,10 +89,27 @@
     <a class="btn btn-outline-primary btn-sm float-end" href="{% url 'post_resolved' %}" role="button" style="margin-left: 10px;">해결</a>
     <a class="btn btn-outline-danger btn-sm float-end" href="{% url 'post_unresolved' %}" role="button">미해결</a>
 
-    <h1>
-        {% if category %}<span class="badge bg-secondary">{{ category }}</span> {% endif %}
-        {% if tag %} <span class="bg-info text-dark"><i class="fa-fag fa-tags"></i>{{ tag }}({{ tag.post_set.count}})</span> {% endif %}
+    <h1>게시물
+        {% if category %}<span class="badge bg-secondary new-style" >{{ category }}</span> {% endif %}
+        {% if tag %} <i class="fa fa-tags" style="font-size: 20px; margin-right: 5px;"></i><span class="badge bg-secondary new-style">{{ tag }}({{ tag.post_set.count}})</span> {% endif %}
     </h1>
+
+    <style>
+        .new-style {
+        /* 공통 스타일 */
+        background-color: #EDEDED !important;
+        color: #000000;
+        border-radius: 29px ;
+        padding: 15px 30px 15px 30px;
+        margin-right: 5px;
+        border: 1px solid #CCCCCC;
+        border-color: #CCCCCC;
+        font-family: 'Pretendard';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+    }
+    </style>
 
   <!-- post List -->
 
@@ -154,6 +172,7 @@
                     <div class="text-muted fst-italic mb-2">{{ post.anonymous_nickname }} | {{ post.created_at|date:"Y-m-d H:i:s" }}</div>
                 {% else %}
                     <div class="text-muted fst-italic mb-2"> 익명 | {{ post.created_at|date:"Y-m-d H:i:s" }}</div>
+
                 {% endif %}
             {% else %}
                 <div class="text-muted fst-italic mb-2">
