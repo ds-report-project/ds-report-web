@@ -73,7 +73,7 @@
             <div id="post-search" class="sidebar-content">
                 {% include 'post/search.html' %}
             </div>
-            <!-- 검색 결과 표시 -->
+            <!-- 검색 결과 표시 또는 메인 영역 표시 -->
             {% if posts %}
                 <h3>Search Results for "{{ query }}"</h3>
                 <ul>
@@ -84,6 +84,11 @@
             {% elif query %}
                 <p>No results found for "{{ query }}"</p>
             {% else %}
+                {% block search_area_in_main %}
+                    {% include 'post/search.html' %}
+                {% endblock %}
+
+                <!-- Main Area -->
                 {% block main_area %}
                 {% endblock %}
             {% endif %}
@@ -110,25 +115,6 @@
             </ul>
         </div>
     </div>
-
-<!--    부트스트랩 주석 처리함-->
-<!--    <div id="main-container">-->
-<!--        <div class="container my-3">-->
-<!--            <div class="row">-->
-<!--                <div class="col-md-8 col-lg-9 mt-1" id="main-area">-->
-                    <!-- Pagination -->
-<!--                    <ul class="pagination justify-content-center mb-4">-->
-<!--                        <li class="page-item">-->
-<!--                            <a class="page-link" href="#">&larr; Older</a>-->
-<!--                        </li>-->
-<!--                        <li class="page-item disabled">-->
-<!--                            <a class="page-link" href="#">Newer &rarr;</a>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
 
 
     <!-- Bootstrap5.x 적용 -->
