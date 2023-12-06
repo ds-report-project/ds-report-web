@@ -34,11 +34,19 @@
     }
    
     .custom-card {
-        max-width: 540px;
+        max-width: 100%;
+        height: auto;
         margin-bottom: 20px; 
         border: 1px solid #ddd; 
         border-radius: 10px;
-        
+        display: absolute; 
+        flex-direction: column; 
+        top:233px;
+    }
+
+    .card-body {
+        flex: 1; /* Allow the card-body to grow to fill available space */
+        padding: 10px;
     }
 
     .custom-card img {
@@ -59,15 +67,7 @@
     .custom-card .card-text {
         margin-bottom: 10px; 
     }
-    .custom-card {
-        width: 830px;
-        height: 146px;
-        position: absolute;
-        top: 282px;
-        left: 524px;
-        border: 1px solid #ddd; 
-        border-radius: 10px; 
-    }
+ 
     
   
   </style>
@@ -85,8 +85,8 @@
     </div>
 
     <!-- 해결/미해결 -->
-    <a class="btn btn-secondary btn-sm float-end" href="{% url 'post_resolved' %}" role="button" style="margin-left: 10px;">해결</a>
-    <a class="btn btn-secondary btn-sm float-end" href="{% url 'post_unresolved' %}" role="button">미해결</a>
+    <a class="btn btn-outline-primary btn-sm float-end" href="{% url 'post_resolved' %}" role="button" style="margin-left: 10px;">해결</a>
+    <a class="btn btn-outline-danger btn-sm float-end" href="{% url 'post_unresolved' %}" role="button">미해결</a>
 
     <h1>
         {% if category %}<span class="badge bg-secondary">{{ category }}</span> {% endif %}
