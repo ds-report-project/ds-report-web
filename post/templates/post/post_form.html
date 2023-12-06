@@ -247,75 +247,39 @@
     color: #000000;
 }
 
-#list{
+#list {
+  /* 목록보기 */
   width: 81px;
   height: 31px;
-  /* Auto layout */
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 7px 16px;
   gap: 10px;
-  
   position: absolute;
-
   left: 1108px;
   top: 234px;
-  
   background: #ECECEC;
   border-radius: 24px;
-  
-
-  
-  
-  /* Inside auto layout */
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  
 }
  
 
 #sub {
-    /* Frame 18 */
-    
-    /* Auto layout */
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 7px 16px;
-    gap: 10px;
-    
-    position: absolute;
-    width: 57px;
-    height: 31px;
-    left: 1297px;
-    top: 234px;
-    
-    background: #333333;
-    border-radius: 24px;
-    
-    /* 등록 */
-    width: 57px;
-    height: 31px;
-    
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
-    /* identical to box height */
-    
-    color: #FFFFFF;
-    
-    /* Inside auto layout */
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    
-    flex-direction: column; /* This was missing */
+  /* 등록 */
+  width: 57px;
+  height: 31px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 16px;
+  gap: 10px;
+  position: absolute;
+  left: 1297px;
+  top: 234px;
+  background: #333333;
+  border-radius: 24px;
 }
     
 #sub button {
@@ -341,29 +305,20 @@
     line-height: 17px;
 
 }
-#cancel{
-      width: 84px;
-      height: 31px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 7px 16px;
-    gap: 10px;
-    
-    position: absolute;
-    
-    left: 1201px;
-    top: 234px;
-    
-    background: #ECECEC;
-    border-radius: 24px;
-    
-    
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-
+#cancel {
+  width: 84px;
+  height: 31px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 16px;
+  gap: 10px;
+  position: absolute;
+  left: 1201px;
+  top: 234px;
+  background: #ECECEC;
+  border-radius: 24px;
 }
 #title input {
       left: 524px;
@@ -372,7 +327,6 @@
     position: absolute;
       border: none;
       color: #888;
-
 font-style: normal;
 font-weight: 500;
 width: 450px;
@@ -382,7 +336,7 @@ font-weight: 500;
 line-height: 33px;
 letter-spacing: 0em;
 text-align: left;
-
+border:none;
     height: 50px; 
     outline: none;
 }   
@@ -458,6 +412,14 @@ line-height: normal;
     height: 100vh;
     margin: 0;
   }
+  
+  #title input:focus,
+  #content textarea:focus {
+      border: none !important;
+      border-bottom: 1px solid #ccc !important;
+      outline: none !important;
+  }
+  
 
   </style>
   <link rel="stylesheet" href="{% static 'post/bootstrap/bootstrap.min.css' %}" media="screen">
