@@ -67,6 +67,57 @@ document.addEventListener('DOMContentLoaded', function () {
         // 검색창 비활성화
         document.getElementById('post-search').classList.remove('active');
     }
+
+    var facility = document.getElementById('rectangle19');
+    var admin = document.getElementById('rectangle20');
+    var wel = document.getElementById('rectangle21');
+    var edu = document.getElementById('rectangle45');
+    var other = document.getElementById('rectangle46');
+
+    currentPath
+    // 사이드바 배경색 주기
+    if (currentPath.includes('1')){
+        facility.style.backgroundColor = '#EDEDED';
+        admin.style.backgroundColor = '#FFFFFF';
+        wel.style.backgroundColor = '#FFFFFF';
+        edu.style.backgroundColor = '#FFFFFF';
+        other.style.backgroundColor = '#FFFFFF';
+    }
+    else if (currentPath.includes('2')){
+        facility.style.backgroundColor = '#FFFFFF';
+        admin.style.backgroundColor = '#EDEDED';
+        wel.style.backgroundColor = '#FFFFFF';
+        edu.style.backgroundColor = '#FFFFFF';
+        other.style.backgroundColor = '#FFFFFF';
+    }
+    else if (currentPath.includes('3')){
+        facility.style.backgroundColor = '#FFFFFF';
+        admin.style.backgroundColor = '#FFFFFF';
+        wel.style.backgroundColor = '#EDEDED';
+        edu.style.backgroundColor = '#FFFFFF';
+        other.style.backgroundColor = '#FFFFFF';
+    }
+    else if (currentPath.includes('4')){
+        facility.style.backgroundColor = '#FFFFFF';
+        admin.style.backgroundColor = '#FFFFFF';
+        wel.style.backgroundColor = '#FFFFFF';
+        edu.style.backgroundColor = '#EDEDED';
+        other.style.backgroundColor = '#FFFFFF';
+    }
+    else if (currentPath.includes('no_category')){
+        facility.style.backgroundColor = '#FFFFFF';
+        admin.style.backgroundColor = '#FFFFFF';
+        wel.style.backgroundColor = '#FFFFFF';
+        edu.style.backgroundColor = '#FFFFFF';
+        other.style.backgroundColor = '#EDEDED';
+    }
+    else{
+        facility.style.backgroundColor = '#EDEDED';
+        admin.style.backgroundColor = '#FFFFFF';
+        wel.style.backgroundColor = '#FFFFFF';
+        edu.style.backgroundColor = '#FFFFFF';
+        other.style.backgroundColor = '#FFFFFF';
+    }
 });
 
 
@@ -151,7 +202,7 @@ function sideClickEvent(boxId, icon) {
 // 토글 초기값 지정
 document.addEventListener('DOMContentLoaded', function() {
     // 여기서 초기값을 지정할 요소의 ID를 사용하여 bgColor 함수 호출
-    bgColor('rectangle19');
+    // bgColor('rectangle19');
     // 초기값으로 설정한 rectangle19에 대해 클릭 이벤트 핸들러 등록
     addClickEvent('rectangle19', 'facility');
 
@@ -161,9 +212,9 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     // 배경색 초기값 지정
     // 여기서 초기값을 지정할 요소의 ID를 사용하여 bgColor 함수 호출
-    bgColor('rectangle19');
+    // bgColor('rectangle19');
     // 초기값으로 설정한 rectangle19에 대해 클릭 이벤트 핸들러 등록
-    addClickEvent('rectangle19', 'facility');
+    // addClickEvent('rectangle19', 'facility');
 
     // Get sidebar elements
     var sidebarPost = document.getElementById('sidebar-post');
