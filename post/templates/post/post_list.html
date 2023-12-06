@@ -56,9 +56,26 @@
     <a class="btn btn-info btn-sm float-end" href="{% url 'post_unresolved' %}" role="button">미해결</a>
 
     <h1>게시물
-        {% if category %}<span class="badge bg-secondary">{{ category }}</span> {% endif %}
-        {% if tag %} <i class="fa fa-tags"></i></i><span class="badge bg-secondary">{{ tag }}({{ tag.post_set.count}})</span> {% endif %}
+        {% if category %}<span class="badge bg-secondary new-style" >{{ category }}</span> {% endif %}
+        {% if tag %} <i class="fa fa-tags" style="font-size: 20px; margin-right: 5px;"></i><span class="badge bg-secondary new-style">{{ tag }}({{ tag.post_set.count}})</span> {% endif %}
     </h1>
+
+    <style>
+        .new-style {
+        /* 공통 스타일 */
+        background-color: #EDEDED !important;
+        color: #000000;
+        border-radius: 29px ;
+        padding: 15px 30px 15px 30px;
+        margin-right: 5px;
+        border: 1px solid #CCCCCC;
+        border-color: #CCCCCC;
+        font-family: 'Pretendard';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+    }
+    </style>
 
     <!-- post List -->
     {% if post_list.exists %}
