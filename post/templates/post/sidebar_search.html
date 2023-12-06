@@ -115,14 +115,15 @@ top: 84px;
                         {% csrf_token %}
                         <input class="form-control me-2 form-rule" type="search" placeholder="검색어 입력" name="searched" aria-label="search">
                         <button class="btn btn-outline-success btn-rule" type="submit">Search</button>
+
                     </form>
                 </div>
             </div>
 
                 {% for key, value in request.session.search_context.items %}
                     <p> </p>
-                    <p>조항:{{ key }} </p>
-                    <p>내용:{{ value }}</p>
+                    <p>조항: {{ key }} </p>
+                    <p>규정: {{ value }}</p>
                 {% endfor %}
 
         </div>
