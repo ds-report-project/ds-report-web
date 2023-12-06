@@ -35,35 +35,29 @@
    
     .custom-card {
         max-width: 540px;
-        margin-bottom: 20px; /* Adjust margin between cards */
-        border: 1px solid #ddd; /* Optional: Add a border for separation */
-        border-radius: 10px; /* Optional: Add rounded corners */
-        width: 830px;
-        height: 146px;
-        position: absolute;
-        top: 282px; /* 원하는 시작 위치로 조절하세요 */
-        left: 524px;
-        border: 1px solid #ddd;
+        margin-bottom: 20px; 
+        border: 1px solid #ddd; 
         border-radius: 10px;
+        
     }
 
     .custom-card img {
         max-width: 100%;
         height: auto;
-        border-top-left-radius: 10px; /* Optional: Adjust border radius for image */
-        border-bottom-left-radius: 10px; /* Optional: Adjust border radius for image */
+        border-top-left-radius: 10px; 
+        border-bottom-left-radius: 10px; 
     }
 
     .custom-card .card-body {
-        padding: 10px; /* Adjust padding within the card body */
+        padding: 10px;
     }
 
     .custom-card h5 {
-        margin-bottom: 5px; /* Adjust margin for card title */
+        margin-bottom: 5px;
     }
 
     .custom-card .card-text {
-        margin-bottom: 10px; /* Adjust margin for card text */
+        margin-bottom: 10px; 
     }
     .custom-card {
         width: 830px;
@@ -71,8 +65,8 @@
         position: absolute;
         top: 282px;
         left: 524px;
-        border: 1px solid #ddd; /* Optional: Add a border for separation */
-        border-radius: 10px; /* Optional: Add rounded corners */
+        border: 1px solid #ddd; 
+        border-radius: 10px; 
     }
     
   
@@ -100,7 +94,7 @@
     </h1>
 
   <!-- post List -->
-  <div id="a">
+
   {% if post_list.exists %}
   {% for post in post_list %}
       <!-- Custom Card Format -->
@@ -154,32 +148,29 @@
           </div>
   
           <div class="card-footer text-muted">
-              <!-- Display Anonymous Nickname -->
-              {% if post.anonymous %}
-                  {% if post.anonymous_nickname %}
-                      <div class="text-muted fst-italic mb-2">{{ post.anonymous_nickname }}</div>
-                  {% else %}
-                      <div class="text-muted fst-italic mb-2"> 익명</div>
-                  {% endif %}
-              {% else %}
-                  <div class="text-muted fst-italic mb-2">
-                      {% if post.anonymous_nickname %}
-                          {{ post.anonymous_nickname }}
-                      {% else %}
-                          {{ post.get_anonymous_nickname_display }}
-                      {% endif %}
-                  </div>
-              {% endif %}
-              <div class="text-muted fst-italic mb-2">
-                  {{ post.created_at|date:"Y-m-d H:i:s" }}
-              </div>
+            <!-- Display Anonymous Nickname and Timestamp on the same line -->
+            {% if post.anonymous %}
+                {% if post.anonymous_nickname %}
+                    <div class="text-muted fst-italic mb-2">{{ post.anonymous_nickname }} | {{ post.created_at|date:"Y-m-d H:i:s" }}</div>
+                {% else %}
+                    <div class="text-muted fst-italic mb-2"> 익명 | {{ post.created_at|date:"Y-m-d H:i:s" }}</div>
+                {% endif %}
+            {% else %}
+                <div class="text-muted fst-italic mb-2">
+                    {% if post.anonymous_nickname %}
+                        {{ post.anonymous_nickname }} | {{ post.created_at|date:"Y-m-d H:i:s" }}
+                    {% else %}
+                        {{ post.get_anonymous_nickname_display }} | {{ post.created_at|date:"Y-m-d H:i:s" }}
+                    {% endif %}
+                </div>
+            {% endif %}
   
               <!-- 첨부 파일 다운로드 버튼 -->
               {% if post.attachment %}
                   <a href="{{ post.attachment.url }}" class="btn btn-outline-secondary" download>첨부 파일 다운로드</a>
               {% endif %}
           </div>
-      </div>
+    
   {% endfor %}
   <!-- 페이지네이션 부분 -->
   <nav aria-label="Page navigation example" style="text-align: center; margin-top: 150px; margin-left: 320px; ">
