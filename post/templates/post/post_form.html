@@ -464,17 +464,11 @@ line-height: normal;
   <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
 
   <!-- Bootstrap5.x 적용 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-
-  4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-
- 
-
-
-
 <div id="container">
   <!-- 사이드바 -->
   <div id="Rectangle29"></div>
@@ -494,7 +488,7 @@ line-height: normal;
   <!-- 게시물 카테고리 사이드바 -->
   <div id="sidebar-container">
     <!-- 게시물 -->
-    <div id="sidebar-post" class="sidebar-content">
+    <div id="sidebar-post" class="sidebar-content" style="position:absolute;top: 80px;">
         {% include 'post/sidebar_post.html' %}
     </div>
 
@@ -540,7 +534,7 @@ line-height: normal;
   </ul>
 </div>
   
-  <form method="post" enctype="multipart/form-data">
+  <form method="post" enctype="multipart/form-data" style="padding-top: 100px;">
     {% csrf_token %}
 
   
@@ -554,7 +548,7 @@ line-height: normal;
 
     
     <div id="category">
-      <img src="../../static/post/category.svg"><span id="category-text">카테고리</span>
+      <img src="{% static 'post/category.svg' %}"><span id="category-text">카테고리</span>
       {{ form.category }}  
     </div>
     <br>
@@ -566,18 +560,18 @@ line-height: normal;
 
 
     <div id="nikname">
-      <img src="../../static/post/account_circle2.svg">
+      <img src="{% static 'post/account_circle2.svg' %}">
       {{ form.anonymous_nickname }}
     </div>
     
     <hr id="Line32">
-    <p id="plus"><img src="../../static/post/attachment_btn.svg">이미지{{ form.images }}
+    <p id="plus"><img src=".{% static 'post/attachment_btn.svg' %}">이미지{{ form.images }}
     <br>
 
-    <img src="../../static/post/attachment_btn.svg">비디오{{ form.video }}
+    <img src="{% static 'post/attachment_btn.svg' %}">비디오{{ form.video }}
     <br>
 
-    <img src="../../static/post/attachment_btn.svg">첨부 파일
+    <img src="{% static 'post/attachment_btn.svg' %}">첨부 파일
     {{ form.attachment }}
     <br></p>
 
@@ -602,7 +596,8 @@ line-height: normal;
                 this.submit();
             });
         </script>
-        
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
             crossorigin="anonymous"></script>
