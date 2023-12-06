@@ -43,7 +43,7 @@ class Post(models.Model):
     ]
 
     title = models.CharField(max_length=50)
-    content = models.TextField(max_length=255)
+    content = models.TextField(max_length=500)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

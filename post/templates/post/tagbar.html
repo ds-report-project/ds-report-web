@@ -1,17 +1,64 @@
-<div class="btn-group " role="group" aria-label="Button group with nested dropdown">
-    {% for tag in tags|slice:":10" %}
-        <a href="{{ tag.get_absolute_url }}" class="btn btn-primary">{{ tag }}</a>
+<style>
+    .custom-style {
+        /* 공통 스타일 */
+        background-color: #FFFFFF;
+        color: #000000;
+        border-radius: 29px !important;
+        padding: 4px 20px 4px 20px;
+        margin-right: 5px;
+        border: 1px solid #CCCCCC;
+        border-color: #CCCCCC;
+        font-family: 'Pretendard';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 15px;
+    }
+
+    .dropdown-button {
+        /* 더보기 버튼 스타일 */
+        margin-right: 0;
+        border: 1px solid #CCCCCC;
+        border-color: #CCCCCC;
+        border-radius: 29px !important;
+        padding: 4px 20px;
+        background-color: #FFFFFF;
+        color: #000000;
+        font-family: 'Pretendard';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 15px;
+    }
+    .custom-style:hover,
+    .dropdown-button:hover {
+        margin-right: 0;
+        border: 1px solid #CCCCCC;
+        border-color: #CCCCCC;
+        border-radius: 29px !important;
+        padding: 4px 20px;
+        background-color: #EDEDED; /* 마우스를 올렸을 때의 색상 */
+        color: #000000;
+        font-family: 'Pretendard';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 15px;
+    }
+</style>
+
+<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    {% for tag in tags|slice:":7" %}
+        <a href="{{ tag.get_absolute_url }}" class="btn custom-style">{{ tag }}</a>
     {% endfor %}
 
-  <div class="btn-group" role="group">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-      더보기
-    </button>
-    <ul class="dropdown-menu">
-        {% for tag in tags|slice:"10:" %}
-            <li><a href="{{ tag.get_absolute_url }}" class="dropdown-item">{{ tag }}</a></li>
-        {% endfor %}
-    </ul>
-  </div>
-</div>
+    <div class="btn-group" role="group">
+        <!-- 분리할 버튼에 새로운 클래스 적용 -->
+        <button type="button" class="btn dropdown-button" data-bs-toggle="dropdown" aria-expanded="false">
+            더보기
+        </button>
+        <ul class="dropdown-menu custom-style">
+            {% for tag in tags|slice:"7:" %}
+                <li><a href="{{ tag.get_absolute_url }}" class="dropdown-item">{{ tag }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
 
+</div>
