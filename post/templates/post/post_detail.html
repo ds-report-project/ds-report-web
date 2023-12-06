@@ -53,7 +53,7 @@
 
                         <!-- 첨부 파일 다운로드 버튼 -->
                         {% if post.attachment %}
-                        <a href="{{ post.attachment.url }}" class="btn btn-primary" download>첨부 파일 다운로드</a>
+                        <a href="{{ post.attachment.url }}" class="btn btn-outline-secondary" style="margin-bottom: 10px;" download>첨부 파일 다운로드</a>
                         {% endif %}
 
                         <!-- 다운로드 버튼생성-->
@@ -61,20 +61,23 @@
                             <a href="{{ p.file_upload.url }}" class="btn btn-outline-dark" role="button" download>다운로드</a>
                         {% endif %}
 
-                        <!-- 해결됐어요 버튼 -->
-                        <form method="post" action="{% url 'post_detail' pk=post.pk %}">
-                            {% csrf_token %}
-                            <button type="submit" name="resolve_button" class="btn btn-primary btn-sm float-end">
-                                {% if post.is_resolved %}해결됨{% else %}
-                                해결됐어요 ({{ post.resolve_actions.count }}명){% endif %}
-                            </button>
-                        </form>
+                      
 
-                        <!-- Post update icon -->
-                        {% if user.is_authenticated and user == post.author %}
-                            <a class="btn btn-info btn-sm float-end" href="{% url 'post_update' pk=post.pk %}" role="button">수정</a>
-                            <a class="btn btn-info btn-sm float-end" href="{% url 'post_delete' pk=post.pk %}" role="button">삭제</a>
-                        {% endif %}
+<!-- Post update icon -->
+{% if user.is_authenticated and user == post.author %}
+    <div class="btn-group float-end" style="margin-left: 10px;">
+        <a class="btn btn-outline-primary btn-sm" href="{% url 'post_update' pk=post.pk %}" role="button">수정</a>
+        <a class="btn btn-outline-danger btn-sm"style="margin-left: 10px;" href="{% url 'post_delete' pk=post.pk %}" role="button">삭제</a>
+        <form method="post" action="{% url 'post_detail' pk=post.pk %}" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" name="resolve_button" class="btn btn-outline-success btn-sm" style="margin-left: 10px;">
+                {% if post.is_resolved %}해결됨{% else %}
+                해결됐어요 ({{ post.resolve_actions.count }}명){% endif %}
+            </button>
+        </form>
+    </div>
+{% endif %}
+
 
                         <!-- LIKES -->
                         {% if user.is_authenticated %}
