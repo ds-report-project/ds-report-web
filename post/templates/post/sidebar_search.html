@@ -68,8 +68,30 @@ top: 84px;
 .card.my-4 {
     position: absolute;
     left: 92px;
-    top: 150px;
-    width: 270px;
+    top: 50px;
+    width: 240px;
+    height: 400px;
+}
+.form-rule{
+    width: 130px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+}
+.btn-rule{
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    width:80px;
+}
+.header-rule{
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
 }
 
 </style>
@@ -85,14 +107,15 @@ top: 84px;
 
     <!-- 검색 기능 -->
     <div class="card my-4">
-        <h5 class="card-header">규정 검색</h5>
+        <h5 class="card-header header-rule">규정 검색</h5>
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-8">
                     <form id="searchForm" class="d-flex" method="GET" action="{% url 'search' slug='1'%}">
                         {% csrf_token %}
-                        <input class="form-control me-2" type="search" placeholder="Search" name="searched" aria-label="search" style="width: 150px;">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <input class="form-control me-2 form-rule" type="search" placeholder="검색어 입력" name="searched" aria-label="search">
+                        <button class="btn btn-outline-success btn-rule" type="submit">Search</button>
+
                     </form>
                 </div>
             </div>

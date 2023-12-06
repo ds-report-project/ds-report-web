@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 {% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 <head>
     <title>게시물</title>
@@ -14,6 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <link rel="stylesheet" href="{% static 'post/css/style.css' %}">
+
 </head>  
 
 <body>
@@ -21,12 +23,12 @@
         <!-- 사이드바 -->
         <div id="Rectangle29"></div>
             <!-- 게시물 -->
-            <a id="rectangle32"></a>
-            <img src="../../static/post/description.svg" id="description">
+            <a id="rectangle32" href="{% url 'post_list' %}"></a>
+            <a href="{% url 'post_list' %}"><img src="../../static/post/description.svg" id="description"></a>
             <div id="post">게시물</div>
             <!-- 정보 -->
-            <a id="rectangle37"></a>
-            <img src="../../static/post/bar_chart.svg" id="bar_chart">
+            <a id="rectangle37" href="{% url 'contact' %}"></a>
+            <a href="{% url 'contact' %}"><img src="../../static/post/bar_chart.svg" id="bar_chart"></a>
             <div id="info">정보</div>
             <!-- 규정 검색 -->
             <a id="rectangle40"></a>
@@ -68,8 +70,9 @@
         <!-- 메인 컨테이너 -->
         <div id="main_container">
             <!-- Search 검색창 -->
+        <div id="post-search" class="sidebar-content">
             {% include 'post/search.html' %}
-
+        </div>
             <!-- 검색 결과 표시 -->
             {% if posts %}
                 <h3>Search Results for "{{ query }}"</h3>
@@ -136,7 +139,7 @@
                 this.submit();
             });
         </script>
-        <script src="../../static/post/script.js"></script>
+        <script src="{% static 'post/script.js' %}"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
             crossorigin="anonymous"></script>

@@ -1,3 +1,5 @@
+{% extends 'post/base.html' %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -6,9 +8,15 @@
     <!-- Bootstrap 5.x 적용 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-
 4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../post/static/post/css/style.css">
+    <style>
+        a {
+        text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-
+{% block main_area %}
 <div class="container">
   <div class="row my-3">
     <div class="row-3">
@@ -105,7 +113,9 @@
   </div>
 </div>
 
+<script src="{% static 'post/script.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-
 HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+{% endblock %}
 </body>
 </html>

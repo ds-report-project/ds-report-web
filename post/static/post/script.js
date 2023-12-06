@@ -1,3 +1,55 @@
+// url에 따라 스타일 변경
+document.addEventListener('DOMContentLoaded', function () {
+    // 현재 URL 경로 가져오기
+    var currentPath = window.location.pathname;
+    let is_clicked = false;
+    document.getElementById('rectangle40').addEventListener('click', function() {
+        is_clicked = true;
+    });
+    document.getElementById('action_key').addEventListener('click', function() {
+        is_clicked = true;
+    });
+
+    // 규정 검색 페이지
+    if (is_clicked) {
+        document.getElementById('rectangle40').style.backgroundColor = '#EDEDED';
+        document.getElementById('rectangle37').style.backgroundColor = '#FFFFFF';
+        document.getElementById('rectangle32').style.backgroundColor = '#FFFFFF';
+        document.getElementById('sidebar-info').classList.remove('active');
+        document.getElementById('sidebar-post').classList.remove('active');
+    }
+    //Contact 페이지
+    else if (currentPath === '/contact/') {
+        document.getElementById('rectangle37').style.backgroundColor = '#EDEDED';
+        document.getElementById('rectangle32').style.backgroundColor = '#FFFFFF';
+        document.getElementById('sidebar-info').classList.add('active');
+        document.getElementById('sidebar-post').classList.remove('active');
+        document.getElementById('sidebar-search').classList.remove('active');
+        document.getElementById('post-search').classList.remove('active');
+    }
+    else if (currentPath === '/post/'){
+        document.getElementById('post-search').classList.add('active');
+        document.getElementById('rectangle32').style.backgroundColor = '#EDEDED';
+        document.getElementById('rectangle37').style.backgroundColor = '#FFFFFF';
+        document.getElementById('sidebar-post').classList.add('active');
+        document.getElementById('sidebar-info').classList.remove('active');
+        document.getElementById('sidebar-search').classList.remove('active');
+    }
+    // 게시물 페이지
+    else if (currentPath.startsWith('/post/')) {
+        document.getElementById('rectangle32').style.backgroundColor = '#EDEDED';
+        document.getElementById('rectangle37').style.backgroundColor = '#FFFFFF';
+        document.getElementById('sidebar-post').classList.add('active');
+        document.getElementById('sidebar-info').classList.remove('active');
+        document.getElementById('sidebar-search').classList.remove('active');
+    }
+    else{
+        // 검색창 비활성화
+        document.getElementById('post-search').classList.remove('active');
+    }
+});
+
+
 // hover 시 border 생기게
 function addHoverEffect(iconId, boxId) {
     const icon = document.getElementById(iconId);
@@ -58,32 +110,21 @@ function addClickEvent(boxId, icon) {
     });
 }
 
-// 맨 왼쪽 3개 메뉴 클릭시 색상 변경 토글 함수
-let sidePrev = null;
-function sideColor(boxId) {
-    var box = document.getElementById(boxId);
-    if (sidePrev) {
-        // 이전에 클릭된 요소의 배경색을 초기 상태로 복원
-        sidePrev.style.backgroundColor = '#FFFFFF';
-    }
 
-    // 클릭된 요소의 배경색을 변경
-    box.style.backgroundColor = '#EDEDED';
-
-    // 이전에 클릭된 요소 저장
-    sidePrev = box;
-}
 
 function sideClickEvent(boxId, icon) {
     var box = document.getElementById(boxId);
     var icon = document.getElementById(icon);
 
     box.addEventListener('click', function() {
-        sideColor(boxId);
+        box.style.backgroundColor = '#EDEDED';
+        document.getElementById('rectangle37').style.backgroundColor = '#FFFFFF';
+        document.getElementById('rectangle32').style.backgroundColor = '#FFFFFF';
     });
-
     icon.addEventListener('click', function() {
-        sideColor(boxId);
+        box.style.backgroundColor = '#EDEDED';
+        document.getElementById('rectangle37').style.backgroundColor = '#FFFFFF';
+        document.getElementById('rectangle32').style.backgroundColor = '#FFFFFF';
     });
 }
 
@@ -94,18 +135,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // 초기값으로 설정한 rectangle19에 대해 클릭 이벤트 핸들러 등록
     addClickEvent('rectangle19', 'facility');
 
-    sideClickEvent('rectangle32', 'description');
 });
 
 // 게시물, 정보, 검색 선택에 따라 각각 다른 html 로드
 document.addEventListener('DOMContentLoaded', function() {
-    // 배경색 토글 초기값 지정
+    // 배경색 초기값 지정
     // 여기서 초기값을 지정할 요소의 ID를 사용하여 bgColor 함수 호출
     bgColor('rectangle19');
     // 초기값으로 설정한 rectangle19에 대해 클릭 이벤트 핸들러 등록
     addClickEvent('rectangle19', 'facility');
-    sideColor('rectangle32');
-    sideClickEvent('rectangle32', 'description');
+
     // Get sidebar elements
     var sidebarPost = document.getElementById('sidebar-post');
     var sidebarInfo = document.getElementById('sidebar-info');
@@ -119,21 +158,21 @@ document.addEventListener('DOMContentLoaded', function() {
     var rectangle40 = document.getElementById('rectangle40');
     var actionKey = document.getElementById('action_key');
 
-
-    rectangle32.addEventListener('click', function() {
-        toggleSidebarContent('post');
-    });
-
-    description.addEventListener('click', function() {
-        toggleSidebarContent('post');
-    });
-    rectangle37.addEventListener('click', function() {
-        toggleSidebarContent('info');
-    });
-
-    barChart.addEventListener('click', function() {
-        toggleSidebarContent('info');
-    });
+    //
+    // rectangle32.addEventListener('click', function() {
+    //     toggleSidebarContent('post');
+    // });
+    //
+    // description.addEventListener('click', function() {
+    //     toggleSidebarContent('post');
+    // });
+    // rectangle37.addEventListener('click', function() {
+    //     toggleSidebarContent('info');
+    // });
+    //
+    // barChart.addEventListener('click', function() {
+    //     toggleSidebarContent('info');
+    // });
 
     rectangle40.addEventListener('click', function() {
         toggleSidebarContent('search');
@@ -143,14 +182,12 @@ document.addEventListener('DOMContentLoaded', function() {
         toggleSidebarContent('search');
     });
 
-    sidebarPost.classList.add('active');
-
-    function toggleSidebarContent(contentType) {
+        function toggleSidebarContent(contentType) {
 
         // Reset all sidebar contents
         sidebarPost.classList.remove('active');
         sidebarInfo.classList.remove('active');
-        sidebarSearch.classList.remove('active');
+        sidebarSearch.classList.add('active');
 
         if (contentType === 'post') {
             sidebarPost.classList.add('active');
@@ -169,8 +206,7 @@ addClickEvent('rectangle20', 'administration');
 addClickEvent('rectangle21', 'welfare');
 addClickEvent('rectangle45', 'education');
 addClickEvent('rectangle46', 'other');
-sideClickEvent('rectangle32', 'description');
-sideClickEvent('rectangle37', 'bar_chart');
+
 sideClickEvent('rectangle40', 'action_key');
 
 
@@ -183,3 +219,4 @@ addHoverEffect('other','rectangle46');
 addHoverEffect('description','rectangle32');
 addHoverEffect('bar_chart','rectangle37');
 addHoverEffect('action_key','rectangle40');
+
