@@ -33,10 +33,10 @@ box-sizing: border-box;
 
 #title{
   position: absolute;
-width: 128px;
+width: 500px;
 height: 33px;
-left: 0px;
-top: 0px;
+left: 524px;
+top: 233px;
 right:1268px;
 font-family: 'Pretendard';
 font-style: normal;
@@ -44,7 +44,7 @@ font-weight: 500;
 font-size: 28px;
 line-height: 33px;
 color: #888888;
-border: none; 
+border:none; 
 
 }
 
@@ -52,8 +52,8 @@ border: none;
   position: absolute;
 width: 830px;
 height: 329px;
-left: 0px;
-top: 0px;
+left: 524px;
+top: 310px;
 
 right:566px;
 font-family: 'Pretendard';
@@ -88,7 +88,7 @@ color: black;
   align-items: center; 
   position: absolute;
 left: 524px;
-top: 178px;
+top: 160px;
 right: 1274px;
 bottom: 884px;
 
@@ -171,14 +171,13 @@ width: 45px;
 height: 18px;
 font-size: 15px;
 writing-mode: vertical-lr;
-
 }
 
 #tag select {
 position: absolute;
 width: 81px;
 height: 70px;
-top:-45px;
+top:-25px;
 left:50px;
 color: #000;
 font-family: Pretendard;
@@ -237,75 +236,39 @@ line-height: 17px;
 color: #000000;
 }
 
-#list{
+#list {
+/* 목록보기 */
 width: 81px;
 height: 31px;
-/* Auto layout */
 display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
 padding: 7px 16px;
 gap: 10px;
-
 position: absolute;
-
 left: 1108px;
 top: 234px;
-
 background: #ECECEC;
 border-radius: 24px;
-
-
-
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 0;
-
 }
 
 
 #sub {
-/* Frame 18 */
-
-/* Auto layout */
+/* 등록 */
+width: 57px;
+height: 31px;
 display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
 padding: 7px 16px;
 gap: 10px;
-
 position: absolute;
-width: 57px;
-height: 31px;
 left: 1297px;
 top: 234px;
-
 background: #333333;
 border-radius: 24px;
-
-/* 등록 */
-width: 57px;
-height: 31px;
-
-font-family: 'Pretendard';
-font-style: normal;
-font-weight: 600;
-font-size: 14px;
-line-height: 17px;
-/* identical to box height */
-
-color: #FFFFFF;
-
-/* Inside auto layout */
-flex: none;
-order: 0;
-flex-grow: 0;
-
-flex-direction: column; /* This was missing */
 }
 
 #sub button {
@@ -331,29 +294,20 @@ font-size: 14px;
 line-height: 17px;
 
 }
-#cancel{
-  width: 84px;
-  height: 31px;
+#cancel {
+width: 84px;
+height: 31px;
 display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
 padding: 7px 16px;
 gap: 10px;
-
 position: absolute;
-
 left: 1201px;
 top: 234px;
-
 background: #ECECEC;
 border-radius: 24px;
-
-
-flex: none;
-order: 0;
-flex-grow: 0;
-
 }
 #title input {
   left: 524px;
@@ -362,10 +316,8 @@ right:1268px;
 position: absolute;
   border: none;
   color: #888;
-
 font-style: normal;
 font-weight: 500;
-
 width: 450px;
 font-family: Pretendard;
 font-size: 28px;
@@ -373,8 +325,8 @@ font-weight: 500;
 line-height: 33px;
 letter-spacing: 0em;
 text-align: left;
-
-height: 33px; 
+border:none;
+height: 50px; 
 outline: none;
 }   
 #content textarea {
@@ -389,7 +341,7 @@ height: 329px;
 left: 524px;
 top: 310px;
 width: 830px;
-color: #888;
+
 font-family: Pretendard;
 font-size: 16px;
 font-style: normal;
@@ -399,4 +351,69 @@ line-height: normal;
 
 outline: none;
 resize: none;
-}  
+}   
+#title input,
+#content textarea {
+    border: none !important;
+    border-bottom: 1px solid #ccc !important;
+    outline: none !important;
+}
+#title:focus,
+#content:focus {
+    border: none;
+}
+#Rectangle42 {
+  position: fixed;
+  width: 240px;
+  height: 1023px;
+  left: 92px;
+  top: 57px;
+  background: #FFFFFF;
+  box-shadow: -4px 0px 2px rgba(0, 0, 0, 0.1), 4px 0px 2px rgba(0, 0, 0, 0.1);
+}
+[id^="rectangle"] {
+cursor: pointer;
+}
+
+[id^="rectangle"]:hover {
+border: 1px solid #CCCCCC;
+}
+
+/*active 시 배경색 변경*/
+#rectangle19:active,
+#rectangle20:active,
+#rectangle21:active,
+#rectangle45:active,
+#rectangle46:active
+{
+background: #EDEDED; /* active 시 배경색 변경 */
+}
+
+/* 기존 스타일 유지하면서 밑줄 제거 */
+#duckSungLogo, #sidebar-post a, #sidebar-info a, #sidebar-search a {
+text-decoration: none;
+}
+
+body {
+display: flex;
+align-items: center;
+justify-content: center;
+height: 100vh;
+margin: 0;
+}
+
+#title input,
+#content textarea {
+border: none !important;
+border-bottom: 1px solid #ccc !important;
+outline: none !important;
+}
+
+#title:focus,
+#content:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+
