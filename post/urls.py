@@ -19,7 +19,7 @@ urlpatterns = [
     path('post-like/<int:pk>', views.PostLike, name="post_like"),
     path('resolved/', views.PostResolvedList, name='post_resolved'),
     path('unresolved/', views.PostUnresolvedList, name='post_unresolved'),
-    path('contact/', include('contact_number.urls')),
+    path('contact/', include('contact_number.urls'), name='contact'),
     path('comment-like/<int:pk>', views.CommentLike, name="comment_like"),
 ]
 
