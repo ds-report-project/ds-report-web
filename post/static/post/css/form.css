@@ -43,7 +43,7 @@ font-style: normal;
 font-weight: 500;
 font-size: 28px;
 line-height: 33px;
-color: #888888;
+color: #000000;
 border:none; 
 
 }
@@ -54,7 +54,6 @@ width: 830px;
 height: 329px;
 left: 524px;
 top: 310px;
-
 right:566px;
 font-family: 'Pretendard';
 font-style: normal;
@@ -63,7 +62,7 @@ font-size: 16px;
 line-height: 19px;
 /* identical to box height */
 border: none;
-color: #888888;
+color: #333333;
 }
 
 #plus{
@@ -379,15 +378,9 @@ cursor: pointer;
 border: 1px solid #CCCCCC;
 }
 
-/*active 시 배경색 변경*/
-#rectangle19:active,
-#rectangle20:active,
-#rectangle21:active,
-#rectangle45:active,
-#rectangle46:active
-{
-background: #EDEDED; /* active 시 배경색 변경 */
-}
+input::placeholder {color:#888888;}
+input::-webkit-input-placeholder {color:#888888;}
+input:-ms-input-placeholder {color:#888888;}
 
 /* 기존 스타일 유지하면서 밑줄 제거 */
 #duckSungLogo, #sidebar-post a, #sidebar-info a, #sidebar-search a {
@@ -411,9 +404,8 @@ outline: none !important;
 
 #title:focus,
 #content:focus {
-    border: none;
-    outline: none;
-    box-shadow: none;
+border: none;
+outline: none;
+box-shadow: none;
 }
-
 
