@@ -520,7 +520,22 @@ line-height: normal;
       <a id="signupText" href="/accounts/signup/">회원가입</a>
   {% endif %}
 
-
+<!-- 인기글 -->
+<div id="popular">
+  <div id="popular_text">이번 달 인기글</div>
+  <ul>
+      {% for post in top_5_posts %}
+          <!-- <div class="post-info post-ranking"> -->
+          <div>
+              <a href="{% url 'post_detail' pk=post.pk %}">{{ forloop.counter }}위 {{ post.title }}</a>
+          </div>
+          <!-- <div class="post-content post-ranking"> -->
+          <div>
+              <a href="{% url 'post_detail' pk=post.pk %}">{{ post.content }}</a>
+          </div>
+      {% endfor %}
+  </ul>
+</div>
   
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
