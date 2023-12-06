@@ -32,12 +32,19 @@
         justify-content: center;
         margin-top: 20px; /* 페이지네이션과 카드 간격 조절 */
     }
-    /* Add a new style for the custom card format */
+   
     .custom-card {
         max-width: 540px;
         margin-bottom: 20px; /* Adjust margin between cards */
         border: 1px solid #ddd; /* Optional: Add a border for separation */
         border-radius: 10px; /* Optional: Add rounded corners */
+        width: 830px;
+        height: 146px;
+        position: absolute;
+        top: 282px; /* 원하는 시작 위치로 조절하세요 */
+        left: 524px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
     }
 
     .custom-card img {
@@ -58,7 +65,17 @@
     .custom-card .card-text {
         margin-bottom: 10px; /* Adjust margin for card text */
     }
-   
+    .custom-card {
+        width: 830px;
+        height: 146px;
+        position: absolute;
+        top: 282px;
+        left: 524px;
+        border: 1px solid #ddd; /* Optional: Add a border for separation */
+        border-radius: 10px; /* Optional: Add rounded corners */
+    }
+    
+  
   </style>
 </head>
 
@@ -83,6 +100,7 @@
     </h1>
 
   <!-- post List -->
+  <div id="a">
   {% if post_list.exists %}
   {% for post in post_list %}
       <!-- Custom Card Format -->
@@ -186,7 +204,7 @@
   <h1>게시물이 없습니다.</h1>
   {% endif %}
   {% endblock %}
-
+</div>
 
 
 
