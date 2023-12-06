@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     // 현재 URL 경로 가져오기
     var currentPath = window.location.href;
+    var currentPathPost = window.location.pathname;
     console.log(localStorage.getItem('is_clicked'));
     console.log(currentPath);
     document.getElementById('rectangle40').addEventListener('click', function() {
@@ -33,6 +34,15 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('sidebar-search').classList.remove('active');
         localStorage.setItem('is_clicked', 'false');
     }
+    else if (currentPathPost ==='/post/') {
+        document.getElementById('rectangle32').style.backgroundColor = '#EDEDED';
+        document.getElementById('rectangle37').style.backgroundColor = '#FFFFFF';
+        document.getElementById('sidebar-post').classList.add('active');
+        document.getElementById('sidebar-info').classList.remove('active');
+        document.getElementById('sidebar-search').classList.remove('active');
+        localStorage.setItem('is_clicked', 'false');
+
+    }
     // 게시물 페이지
     else if (currentPath.includes('/post/')) {
         document.getElementById('rectangle32').style.backgroundColor = '#EDEDED';
@@ -41,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('sidebar-info').classList.remove('active');
         document.getElementById('sidebar-search').classList.remove('active');
         localStorage.setItem('is_clicked', 'false');
+
     }
     // 규정 검색 페이지
     else if (localStorage.getItem('is_clicked')) {
@@ -167,21 +178,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var rectangle40 = document.getElementById('rectangle40');
     var actionKey = document.getElementById('action_key');
 
-    //
-    // rectangle32.addEventListener('click', function() {
-    //     toggleSidebarContent('post');
-    // });
-    //
-    // description.addEventListener('click', function() {
-    //     toggleSidebarContent('post');
-    // });
-    // rectangle37.addEventListener('click', function() {
-    //     toggleSidebarContent('info');
-    // });
-    //
-    // barChart.addEventListener('click', function() {
-    //     toggleSidebarContent('info');
-    // });
 
     rectangle40.addEventListener('click', function() {
         toggleSidebarContent('search');
