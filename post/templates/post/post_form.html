@@ -54,7 +54,7 @@
     font-weight: 500;
     font-size: 28px;
     line-height: 33px;
-    color: #888888;
+    color: #000000;
     border:none; 
     
     }
@@ -73,7 +73,7 @@
     line-height: 19px;
     /* identical to box height */
     border: none;
-    color: #888888;
+    color: #333333;
     }
     
     #plus{
@@ -389,15 +389,9 @@ line-height: normal;
     border: 1px solid #CCCCCC;
 }
 
-/*active 시 배경색 변경*/
-#rectangle19:active,
-#rectangle20:active,
-#rectangle21:active,
-#rectangle45:active,
-#rectangle46:active
-{
-    background: #EDEDED; /* active 시 배경색 변경 */
-}
+input::placeholder {color:#888888;}
+input::-webkit-input-placeholder {color:#888888;}
+input:-ms-input-placeholder {color:#888888;}
 
   /* 기존 스타일 유지하면서 밑줄 제거 */
   #duckSungLogo, #sidebar-post a, #sidebar-info a, #sidebar-search a {
@@ -553,7 +547,7 @@ line-height: normal;
 </div>
    
  
-  <script src="{% static 'post/script.js' %}"></script>
+  <script src="{% static 'post/js/script.js' %}"></script>
  
   <script src="{% static 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js' %}" integrity="sha384-
     HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
@@ -567,6 +561,7 @@ line-height: normal;
             });
         </script>
 
+        <script src="{% static '/post/js/script.js' %}"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

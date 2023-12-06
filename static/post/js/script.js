@@ -2,38 +2,34 @@
 document.addEventListener('DOMContentLoaded', function () {
     // 현재 URL 경로 가져오기
     var currentPath = window.location.pathname;
-    let is_clicked = false;
     document.getElementById('rectangle40').addEventListener('click', function() {
-        is_clicked = true;
+        localStorage.setItem('is_clicked', 'true');
     });
     document.getElementById('action_key').addEventListener('click', function() {
-        is_clicked = true;
+        localStorage.setItem('is_clicked', 'true');
+    });
+    document.getElementById('rule_btn').addEventListener('click', function() {
+        localStorage.setItem('is_clicked', 'true');
+        console.log(localStorage.getItem('is_clicked'));
     });
 
-    // 규정 검색 페이지
-    if (is_clicked) {
-        document.getElementById('rectangle40').style.backgroundColor = '#EDEDED';
-        document.getElementById('rectangle37').style.backgroundColor = '#FFFFFF';
-        document.getElementById('rectangle32').style.backgroundColor = '#FFFFFF';
-        document.getElementById('sidebar-info').classList.remove('active');
-        document.getElementById('sidebar-post').classList.remove('active');
-    }
+
     //Contact 페이지
-    else if (currentPath === '/contact/') {
+    if (currentPath === '/contact/') {
         document.getElementById('rectangle37').style.backgroundColor = '#EDEDED';
         document.getElementById('rectangle32').style.backgroundColor = '#FFFFFF';
         document.getElementById('sidebar-info').classList.add('active');
         document.getElementById('sidebar-post').classList.remove('active');
         document.getElementById('sidebar-search').classList.remove('active');
-        document.getElementById('post-search').classList.remove('active');
+        localStorage.setItem('is_clicked', 'false');
     }
     else if (currentPath === '/post/'){
-        document.getElementById('post-search').classList.add('active');
         document.getElementById('rectangle32').style.backgroundColor = '#EDEDED';
         document.getElementById('rectangle37').style.backgroundColor = '#FFFFFF';
         document.getElementById('sidebar-post').classList.add('active');
         document.getElementById('sidebar-info').classList.remove('active');
         document.getElementById('sidebar-search').classList.remove('active');
+        localStorage.setItem('is_clicked', 'false');
     }
     // 게시물 페이지
     else if (currentPath.startsWith('/post/')) {
@@ -42,6 +38,16 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('sidebar-post').classList.add('active');
         document.getElementById('sidebar-info').classList.remove('active');
         document.getElementById('sidebar-search').classList.remove('active');
+        localStorage.setItem('is_clicked', 'false');
+    }
+    // 규정 검색 페이지
+    else if (localStorage.getItem('is_clicked')) {
+        document.getElementById('rectangle40').style.backgroundColor = '#EDEDED';
+        document.getElementById('rectangle37').style.backgroundColor = '#FFFFFF';
+        document.getElementById('rectangle32').style.backgroundColor = '#FFFFFF';
+        document.getElementById('sidebar-info').classList.remove('active');
+        document.getElementById('sidebar-post').classList.remove('active');
+        document.getElementById('sidebar-search').classList.add('active');
     }
     else{
         // 검색창 비활성화
@@ -199,6 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     }
 });
+
 
 // 클릭 시 배경색 변경
 addClickEvent('rectangle19', 'facility');

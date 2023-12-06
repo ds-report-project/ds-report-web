@@ -129,7 +129,7 @@
                                     {% csrf_token %}
 
                                     <input name="new_comment" type="text" value="">
-                                    <button type = "submit" class = "btn btn-primary"> 입력 </button>
+                                    <button type = "submit" class = "btn btn-outline-primary"> 입력 </button>
                                 {% else %}
                                     <a role="button" class = "btn btn-sm" href="#" data-toggle="modal" data-target="#loginModal">로그인하고 댓글을 남겨주세요</a>
                                 {% endif %}
@@ -163,11 +163,11 @@
                                         {% endif %}
 
                                         {% if user.is_authenticated and comment.author == user %}
-                                            <a role="button" class="btn btn-sm btn-info float-end" id="comment-{{comment.pk}}-update-btn" href="{% url 'update_comment' comment.pk %}">수정</a>
+                                            <a role="button" class="btn btn-outline-primary" id="comment-{{comment.pk}}-update-btn" href="{% url 'update_comment' comment.pk %}">수정</a>
                                         {% endif %}
 
                                         <!-- 모달 열릴 때 backdrop 사용하지 않도록 설정 -->
-                                        <a role="button" class="btn btn-sm btn-danger float-end" data-toggle="modal" data-target="#deleteCommentModal-{{ comment.pk }}" data-backdrop="false">삭제</a>
+                                        <a role="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteCommentModal-{{ comment.pk }}" data-backdrop="false">삭제</a>
 
                                         <!-- Delete Modal -->
                                         <div class="modal fade" id="deleteCommentModal-{{comment.pk}}" tabindex="-1" role="dialog" aria-hidden="true">
@@ -181,10 +181,10 @@
                                                         {{comment}}
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                                                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">취소</button>
                                                         <form class="d-inline" id="comment-form" method="POST" action="{% url 'delete_comment' pk=comment.pk %}">
                                                             {% csrf_token %}
-                                                            <button type="submit" class="btn btn-danger">삭제</button>
+                                                            <button type="submit" class="btn btn-outline-danger">삭제</button>
                                                         </form>
                                                     </div>
                                                 </div>

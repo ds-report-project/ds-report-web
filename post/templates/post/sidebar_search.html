@@ -70,7 +70,7 @@ top: 84px;
     left: 92px;
     top: 50px;
     width: 240px;
-    height: 400px;
+    height: 650px;
 }
 .form-rule{
     width: 130px;
@@ -95,7 +95,7 @@ top: 84px;
 }
 
 </style>
-
+{% load static %}
 <!--컨테이너-->
 <div id="sidebar">
     <div id="Rectangle42"></div>
@@ -114,7 +114,7 @@ top: 84px;
                     <form id="searchForm" class="d-flex" method="GET" action="{% url 'search' slug='1'%}">
                         {% csrf_token %}
                         <input class="form-control me-2 form-rule" type="search" placeholder="검색어 입력" name="searched" aria-label="search">
-                        <button class="btn btn-outline-success btn-rule" type="submit">Search</button>
+                        <button class="btn btn-outline-success btn-rule" id="rule_btn" type="submit">Search</button>
 
                     </form>
                 </div>
@@ -129,3 +129,4 @@ top: 84px;
         </div>
     </div>
 </div>
+<script src="{% static '/post/js/script.js' %}"></script>
