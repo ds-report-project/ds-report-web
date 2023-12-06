@@ -11,7 +11,7 @@ from .forms import CommentForm
 from django.db import models
 from .models import Post, Category, Tag, ResolveAction, Comment, Rule
 from django.urls import reverse_lazy, reverse
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
@@ -20,7 +20,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 
 
-class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+class PostCreate(LoginRequiredMixin,CreateView):
     model = Post
     fields = ['title', 'content', 'category', 'tags', 'anonymous_nickname', 'images', 'video', 'attachment']
         
@@ -31,7 +31,7 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
             form.instance.anonymous_nickname = form.cleaned_data.get('anonymous_nickname', "Default Nickname")
             return super(PostCreate, self).form_valid(form)
         else:
-            return redirect('/post/')
+            return self.handle_no_permission()
 
     def test_func(self):
         return self.request.user.is_superuser or self.request.user.is_staff
