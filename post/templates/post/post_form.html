@@ -1,4 +1,4 @@
-<html lang="ko">
+<html>
 <head>
     {% load static %}
     <title>게시물</title>
@@ -445,6 +445,17 @@ line-height: normal;
 {
     background: #EDEDED; /* active 시 배경색 변경 */
 }
+
+  /* 기존 스타일 유지하면서 밑줄 제거 */
+  #duckSungLogo, #sidebar-post a, #sidebar-info a, #sidebar-search a {
+    text-decoration: none;
+  }
+
+  /* Hover 시 색깔 변경 */
+  #duckSungLogo:hover, #sidebar-post a:hover, #sidebar-info a:hover, #sidebar-search a:hover {
+    color: #your_hover_color; /* 원하는 Hover 시 색깔로 변경 */
+  }
+
   </style>
   <link rel="stylesheet" href="{% static 'post/bootstrap/bootstrap.min.css' %}" media="screen">
   <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
@@ -559,9 +570,10 @@ line-height: normal;
   </form>
 
    
-
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-
+ 
+  <script src="{% static 'post/script.js' %}"></script>
+ 
+  <script src="{% static 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js' %}" integrity="sha384-
     HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
         <script>
             document.getElementById('searchForm').addEventListener('submit', function (e) {
@@ -572,7 +584,7 @@ line-height: normal;
                 this.submit();
             });
         </script>
-        <script src="../../static/post/script.js"></script>
+        
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
             crossorigin="anonymous"></script>
