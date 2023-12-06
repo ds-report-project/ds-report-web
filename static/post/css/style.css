@@ -379,6 +379,7 @@ a {
     line-height: 19px;
     color: #9F9F9F;
     position: fixed;
+    z-index:3;
 }
 
 /* 인기글 스타일 */
