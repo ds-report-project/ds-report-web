@@ -15,7 +15,7 @@
 body {
     margin: 0;
     padding: 0;
-    overflow-x:hidden;
+    overflow-x:auto;
     overflow-y:auto;
     width: 1920px;
     height: 1080px;
@@ -23,7 +23,7 @@ body {
 
 #container {
     width: 1920px;
-    height: 1080px;
+    height: 1800px;
     position: relative;
     /*top: 50%;*/
     /*left: 50%;*/
@@ -340,11 +340,12 @@ a {
 
 #main_container{
     width:850px;
-    height:990px;
+    /*height:990px;*/
+    height:1800px;
     top:90px;
     left:512px;
     position: absolute;
-    overflow: hidden;
+    overflow: visible;
     z-index: 1;
 }
 
