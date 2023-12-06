@@ -1,4 +1,5 @@
 {% extends 'post/base.html' %}
+{% load static %}
 <html lang="ko">
 <head>
   
@@ -42,7 +43,7 @@
 {% block main_area %}
     {% if user.is_authenticated %}
         <!-- 일반 사용자도 글 작성 가능 -->
-        <div id="write"><a class="btn btn-info btn-sm float-end" href="{% url 'post_create' %}" role="button"><i class="fa fa-tags"></i> <img src="../../static/post/edit.svg"><span id="write-text">글쓰기</span></a></div>
+        <div id="write"><a class="btn btn-info btn-sm float-end" href="{% url 'post_create' %}" role="button"><i class="fa fa-tags"></i> <img src="{% static 'post/edit.svg' %}"><span id="write-text">글쓰기</span></a></div>
     {% endif %}
 
     <!-- Tag Bar -->
