@@ -1,0 +1,402 @@
+button {
+  border: none;
+  outline: none;
+  background: transparent;
+
+}
+#Line31 {
+  position: absolute;
+  width: 830px;
+  height: 0px;
+  top: 282px;
+  right: 566px;
+  bottom: 798px;
+  left: 524px;
+  border: 1px solid #CCCCCC;
+  background: #CCC;
+  box-sizing: border-box;
+}
+
+#Line32{
+  position: absolute;
+width: 830px;
+height: 0px;
+left: 524px;
+top: 658px;
+right: 566px;
+bottom: 422px;
+
+border: 1px solid #CCCCCC;
+box-sizing: border-box;
+}
+
+
+#title{
+  position: absolute;
+width: 128px;
+height: 33px;
+left: 0px;
+top: 0px;
+right:1268px;
+font-family: 'Pretendard';
+font-style: normal;
+font-weight: 500;
+font-size: 28px;
+line-height: 33px;
+color: #888888;
+border: none; 
+
+}
+
+#content{
+  position: absolute;
+width: 830px;
+height: 329px;
+left: 0px;
+top: 0px;
+
+right:566px;
+font-family: 'Pretendard';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+border: none;
+color: #888888;
+}
+
+#plus{
+  position: absolute;
+width: 179px;
+height: 19px;
+left: 524px;
+top: 680px;
+right:1380px;
+bottom:384px;
+font-family: 'Pretendard';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 19px;
+/* identical to box height */
+color: black;
+
+}
+
+#category {
+  align-items: center; 
+  position: absolute;
+left: 524px;
+top: 178px;
+right: 1274px;
+bottom: 884px;
+
+
+gap: 4px;
+color: #000;
+font-family: Pretendard;
+font-size: 15px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+display: flex;
+
+}
+#category select{
+  
+  left: 524px;
+top: 178px;
+right: 1274px;
+bottom: 884px;
+width: 82px;
+height: 18px;
+color: #000;
+font-family: Pretendard;
+font-size: 15px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+#category-text {
+  width: 82px;
+  height: 18px;
+  font-size: 15px;
+writing-mode: vertical-lr;
+}
+/* 익명 */
+#nikname{
+  position: absolute;
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 4px;
+
+width: 26px;
+height: 18px;
+left: 720px;
+top: 168px;
+right: 1222px;
+bottom: 880px;
+font-family: Pretendard;
+font-style: normal;
+font-weight: 600;
+font-size: 15px;
+line-height: 18px;
+/* identical to box height */
+
+color: #000000;
+}
+#nikname img {
+  margin-right: 4px; /* 간격 조절 */
+}
+#nickname select {
+  position: absolute;
+  width: 26px;
+  height: 18px;
+  left: 702px;
+  top: 178px;
+  right: 1192px;
+  bottom: 884px;
+  color: #000;
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+#tag-text {
+width: 45px;
+height: 18px;
+font-size: 15px;
+writing-mode: vertical-lr;
+
+}
+
+#tag select {
+position: absolute;
+width: 81px;
+height: 70px;
+top:-45px;
+left:50px;
+color: #000;
+font-family: Pretendard;
+font-size: 15px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+appearance: none;
+-webkit-appearance: none;
+-moz-appearance: none;
+background: none;
+border: 1px solid #000;
+padding: 45px;
+cursor: pointer;
+}
+#tag{
+
+position: absolute;
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 4px;
+
+width: 26px;
+height: 18px;
+left: 900px;
+top: 168px;
+right: 1222px;
+bottom: 900px;
+font-family: 'Pretendard';
+font-style: normal;
+font-weight: 600;
+font-size: 15px;
+line-height: 18px;
+/* identical to box height */
+
+color: #000000;
+
+}
+#list button{
+/* 목록보기 */
+
+width: 81px;
+height: 31px;
+left: 1108px;
+top: 234px;
+
+font-family: 'Pretendard';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 17px;
+/* identical to box height */
+
+color: #000000;
+}
+
+#list{
+width: 81px;
+height: 31px;
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 7px 16px;
+gap: 10px;
+
+position: absolute;
+
+left: 1108px;
+top: 234px;
+
+background: #ECECEC;
+border-radius: 24px;
+
+
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+}
+
+
+#sub {
+/* Frame 18 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 7px 16px;
+gap: 10px;
+
+position: absolute;
+width: 57px;
+height: 31px;
+left: 1297px;
+top: 234px;
+
+background: #333333;
+border-radius: 24px;
+
+/* 등록 */
+width: 57px;
+height: 31px;
+
+font-family: 'Pretendard';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 17px;
+/* identical to box height */
+
+color: #FFFFFF;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+flex-direction: column; /* This was missing */
+}
+
+#sub button {
+color: white; 
+width: 57px;
+  height: 31px;
+  color: #FFFFFF;
+  font-family: 'Pretendard';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 17px;
+
+}
+#cancel button {
+width: 84px;
+  height: 31px;
+  color: black;
+  font-family: 'Pretendard';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 17px;
+
+}
+#cancel{
+  width: 84px;
+  height: 31px;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 7px 16px;
+gap: 10px;
+
+position: absolute;
+
+left: 1201px;
+top: 234px;
+
+background: #ECECEC;
+border-radius: 24px;
+
+
+flex: none;
+order: 0;
+flex-grow: 0;
+
+}
+#title input {
+  left: 524px;
+top: 233px;
+right:1268px;
+position: absolute;
+  border: none;
+  color: #888;
+
+font-style: normal;
+font-weight: 500;
+
+width: 450px;
+font-family: Pretendard;
+font-size: 28px;
+font-weight: 500;
+line-height: 33px;
+letter-spacing: 0em;
+text-align: left;
+
+height: 33px; 
+outline: none;
+}   
+#content textarea {
+
+  border: none;
+  color: black;
+  position: absolute;
+font-style: normal;
+font-weight: 500;
+
+height: 329px;
+left: 524px;
+top: 310px;
+width: 830px;
+color: #888;
+font-family: Pretendard;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+
+
+outline: none;
+resize: none;
+}  
