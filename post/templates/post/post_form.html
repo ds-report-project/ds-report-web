@@ -477,18 +477,18 @@ input:-ms-input-placeholder {color:#888888;}
       <a id="signupText" href="/accounts/signup/">회원가입</a>
   {% endif %}
 
-<!-- 인기글 -->
+        <!-- 인기글 -->
         <div id="popular">
-            <div id="popular_text" style="z-index: 2;">이번 달 인기글</div>
-            <ul style="margin-top: 50px;">
+            <div id="popular_text">이번 달 인기글</div>
+            <ul id="popular_ul" style="margin-top: 70px; text-decoration: none;">
                 {% for post in top_5_posts %}
                     <!-- <div class="post-info post-ranking"> -->
-                    <div>
-                        <a href="{% url 'post_detail' pk=post.pk %}" style="color: #000000;">{{ forloop.counter }}위 {{ post.title }}</a>
+                    <div style="margin-bottom: 5px;">
+                        <a href="{% url 'post_detail' pk=post.pk %}" id="popular_title" style="color: #000000;text-decoration: none;">{{ forloop.counter }}위 {{ post.title }}</a>
                     </div>
                     <!-- <div class="post-content post-ranking"> -->
-                    <div>
-                        <a href="{% url 'post_detail' pk=post.pk %}" style="color: #676767;">{{ post.content }}</a>
+                    <div style="margin-bottom: 25px;">
+                        <a href="{% url 'post_detail' pk=post.pk %}" id="popular_content" style="color: #676767;text-decoration: none;">{{ post.content }}</a>
                     </div>
                 {% endfor %}
             </ul>
