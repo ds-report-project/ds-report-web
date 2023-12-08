@@ -21,10 +21,10 @@
     <a class="btn btn-outline-primary btn-sm float-end" href="{% url 'post_resolved' %}" role="button" style="margin-left: 10px;">해결</a>
     <a class="btn btn-outline-danger btn-sm float-end" href="{% url 'post_unresolved' %}" role="button">미해결</a>
 
-    <h1>
+    <h2>게시물
         {% if category %}<span class="badge bg-secondary new-style" >{{ category }}</span> {% endif %}
         {% if tag %} <i class="fa fa-tags" style="font-size: 20px; margin-right: 5px;"></i><span class="badge bg-secondary new-style">{{ tag }}({{ tag.post_set.count}})</span> {% endif %}
-    </h1>
+    </h2>
 
     <style>
         .new-style {
