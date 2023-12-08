@@ -344,3 +344,4 @@ def PostUnresolvedList(request):
         'post/post_list.html',
         {'post_list': post_list}
     )
+

@@ -53,3 +53,7 @@ def delete_account(request):
 
     return render(request, 'delete_account.html')
 
+# 마이페이지
+def MyPage(request):
+    return render(request, 'mypage.html')
+
