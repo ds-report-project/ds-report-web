@@ -56,4 +56,3 @@ def delete_account(request):
 # 마이페이지
 def MyPage(request):
     return render(request, 'mypage.html')
-

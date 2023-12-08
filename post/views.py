@@ -176,6 +176,7 @@ def category_page(request, slug):
         category = Category.objects.get(slug=slug)
         post_list = Post.objects.filter(category=category)
 
+    top_5_posts = Post.objects.annotate(like_count=models.Count('likes')).order_by('-like_count')[:5]
     return render(
         request,
         'post/post_list.html',
@@ -185,6 +186,7 @@ def category_page(request, slug):
         'no_categories_post_count' : Post.objects.filter(category=None).count(),
         'category' : category,
         'tags': Tag.objects.all(),
+        'top_5_posts': top_5_posts,
     }
     )
 
@@ -246,6 +248,7 @@ def tag_page(request, slug):
     tag = Tag.objects.get(slug=slug)
     post_list = tag.post_set.all()
 
+    top_5_posts = Post.objects.annotate(like_count=models.Count('likes')).order_by('-like_count')[:5]
     return render(
         request,
         'post/post_list.html',
@@ -255,6 +258,7 @@ def tag_page(request, slug):
             'categories': Category.objects.all(),
             'no_category_post_count': Post.objects.filter(category=None).count(),
             'tags': Tag.objects.all(),
+            'top_5_posts': top_5_posts,
         }
     )
 
@@ -330,18 +334,22 @@ def post_search(request):
 # 해결 페이지
 def PostResolvedList(request):
     post_list = Post.objects.filter(is_resolved=True).order_by('-pk')
+    top_5_posts = Post.objects.annotate(like_count=models.Count('likes')).order_by('-like_count')[:5]
     return render(
         request,
         'post/post_list.html',
-        {'post_list': post_list}
+        {'post_list': post_list,
+                'top_5_posts': top_5_posts,}
     )
 
 # 미해결 페이지
 def PostUnresolvedList(request):
     post_list = Post.objects.filter(is_resolved=False).order_by('-pk')
+    top_5_posts = Post.objects.annotate(like_count=models.Count('likes')).order_by('-like_count')[:5]
     return render(
         request,
         'post/post_list.html',
-        {'post_list': post_list}
+        {'post_list': post_list,
+                'top_5_posts': top_5_posts,}
     )
 
