@@ -70,6 +70,8 @@ class PostList(ListView):
         
         data['tags'] = Tag.objects.all()
 
+        data['comment_num'] = [post.comment_set.count() for post in data['post_list']]
+
         # 인기글
         top_5_posts = Post.objects.annotate(like_count=models.Count('likes')).order_by('-like_count')[:5]
         data['top_5_posts'] = top_5_posts

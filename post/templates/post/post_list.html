@@ -65,30 +65,24 @@
                         {% if post.tags.exists %}
                             <i class="fa fa-tags"></i>
                             {% for tag in post.tags.iterator %}
-                                <a href="{{ tag.get_absolute_url }}"><span class="badge bg-secondary">{{ tag }}</span></a>
+                                <a href="{{ tag.get_absolute_url }}"><span class="badge bg-secondary mb-2">{{ tag }}</span></a>
                             {% endfor %}
                         {% endif %}
-
-                        <br/>
-
-                        <strong class="text-secondary">{{ post.number_of_likes }} <i class="fas fa-thumbs-up"></i></strong>
-
-                        <br>
                         <br>
 
-                        <a href="{{ post.get_absolute_url }}" class="btn btn-outline-secondary">더보기 &rarr;</a>
+                        <a href="{{ post.get_absolute_url }}" class="btn btn-outline-secondary mt-2">더보기 &rarr;</a>
                     </div>
                 </div>
                 {% if post.images %}
                     <div class="col-md-4">
-                        <img src="{{ post.images.url }}" class="img-fluid rounded-start" alt="{{ post.title }}" style="max-width: 60%; max-height: 60%;">
+                        <img src="{{ post.images.url }}" class="img-fluid rounded mt-3" alt="{{ post.title }}" style="max-width: 60%; max-height: 60%;">
                     </div>
                 {% endif %}
 
                 {% if post.video %}
-                    <div class="col-md-4">
+                    <div class="col-md-4 mt-3">
                         <div style="margin-left: 10px; margin-top: 10px;">
-                            <video width="80%" height="80%" controls>
+                            <video width="80%" height="80%" controls style="border-radius: 5px;">
                                 <source src="{{ post.video.url }}" type="video/mp4">
                                 브라우저가 비디오 태그를 지원하지 않습니다.
                             </video>
@@ -97,23 +91,36 @@
                 {% endif %}
             </div>
 
-            <div class="card-footer text-muted border-0" style="padding: 10px 10px 5px 12px;">
-                <!-- Display Anonymous Nickname and Timestamp on the same line -->
-                {% if post.anonymous %}
-                    {% if post.anonymous_nickname %}
-                        <div class="text-muted fst-normal mb-1">{{ post.anonymous_nickname }} | {{ post.created_at|date:"Y-m-d H:i:s" }}</div>
+            <!-- card footer -->
+            <div class="card-footer text-muted border-0" style="padding: 10px 10px 5px 12px; display: flex; align-items: center;">
+                <!-- 공감수 -->
+                <div class="d-inline-block me-3">
+                    <i class="fas fa-thumbs-up text-secondary"></i>
+                    <span class="text-secondary" style="font-weight: 500;">{{ post.number_of_likes }}</span>
+                </div>
+                <!-- 댓글수 -->
+                <div class="d-inline-block me-3">
+                    <i class="fas fa-comment text-secondary"></i>
+                    <span class="text-secondary" style="font-weight: 500;">{{ post.comment_set.count }}</span>
+                </div>
+
+                <!-- 작성날짜, 시간, 작성자 -->
+                <div class="text-muted fst-normal mb-1" style="margin-right: 20px;">
+                    {% if post.anonymous %}
+                        {% if post.anonymous_nickname %}
+                            {{ post.anonymous_nickname }} | {{ post.created_at|date:"Y-m-d H:i:s" }}
+                        {% else %}
+                            익명 | {{ post.created_at|date:"Y-m-d H:i:s" }}
+                        {% endif %}
                     {% else %}
-                        <div class="text-muted fst-normal mb-1"> 익명 | {{ post.created_at|date:"Y-m-d H:i:s" }}</div>
-                    {% endif %}
-                {% else %}
-                    <div class="text-muted fst-normal mb-1">
                         {% if post.anonymous_nickname %}
                             {{ post.anonymous_nickname }} | {{ post.created_at|date:"Y-m-d H:i:s" }}
                         {% else %}
                             {{ post.get_anonymous_nickname_display }} | {{ post.created_at|date:"Y-m-d H:i:s" }}
                         {% endif %}
-                    </div>
-                {% endif %}
+                    {% endif %}
+                </div>
+
 
                 <!-- 첨부 파일 다운로드 버튼 -->
                 {% if post.attachment %}
@@ -121,7 +128,9 @@
                 {% endif %}
             </div>
         </div>
+
     {% endfor %}
+
   <!-- 페이지네이션 부분 -->
   <nav aria-label="Page navigation example" style="text-align: center; margin-top: 150px; margin-left: 320px; ">
       <ul class="pagination">
