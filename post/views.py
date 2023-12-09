@@ -15,7 +15,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
-from django.db.models import Q
+from django.db.models import Q, F, Count
 from django.shortcuts import render, get_object_or_404, redirect
 from django.shortcuts import render
 
@@ -53,14 +53,21 @@ class PostList(ListView):
     model = Post
     ordering = '-pk'
     context_object_name = 'post_list'
-    
-    # def get_context_data(self, **kwargs):
-    #     context = super(PostList, self).get_context_data()
-    #     context['categories'] = Category.objects.all()
-    #     context['no_categories_post_count'] = Post.objects.filter(category=None).count()
-    #     return context
+    paginate_by = 10  # 페이지당 보여질 게시물 수
 
-    def get_context_data(self, **kwargs): 
+    def get_queryset(self):
+        order_by = self.request.GET.get('order_by', None)
+
+        if order_by == 'likes':
+            queryset = Post.objects.annotate(like_count=Count('likes')).order_by('-like_count')
+        elif order_by == 'comments':
+            queryset = Post.objects.annotate(comment_count=Count('comment')).order_by('-comment_count')
+        else:
+            queryset = super().get_queryset()
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
 
         data['categories'] = Category.objects.all()

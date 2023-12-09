@@ -7,21 +7,27 @@
 </head>
 
 {% block main_area %}
-    {% if user.is_authenticated %}
-        <!-- 일반 사용자도 글 작성 가능 -->
-        <a id="write" class="btn btn-dark btn-sm float-end" href="{% url 'post_create' %}" role="button"><img src="{% static 'post/edit.svg' %}"><span id="write-text">글쓰기</span></a>
-    {% endif %}
-
     <!-- Tag Bar -->
     <div id="tag_container">
         {% include 'post/tagbar.html' %}
     </div>
 
-    <!-- 해결/미해결 -->
-    <a class="btn btn-outline-primary btn-sm float-end" href="{% url 'post_resolved' %}" role="button" style="margin-left: 10px;">해결</a>
-    <a class="btn btn-outline-danger btn-sm float-end" href="{% url 'post_unresolved' %}" role="button">미해결</a>
+    <!-- 최신순, 공감순, 댓글순 버튼 -->
+    <div class="btn-group mt-4" role="group" aria-label="Post sorting buttons">
+        <a href="?order_by=created_at" class="text-secondary">최신순 |&nbsp;</a>
+        <a href="?order_by=likes" class="text-secondary"> 공감순 |&nbsp;</a>
+        <a href="?order_by=comments" class="text-secondary"> 댓글순 |&nbsp;</a>
+        <!-- 해결/미해결 -->
+    <a class="text-primary" href="{% url 'post_resolved' %}" role="button">해결 |&nbsp;</a>
+    <a class="text-danger" href="{% url 'post_unresolved' %}" role="button">미해결 &nbsp;</a>
+    </div>
 
-    <h2>게시물
+    {% if user.is_authenticated %}
+        <!-- 일반 사용자도 글 작성 가능 -->
+        <a id="write" class="btn btn-dark btn-sm float-end mt-3" href="{% url 'post_create' %}" role="button"><img src="{% static 'post/edit.svg' %}"><span id="write-text">글쓰기</span></a>
+    {% endif %}
+
+    <h2>
         {% if category %}<span class="badge bg-secondary new-style" >{{ category }}</span> {% endif %}
         {% if tag %} <i class="fa fa-tags" style="font-size: 20px; margin-right: 5px;"></i><span class="badge bg-secondary new-style">{{ tag }}({{ tag.post_set.count}})</span> {% endif %}
     </h2>
