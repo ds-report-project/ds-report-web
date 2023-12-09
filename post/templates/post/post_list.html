@@ -48,11 +48,11 @@
 {% if post_list.exists %}
     {% for post in post_list %}
         <!-- Custom Card Format -->
-        <div class="card custom-card mb-0 border-bottom"
-             style=" border-top: 1px solid #ddd; border-bottom: 2px solid #ddd;">
+        <div class="card custom-card mb-0 border "
+             style=" margin-top:20px; border-bottom: 2px solid #cccccc;">
             <div class="row g-0">
                 <div class="col-md-8">
-                    <div class="card-body">
+                    <div class="card-body" >
                         {% if post.category %}
                             <span class="badge bg-secondary">{{ post.category }}</span>
                         {% else %}
@@ -97,16 +97,16 @@
                 {% endif %}
             </div>
 
-            <div class="card-footer text-muted">
+            <div class="card-footer text-muted border-0" style="padding: 10px 10px 5px 12px;">
                 <!-- Display Anonymous Nickname and Timestamp on the same line -->
                 {% if post.anonymous %}
                     {% if post.anonymous_nickname %}
-                        <div class="text-muted fst-italic mb-2">{{ post.anonymous_nickname }} | {{ post.created_at|date:"Y-m-d H:i:s" }}</div>
+                        <div class="text-muted fst-normal mb-1">{{ post.anonymous_nickname }} | {{ post.created_at|date:"Y-m-d H:i:s" }}</div>
                     {% else %}
-                        <div class="text-muted fst-italic mb-2"> 익명 | {{ post.created_at|date:"Y-m-d H:i:s" }}</div>
+                        <div class="text-muted fst-normal mb-1"> 익명 | {{ post.created_at|date:"Y-m-d H:i:s" }}</div>
                     {% endif %}
                 {% else %}
-                    <div class="text-muted fst-italic mb-2">
+                    <div class="text-muted fst-normal mb-1">
                         {% if post.anonymous_nickname %}
                             {{ post.anonymous_nickname }} | {{ post.created_at|date:"Y-m-d H:i:s" }}
                         {% else %}
