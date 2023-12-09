@@ -15,7 +15,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
-from django.db.models import Q
+from django.db.models import Q, F, Count
 from django.shortcuts import render, get_object_or_404, redirect
 from django.shortcuts import render
 
@@ -53,14 +53,21 @@ class PostList(ListView):
     model = Post
     ordering = '-pk'
     context_object_name = 'post_list'
-    
-    # def get_context_data(self, **kwargs):
-    #     context = super(PostList, self).get_context_data()
-    #     context['categories'] = Category.objects.all()
-    #     context['no_categories_post_count'] = Post.objects.filter(category=None).count()
-    #     return context
+    # paginate_by = 10  # 페이지당 보여질 게시물 수
 
-    def get_context_data(self, **kwargs): 
+    def get_queryset(self):
+        order_by = self.request.GET.get('order_by', None)
+
+        if order_by == 'likes':
+            queryset = Post.objects.annotate(like_count=Count('likes')).order_by('-like_count')
+        elif order_by == 'comments':
+            queryset = Post.objects.annotate(comment_count=Count('comment')).order_by('-comment_count')
+        else:
+            queryset = super().get_queryset()
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
 
         data['categories'] = Category.objects.all()
@@ -69,6 +76,8 @@ class PostList(ListView):
         data['number_of_likes'] = [post.number_of_likes() for post in data['post_list']]
         
         data['tags'] = Tag.objects.all()
+
+        data['comment_num'] = [post.comment_set.count() for post in data['post_list']]
 
         # 인기글
         top_5_posts = Post.objects.annotate(like_count=models.Count('likes')).order_by('-like_count')[:5]
@@ -176,6 +185,7 @@ def category_page(request, slug):
         category = Category.objects.get(slug=slug)
         post_list = Post.objects.filter(category=category)
 
+    top_5_posts = Post.objects.annotate(like_count=models.Count('likes')).order_by('-like_count')[:5]
     return render(
         request,
         'post/post_list.html',
@@ -185,6 +195,7 @@ def category_page(request, slug):
         'no_categories_post_count' : Post.objects.filter(category=None).count(),
         'category' : category,
         'tags': Tag.objects.all(),
+        'top_5_posts': top_5_posts,
     }
     )
 
@@ -246,6 +257,7 @@ def tag_page(request, slug):
     tag = Tag.objects.get(slug=slug)
     post_list = tag.post_set.all()
 
+    top_5_posts = Post.objects.annotate(like_count=models.Count('likes')).order_by('-like_count')[:5]
     return render(
         request,
         'post/post_list.html',
@@ -255,6 +267,7 @@ def tag_page(request, slug):
             'categories': Category.objects.all(),
             'no_category_post_count': Post.objects.filter(category=None).count(),
             'tags': Tag.objects.all(),
+            'top_5_posts': top_5_posts,
         }
     )
 
@@ -330,17 +343,22 @@ def post_search(request):
 # 해결 페이지
 def PostResolvedList(request):
     post_list = Post.objects.filter(is_resolved=True).order_by('-pk')
+    top_5_posts = Post.objects.annotate(like_count=models.Count('likes')).order_by('-like_count')[:5]
     return render(
         request,
         'post/post_list.html',
-        {'post_list': post_list}
+        {'post_list': post_list,
+                'top_5_posts': top_5_posts,}
     )
 
 # 미해결 페이지
 def PostUnresolvedList(request):
     post_list = Post.objects.filter(is_resolved=False).order_by('-pk')
+    top_5_posts = Post.objects.annotate(like_count=models.Count('likes')).order_by('-like_count')[:5]
     return render(
         request,
         'post/post_list.html',
-        {'post_list': post_list}
+        {'post_list': post_list,
+                'top_5_posts': top_5_posts,}
     )
+

@@ -80,7 +80,7 @@ class Comment(models.Model):
             return self.clikes.count()
 
         def number_of_comments(self):
-            return self.count()
+            return self.post.comment_set.count()
 
         def __str__(self):
             return f'{self.author}::{self.content}'

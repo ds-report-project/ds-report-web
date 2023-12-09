@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    <link rel="stylesheet" href="{% static 'post/css/style.css' %}">
+    <link rel="stylesheet" href="{% static '/post/css/style.css' %}">
 
 </head>  
 
@@ -59,7 +59,7 @@
         <a href="{% url 'post_list' %}"><img src="{% static 'post/notification.svg' %}" id="notificationsIcon"></a>
         <a id="duckSungLogo" href="{% url 'post_list' %}">덕성신문고</a>
         {% if user.is_authenticated %}
-            <a href="#"><img src="{% static 'post/account_circle.svg' %}" alt="" id="accountIcon"></a>
+            <a href="/accounts/mypage/"><img src="{% static 'post/account_circle.svg' %}" alt="" id="accountIcon"></a>
             <a id="logout" href="/accounts/logout/">로그아웃</a>
         {% else %}
             <a href="/accounts/login/" id="loginText">로그인</a>
@@ -100,16 +100,16 @@
       
         <!-- 인기글 -->
         <div id="popular">
-            <div id="popular_text" style="z-index: 2;">이번 달 인기글</div>
-            <ul style="margin-top: 50px;">
+            <div id="popular_text">이번 달 인기글</div>
+            <ul id="popular_ul" style="margin-top: 70px; text-decoration: none;">
                 {% for post in top_5_posts %}
                     <!-- <div class="post-info post-ranking"> -->
-                    <div>
-                        <a href="{% url 'post_detail' pk=post.pk %}" style="color: #000000;">{{ forloop.counter }}위 {{ post.title }}</a>
+                    <div style="margin-bottom: 5px;">
+                        <a href="{% url 'post_detail' pk=post.pk %}" id="popular_title" style="color: #000000;text-decoration: none;">{{ forloop.counter }}위 {{ post.title }}</a>
                     </div>
                     <!-- <div class="post-content post-ranking"> -->
-                    <div>
-                        <a href="{% url 'post_detail' pk=post.pk %}" style="color: #333333;">{{ post.content }}</a>
+                    <div style="margin-bottom: 25px;">
+                        <a href="{% url 'post_detail' pk=post.pk %}" id="popular_content" style="color: #676767;text-decoration: none;">{{ post.content }}</a>
                     </div>
                 {% endfor %}
             </ul>

@@ -371,6 +371,7 @@ a {
     height: 19px;
     left: 1456px;
     top: 245px;
+    text-decoration: none;
 
     font-family: 'Pretendard';
     font-style: normal;
@@ -409,6 +410,17 @@ a {
 /* 인기글 순위 클래스 */
 .post-ranking {
     top: 20px; /* 순위별 위치 조정 */
+}
+#popular_ul{
+    margin-top: 50px;
+}
+#popular_title{
+    color: #000000;
+    text-decoration: none;
+}
+#popular_content{
+    color: #676767;
+    text-decoration: none;
 }
 
 .form-rule{

@@ -45,7 +45,7 @@ def signup(request):
 # 회원 탈퇴
 @login_required
 def delete_account(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
         # 현재 로그인한 사용자 삭제
         request.user.delete()
         messages.success(request, '계정이 성공적으로 삭제되었습니다.')
@@ -53,3 +53,6 @@ def delete_account(request):
 
     return render(request, 'delete_account.html')
 
+# 마이페이지
+def MyPage(request):
+    return render(request, 'mypage.html')
