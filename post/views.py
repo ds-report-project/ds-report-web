@@ -53,7 +53,7 @@ class PostList(ListView):
     model = Post
     ordering = '-pk'
     context_object_name = 'post_list'
-    paginate_by = 10  # 페이지당 보여질 게시물 수
+    # paginate_by = 10  # 페이지당 보여질 게시물 수
 
     def get_queryset(self):
         order_by = self.request.GET.get('order_by', None)
