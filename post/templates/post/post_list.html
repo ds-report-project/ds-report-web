@@ -18,148 +18,153 @@
         <a href="?order_by=likes" class="text-secondary"> 공감순 |&nbsp;</a>
         <a href="?order_by=comments" class="text-secondary"> 댓글순 |&nbsp;</a>
         <!-- 해결/미해결 -->
-    <a class="text-primary" href="{% url 'post_resolved' %}" role="button">해결 |&nbsp;</a>
-    <a class="text-danger" href="{% url 'post_unresolved' %}" role="button">미해결 &nbsp;</a>
+        <a class="text-primary" href="{% url 'post_resolved' %}" role="button">해결 |&nbsp;</a>
+        <a class="text-danger" href="{% url 'post_unresolved' %}" role="button">미해결 &nbsp;</a>
     </div>
 
     {% if user.is_authenticated %}
         <!-- 일반 사용자도 글 작성 가능 -->
-        <a id="write" class="btn btn-dark btn-sm float-end mt-3" href="{% url 'post_create' %}" role="button"><img src="{% static 'post/edit.svg' %}"><span id="write-text">글쓰기</span></a>
+        <a id="write" class="btn btn-dark btn-sm float-end mt-3" href="{% url 'post_create' %}" role="button"><img
+                src="{% static 'post/edit.svg' %}"><span id="write-text">글쓰기</span></a>
     {% endif %}
 
     <h2>
-        {% if category %}<span class="badge bg-secondary new-style" >{{ category }}</span> {% endif %}
-        {% if tag %} <i class="fa fa-tags" style="font-size: 20px; margin-right: 5px;"></i><span class="badge bg-secondary new-style">{{ tag }}({{ tag.post_set.count}})</span> {% endif %}
+        {% if category %}<span class="badge bg-secondary new-style mt-3">{{ category }}</span> {% endif %}
+        {% if tag %} <i class="fa fa-tags " style="font-size: 20px; margin-right: 5px;"></i>
+            <span class="badge bg-secondary new-style mt-3">{{ tag }}({{ tag.post_set.count }})</span> {% endif %}
     </h2>
 
     <style>
         .new-style {
-        /* 공통 스타일 */
-        background-color: #EDEDED !important;
-        color: #000000;
-        border-radius: 29px ;
-        padding: 15px 30px 15px 30px;
-        margin-right: 5px;
-        border: 1px solid #CCCCCC;
-        border-color: #CCCCCC;
-        font-family: 'Pretendard';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 18px;
-    }
+            /* 공통 스타일 */
+            background-color: #EDEDED !important;
+            color: #000000;
+            border-radius: 29px;
+            padding: 15px 30px 15px 30px;
+            margin-right: 5px;
+            border: 1px solid #CCCCCC;
+            border-color: #CCCCCC;
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 18px;
+        }
     </style>
 
-  <!-- post List -->
+    <!-- post List -->
 
-{% if post_list.exists %}
-    {% for post in post_list %}
-        <!-- Custom Card Format -->
-        <div class="card custom-card mb-0 border "
-             style=" margin-top:20px; border-bottom: 2px solid #cccccc;">
-            <div class="row g-0">
-                <div class="col-md-8">
-                    <div class="card-body" >
-                        {% if post.category %}
-                            <span class="badge bg-secondary">{{ post.category }}</span>
-                        {% else %}
-                            <span class="badge bg-secondary">기타</span>
-                        {% endif %}
+    {% if post_list.exists %}
+        {% for post in post_list %}
+            <!-- Custom Card Format -->
+            <div class="card custom-card mb-0 border "
+                 style=" margin-top:20px; border-bottom: 2px solid #cccccc;">
+                <div class="row g-0">
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            {% if post.category %}
+                                <span class="badge bg-secondary">{{ post.category }}</span>
+                            {% else %}
+                                <span class="badge bg-secondary">기타</span>
+                            {% endif %}
 
-                        <h5 class="card-title">{{ post.title }}</h5>
-                        <p class="card-text">{{ post.content | truncatechars:200}}</p>
+                            <h5 class="card-title">{{ post.title }}</h5>
+                            <p class="card-text">{{ post.content | truncatechars:147 }}</p>
 
-                        {% if post.tags.exists %}
-                            <i class="fa fa-tags"></i>
-                            {% for tag in post.tags.iterator %}
-                                <a href="{{ tag.get_absolute_url }}"><span class="badge bg-secondary mb-2">{{ tag }}</span></a>
-                            {% endfor %}
-                        {% endif %}
-                        <br>
+                            {% if post.tags.exists %}
+                                <i class="fa fa-tags"></i>
+                                {% for tag in post.tags.iterator %}
+                                    <a href="{{ tag.get_absolute_url }}"><span
+                                            class="badge bg-secondary mb-2">{{ tag }}</span></a>
+                                {% endfor %}
+                            {% endif %}
+                            <br>
 
-                        <a href="{{ post.get_absolute_url }}" class="btn btn-outline-secondary mt-2">더보기 &rarr;</a>
-                    </div>
-                </div>
-                {% if post.images %}
-                    <div class="col-md-4">
-                        <img src="{{ post.images.url }}" class="img-fluid rounded mt-3" alt="{{ post.title }}" style="max-width: 60%; max-height: 60%;">
-                    </div>
-                {% endif %}
-
-                {% if post.video %}
-                    <div class="col-md-4 mt-3">
-                        <div style="margin-left: 10px; margin-top: 10px;">
-                            <video width="80%" height="80%" controls style="border-radius: 5px;">
-                                <source src="{{ post.video.url }}" type="video/mp4">
-                                브라우저가 비디오 태그를 지원하지 않습니다.
-                            </video>
+                            <a href="{{ post.get_absolute_url }}" class="btn btn-outline-secondary mt-2">더보기 &rarr;</a>
                         </div>
                     </div>
-                {% endif %}
-            </div>
+                    {% if post.images %}
+                        <div class="col-md-4">
+                            <img src="{{ post.images.url }}" class="img-fluid rounded mt-3" alt="{{ post.title }}"
+                                 style="max-width: 60%; max-height: 60%;">
+                        </div>
+                    {% endif %}
 
-            <!-- card footer -->
-            <div class="card-footer text-muted border-0" style="padding: 10px 10px 5px 12px; display: flex; align-items: center;">
-                <!-- 공감수 -->
-                <div class="d-inline-block me-3">
-                    <i class="fas fa-thumbs-up text-secondary"></i>
-                    <span class="text-secondary" style="font-weight: 500;">{{ post.number_of_likes }}</span>
-                </div>
-                <!-- 댓글수 -->
-                <div class="d-inline-block me-3">
-                    <i class="fas fa-comment text-secondary"></i>
-                    <span class="text-secondary" style="font-weight: 500;">{{ post.comment_set.count }}</span>
-                </div>
-
-                <!-- 작성날짜, 시간, 작성자 -->
-                <div class="text-muted fst-normal mb-1" style="margin-right: 20px;">
-                    {% if post.anonymous %}
-                        {% if post.anonymous_nickname %}
-                            {{ post.anonymous_nickname }} | {{ post.created_at|date:"Y-m-d H:i:s" }}
-                        {% else %}
-                            익명 | {{ post.created_at|date:"Y-m-d H:i:s" }}
-                        {% endif %}
-                    {% else %}
-                        {% if post.anonymous_nickname %}
-                            {{ post.anonymous_nickname }} | {{ post.created_at|date:"Y-m-d H:i:s" }}
-                        {% else %}
-                            {{ post.get_anonymous_nickname_display }} | {{ post.created_at|date:"Y-m-d H:i:s" }}
-                        {% endif %}
+                    {% if post.video %}
+                        <div class="col-md-4 mt-3">
+                            <div style="margin-left: 10px; margin-top: 10px;">
+                                <video width="80%" height="80%" controls style="border-radius: 5px;">
+                                    <source src="{{ post.video.url }}" type="video/mp4">
+                                    브라우저가 비디오 태그를 지원하지 않습니다.
+                                </video>
+                            </div>
+                        </div>
                     {% endif %}
                 </div>
 
+                <!-- card footer -->
+                <div class="card-footer text-muted border-0"
+                     style="padding: 10px 10px 5px 12px; display: flex; align-items: center;">
+                    <!-- 공감수 -->
+                    <div class="d-inline-block me-3">
+                        <i class="fas fa-thumbs-up text-secondary"></i>
+                        <span class="text-secondary" style="font-weight: 500;">{{ post.number_of_likes }}</span>
+                    </div>
+                    <!-- 댓글수 -->
+                    <div class="d-inline-block me-3">
+                        <i class="fas fa-comment text-secondary"></i>
+                        <span class="text-secondary" style="font-weight: 500;">{{ post.comment_set.count }}</span>
+                    </div>
 
-                <!-- 첨부 파일 다운로드 버튼 -->
-                {% if post.attachment %}
-                    <a href="{{ post.attachment.url }}" class="btn btn-outline-secondary" download>첨부 파일 다운로드</a>
-                {% endif %}
+                    <!-- 작성날짜, 시간, 작성자 -->
+                    <div class="text-muted fst-normal mb-1" style="margin-right: 20px;">
+                        {% if post.anonymous %}
+                            {% if post.anonymous_nickname %}
+                                {{ post.anonymous_nickname }} | {{ post.created_at|date:"Y-m-d H:i:s" }}
+                            {% else %}
+                                익명 | {{ post.created_at|date:"Y-m-d H:i:s" }}
+                            {% endif %}
+                        {% else %}
+                            {% if post.anonymous_nickname %}
+                                {{ post.anonymous_nickname }} | {{ post.created_at|date:"Y-m-d H:i:s" }}
+                            {% else %}
+                                {{ post.get_anonymous_nickname_display }} | {{ post.created_at|date:"Y-m-d H:i:s" }}
+                            {% endif %}
+                        {% endif %}
+                    </div>
+
+
+                    <!-- 첨부 파일 다운로드 버튼 -->
+                    {% if post.attachment %}
+                        <a href="{{ post.attachment.url }}" class="btn btn-outline-secondary" download>첨부 파일 다운로드</a>
+                    {% endif %}
+                </div>
             </div>
-        </div>
 
-    {% endfor %}
+        {% endfor %}
 
-  <!-- 페이지네이션 부분 -->
-  <nav aria-label="Page navigation example" style="text-align: center; margin-top: 150px; margin-left: 320px; ">
-      <ul class="pagination">
-          <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-              </a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-              </a>
-          </li>
-      </ul>
-  </nav>
-  <!-- 끝 -->
-  {% else %}
-  <h1>게시물이 없습니다.</h1>
-  {% endif %}
-  {% endblock %}
+        <!-- 페이지네이션 부분 -->
+        <nav aria-label="Page navigation example" style="text-align: center; margin-top: 150px; margin-left: 320px; ">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- 끝 -->
+    {% else %}
+        <h1>게시물이 없습니다.</h1>
+    {% endif %}
+{% endblock %}
 </div>
 </html>
 
