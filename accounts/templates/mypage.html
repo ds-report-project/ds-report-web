@@ -63,7 +63,7 @@
             <div class="card mt-3">
                 <div class="card-body">
                     <h5 class="card-title">{{ liked_post.title }}</h5>
-                    <p class="card-text">{{ liked_post.content }}</p>
+                    <p class="card-text">{{ liked_post.content | truncatechars:114 }}</p>
                     <a href="{{ liked_post.get_absolute_url }}" class="btn btn-primary">자세히 보기</a>
                 </div>
             </div>
@@ -74,7 +74,7 @@
             <div class="card mt-3">
                 <div class="card-body">
                     <h5 class="card-title">{{ resolved_post.title }}</h5>
-                    <p class="card-text">{{ resolved_post.content }}</p>
+                    <p class="card-text">{{ resolved_post.content | truncatechars:114 }}</p>
                     <a href="{{ resolved_post.get_absolute_url }}" class="btn btn-primary">자세히 보기</a>
                 </div>
             </div>
@@ -84,7 +84,7 @@
             {% for liked_comment in user.comment_like.all %}
             <div class="card mt-3">
                 <div class="card-body">
-                    <p class="card-text">{{ liked_comment.content }}</p>
+                    <p class="card-text">{{ liked_comment.content | truncatechars:114 }}</p>
                     <a href="{{ liked_comment.get_absolute_url }}" class="btn btn-primary">원문 보기</a>
                 </div>
             </div>
@@ -96,7 +96,7 @@
             <div class="card mt-3">
                 <div class="card-body">
                     <h5 class="card-title">{{ post.title }}</h5>
-                    <p class="card-text">{{ post.content }}</p>
+                    <p class="card-text">{{ post.content | truncatechars:114 }}</p>
                     <a href="{{ post.get_absolute_url }}" class="btn btn-primary">자세히 보기</a>
                 </div>
             </div>
@@ -105,7 +105,7 @@
             {% for comment in user.comment_set.all %}
             <div class="card mt-3">
                 <div class="card-body">
-                    <p class="card-text">{{ comment.content }}</p>
+                    <p class="card-text">{{ comment.content | truncatechars:114 }}</p>
                     <a href="{{ comment.get_absolute_url }}" class="btn btn-primary">원문 보기</a>
                 </div>
             </div>
