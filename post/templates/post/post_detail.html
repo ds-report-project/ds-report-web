@@ -126,7 +126,7 @@
                                     로그인하세요!</a>
                                 <br>
                             {% endif %}
-                            <strong class="text-secondary">{{ number_of_likes }}공감</strong><br/>
+                            <strong class="text-dark">{{ number_of_likes }} 공감</strong><br/>
                         </div>
                     </div>
 
@@ -177,6 +177,7 @@
                                                                 : {{ comment.modified_at }}</small></p>
                                                         {% endif %}
                                                     {% if user.is_authenticated %}
+
                                                         <!-- 공감 버튼 크기 조정 -->
                                                         <form action="{% url 'comment_like' object.id %}" method="POST">
                                                             {% csrf_token %}
@@ -186,7 +187,8 @@
                                                                     class="far fa-thumbs-up"></i>
                                                             </button>
                                                             <span class="text"
-                                                                  style="font-size: 13px; color:#333333; margin-right: 10px;">{{ comment.number_of_comment_likes }}공감</span>
+                                                                  style="font-size: 14px; color:#333333; margin-right: 10px;font-weight: 600;">
+                                                                {{ comment.number_of_comment_likes }} 공감</span>
                                                         </form>
                                                     {% else %}
                                                         <a class="btn btn-outline-info"
