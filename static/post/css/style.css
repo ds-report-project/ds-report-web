@@ -343,8 +343,8 @@ a {
     /*height:990px;*/
     height:1800px;
     top:90px;
-    left:400px;
-    background:red;
+    left:500px;
+    /*background:red;*/
     position: absolute;
     overflow: visible;
     z-index: 1;
