@@ -62,13 +62,13 @@
                     <div class="col-md-8">
                         <div class="card-body">
                             {% if post.category %}
-                                <span class="badge bg-secondary">{{ post.category }}</span>
+                                <span class="badge bg-secondary mb-1">{{ post.category }}</span>
                             {% else %}
                                 <span class="badge bg-secondary">기타</span>
                             {% endif %}
 
                             <h5 class="card-title">{{ post.title }}</h5>
-                            <p class="card-text">{{ post.content | truncatechars:147 }}</p>
+                            <p class="card-text">{{ post.content | truncatechars:95 }}</p>
 
                             {% if post.tags.exists %}
                                 <i class="fa fa-tags"></i>
