@@ -1,464 +1,486 @@
 <html lang="ko">
 <head>
-  {% load static %}
-  <title>게시물 수정</title>
-  <meta charset="UTF-8">
+    {% load static %}
+    <title>게시물 수정</title>
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="{% static 'post/css/form.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'post/css/style.css' %}">
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="{% static 'post/bootstrap/bootstrap.min.css' %}" media="screen">
-  <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
-  <style>
-    button {
-      border: none;
-      outline: none;
-      background: transparent;
+    <link rel="stylesheet" type="text/css" href="{% static 'post/css/form.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'post/css/style.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'post/bootstrap/bootstrap.min.css' %}" media="screen">
+    <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
+    <style>
+        button {
+            border: none;
+            outline: none;
+            background: transparent;
 
-    }
-    #Line31 {
-      position: absolute;
-      width: 830px;
-      height: 0px;
-      top: 282px;
-      right: 566px;
-      bottom: 798px;
-      left: 524px;
-      border: 1px solid #CCCCCC;
-      background: #CCC;
-      box-sizing: border-box;
-    }
-    
-    #Line32{
-      position: absolute;
-    width: 830px;
-    height: 0px;
-    left: 524px;
-    top: 658px;
-    right: 566px;
-    bottom: 422px;
-    
-    border: 1px solid #CCCCCC;
-    box-sizing: border-box;
-    }
-    
-    
-    #title{
-      position: absolute;
-    width: 500px;
-    height: 33px;
-    left: 524px;
-    top: 233px;
-    right:1268px;
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 28px;
-    line-height: 33px;
-    color: #888888;
-    border:none; 
-    
-    }
-    
-    #content{
-      position: absolute;
-    width: 830px;
-    height: 329px;
-    left: 524px;
-    top: 310px;
-    
-    right:566px;
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    /* identical to box height */
-    border: none;
-    color: #888888;
-    }
-    
-    #plus{
-      position: absolute;
-    width: 179px;
-    height: 19px;
-    left: 524px;
-    top: 680px;
-    right:1380px;
-    bottom:384px;
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
-    /* identical to box height */
-    color: black;
- 
-    }
-   
-    #category {
-      align-items: center; 
-      position: absolute;
-    left: 524px;
-    top: 178px;
-    right: 1274px;
-    bottom: 884px;
-    gap: 4px;
-    color: #000;
-    font-family: Pretendard;
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    display: flex;
-  
-    }
-    #category select{
-      
-      left: 524px;
-    top: 178px;
-    right: 1274px;
-    bottom: 884px;
-    width: 82px;
-    height: 18px;
-    color: #000;
-    font-family: Pretendard;
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    }
-    #category-text {
-      width: 82px;
-      height: 18px;
-      font-size: 15px;
-    writing-mode: vertical-lr;
-    }
-    /* 익명 */
-    #nikname{
-      position: absolute;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 0px;
-    gap: 4px;
-    
-    width: 26px;
-    height: 18px;
-    left: 720px;
-    top: 168px;
-    right: 1222px;
-    bottom: 880px;
-    font-family: Pretendard;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 15px;
-    line-height: 18px;
-    /* identical to box height */
-    
-    color: #000000;
-    }
-    #nikname img {
-      margin-right: 4px; /* 간격 조절 */
-    }
-    #nickname select {
-      position: absolute;
-      width: 26px;
-      height: 18px;
-      left: 702px;
-      top: 178px;
-      right: 1192px;
-      bottom: 884px;
-      color: #000;
-      font-family: Pretendard;
-      font-size: 15px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-  }
-  #tag-text {
-    width: 45px;
-    height: 18px;
-    font-size: 15px;
-  writing-mode: vertical-lr;
+        }
 
-  }
-  
-  #tag select {
-    position: absolute;
-    width: 81px;
-    height: 70px;
- top:-45px;
-    left:50px;
-    color: #000;
-    font-family: Pretendard;
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background: none;
-    border: 1px solid #000;
-    padding: 45px;
-    cursor: pointer;
-}
-#tag{
+        #Line31 {
+            position: absolute;
+            width: 830px;
+            height: 0px;
+            top: 282px;
+            right: 566px;
+            bottom: 798px;
+            left: 524px;
+            border: 1px solid #CCCCCC;
+            background: #CCC;
+            box-sizing: border-box;
+        }
 
-    position: absolute;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0px;
-  gap: 4px;
-  
-  width: 26px;
-  height: 18px;
-  left: 900px;
-  top: 168px;
-  right: 1222px;
-  bottom: 900px;
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 18px;
-  /* identical to box height */
-  
-  color: #000000;
- 
-}
-  #list button{
-    /* 목록보기 */
-    
-    width: 81px;
-    height: 31px;
-    left: 1108px;
-    top: 234px;
-    
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
-    /* identical to box height */
-    
-    color: #000000;
-    }
+        #Line32 {
+            position: absolute;
+            width: 830px;
+            height: 0px;
+            left: 524px;
+            top: 658px;
+            right: 566px;
+            bottom: 422px;
 
-#list{
-  width: 81px;
-  height: 31px;
-  /* Auto layout */
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 7px 16px;
-  gap: 10px;
-  
-  position: absolute;
-
-  left: 1108px;
-  top: 234px;
-  
-  background: #ECECEC;
-  border-radius: 24px;
-  
-
-  
-  
-  /* Inside auto layout */
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  
-}
- 
-
-    #sub {
-    /* Frame 18 */
-    
-    /* Auto layout */
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 7px 16px;
-    gap: 10px;
-    
-    position: absolute;
-    width: 57px;
-    height: 31px;
-    left: 1297px;
-    top: 234px;
-    
-    background: #333333;
-    border-radius: 24px;
-    
-    /* 등록 */
-    width: 57px;
-    height: 31px;
-    
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
-    /* identical to box height */
-    
-    color: #FFFFFF;
-    
-    /* Inside auto layout */
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    
-    flex-direction: column; /* This was missing */
-    }
-    
-    #sub button {
-    color: white; 
-    width: 57px;
-      height: 31px;
-      color: #FFFFFF;
-      font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
-    
-    }
-    #cancel button {
-    width: 84px;
-      height: 31px;
-      color: black;
-      font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
-
-    }
-    #cancel{
-      width: 84px;
-      height: 31px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 7px 16px;
-    gap: 10px;
-    
-    position: absolute;
-    
-    left: 1201px;
-    top: 234px;
-    
-    background: #ECECEC;
-    border-radius: 24px;
-    
-    
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-
-    }
-    #title input {
-      left: 524px;
-    top: 233px;
-    right:1268px;
-    position: absolute;
-      border: none;
-      color: #888;
-
-font-style: normal;
-font-weight: 500;
-
-width: 450px;
-font-family: Pretendard;
-font-size: 28px;
-font-weight: 500;
-line-height: 33px;
-letter-spacing: 0em;
-text-align: left;
-
-    height: 50px; 
-    outline: none;
-    }   
-    #content textarea {
-    
-      border: none;
-      color: black;
-      position: absolute;
-font-style: normal;
-font-weight: 500;
-
-height: 329px;
-left: 524px;
-top: 310px;
-width: 830px;
-
-font-family: Pretendard;
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-
-   
-    outline: none;
-    resize: none;
-    }   
-    #title input,
-    #content textarea {
-        border: none !important;
-        border-bottom: 1px solid #ccc !important;
-        outline: none !important;
-    }
-    #title:focus,
-    #content:focus {
-        border: none;
-    }
-    #Rectangle42 {
-      position: fixed;
-      width: 240px;
-      height: 1023px;
-      left: 92px;
-      top: 57px;
-      background: #FFFFFF;
-      box-shadow: -4px 0px 2px rgba(0, 0, 0, 0.1), 4px 0px 2px rgba(0, 0, 0, 0.1);
-  }
-  [id^="rectangle"] {
-    cursor: pointer;
-}
-
-[id^="rectangle"]:hover {
-    border: 1px solid #CCCCCC;
-}
-
-.del_underline{
-    text-decoration: none;
-}
+            border: 1px solid #CCCCCC;
+            box-sizing: border-box;
+        }
 
 
-  </style>
-  <link rel="stylesheet" href="{% static 'post/bootstrap/bootstrap.min.css' %}" media="screen">
-  <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
+        #title {
+            position: absolute;
+            width: 500px;
+            height: 33px;
+            left: 524px;
+            top: 233px;
+            right: 1268px;
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 28px;
+            line-height: 33px;
+            color: #888888;
+            border: none;
 
-  <!-- Bootstrap5.x 적용 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-
+        }
+
+        #content {
+            position: absolute;
+            width: 830px;
+            height: 329px;
+            left: 524px;
+            top: 310px;
+
+            right: 566px;
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+            /* identical to box height */
+            border: none;
+            color: #888888;
+        }
+
+        #plus {
+            position: absolute;
+            width: 179px;
+            height: 19px;
+            left: 524px;
+            top: 680px;
+            right: 1380px;
+            bottom: 384px;
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+            /* identical to box height */
+            color: black;
+
+        }
+
+        #category {
+            align-items: center;
+            position: absolute;
+            left: 524px;
+            top: 178px;
+            right: 1274px;
+            bottom: 884px;
+            gap: 4px;
+            color: #000;
+            font-family: Pretendard;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            display: flex;
+
+        }
+
+        #category select {
+
+            left: 524px;
+            top: 178px;
+            right: 1274px;
+            bottom: 884px;
+            width: 82px;
+            height: 18px;
+            color: #000;
+            font-family: Pretendard;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+
+        #category-text {
+            width: 82px;
+            height: 18px;
+            font-size: 15px;
+            writing-mode: vertical-lr;
+        }
+
+        /* 익명 */
+        #nikname {
+            position: absolute;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0px;
+            gap: 4px;
+
+            width: 26px;
+            height: 18px;
+            left: 720px;
+            top: 168px;
+            right: 1222px;
+            bottom: 880px;
+            font-family: Pretendard;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 18px;
+            /* identical to box height */
+
+            color: #000000;
+        }
+
+        #nikname img {
+            margin-right: 4px; /* 간격 조절 */
+        }
+
+        #nickname select {
+            position: absolute;
+            width: 26px;
+            height: 18px;
+            left: 702px;
+            top: 178px;
+            right: 1192px;
+            bottom: 884px;
+            color: #000;
+            font-family: Pretendard;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+
+        #tag-text {
+            width: 45px;
+            height: 18px;
+            font-size: 15px;
+            writing-mode: vertical-lr;
+
+        }
+
+        #tag select {
+            position: absolute;
+            width: 81px;
+            height: 70px;
+            top: -45px;
+            left: 50px;
+            color: #000;
+            font-family: Pretendard;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background: none;
+            border: 1px solid #000;
+            padding: 45px;
+            cursor: pointer;
+        }
+
+        #tag {
+
+            position: absolute;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0px;
+            gap: 4px;
+
+            width: 26px;
+            height: 18px;
+            left: 900px;
+            top: 168px;
+            right: 1222px;
+            bottom: 900px;
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 18px;
+            /* identical to box height */
+
+            color: #000000;
+
+        }
+
+        #list button {
+            /* 목록보기 */
+
+            width: 81px;
+            height: 31px;
+            left: 1108px;
+            top: 234px;
+
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 17px;
+            /* identical to box height */
+
+            color: #000000;
+        }
+
+        #list {
+            width: 81px;
+            height: 31px;
+            /* Auto layout */
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 7px 16px;
+            gap: 10px;
+
+            position: absolute;
+
+            left: 1108px;
+            top: 234px;
+
+            background: #ECECEC;
+            border-radius: 24px;
+
+
+            /* Inside auto layout */
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+
+        }
+
+
+        #sub {
+            /* Frame 18 */
+
+            /* Auto layout */
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 7px 16px;
+            gap: 10px;
+
+            position: absolute;
+            width: 57px;
+            height: 31px;
+            left: 1297px;
+            top: 234px;
+
+            background: #333333;
+            border-radius: 24px;
+
+            /* 등록 */
+            width: 57px;
+            height: 31px;
+
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 17px;
+            /* identical to box height */
+
+            color: #FFFFFF;
+
+            /* Inside auto layout */
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+
+            flex-direction: column; /* This was missing */
+        }
+
+        #sub button {
+            color: white;
+            width: 57px;
+            height: 31px;
+            color: #FFFFFF;
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 17px;
+
+        }
+
+        #cancel button {
+            width: 84px;
+            height: 31px;
+            color: black;
+            font-family: 'Pretendard';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 17px;
+
+        }
+
+        #cancel {
+            width: 84px;
+            height: 31px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 7px 16px;
+            gap: 10px;
+
+            position: absolute;
+
+            left: 1201px;
+            top: 234px;
+
+            background: #ECECEC;
+            border-radius: 24px;
+
+
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+
+        }
+
+        #title input {
+            left: 524px;
+            top: 233px;
+            right: 1268px;
+            position: absolute;
+            border: none;
+            color: #333333;
+
+            font-style: normal;
+            font-weight: 500;
+
+            width: 450px;
+            font-family: Pretendard;
+            font-size: 28px;
+            font-weight: 500;
+            line-height: 33px;
+            letter-spacing: 0em;
+            text-align: left;
+
+            height: 50px;
+            outline: none;
+        }
+
+        #content textarea {
+
+            border: none;
+            color: #333333;
+            position: absolute;
+            font-style: normal;
+            font-weight: 500;
+
+            height: 329px;
+            left: 524px;
+            top: 310px;
+            width: 830px;
+
+            font-family: Pretendard;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+
+
+            outline: none;
+            resize: none;
+        }
+
+        #title input,
+        #content textarea {
+            border: none !important;
+            border-bottom: 1px solid #ccc !important;
+            outline: none !important;
+            color: #333333;
+        }
+
+        #title:focus,
+        #content:focus {
+            border: none;
+        }
+
+        #Rectangle42 {
+            position: fixed;
+            width: 240px;
+            height: 1023px;
+            left: 92px;
+            top: 57px;
+            background: #FFFFFF;
+            box-shadow: -4px 0px 2px rgba(0, 0, 0, 0.1), 4px 0px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        [id^="rectangle"] {
+            cursor: pointer;
+        }
+
+        [id^="rectangle"]:hover {
+            border: 1px solid #CCCCCC;
+        }
+
+        .del_underline {
+            text-decoration: none;
+        }
+
+        /* placeholder 스타일 */
+        ::placeholder {
+            color: #888888; /* placeholder 색상 */
+        }
+
+
+    </style>
+    <link rel="stylesheet" href="{% static 'post/bootstrap/bootstrap.min.css' %}" media="screen">
+    <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap5.x 적용 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-
   4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 </head>
 <body>
 <div id="container">
-  <!-- 사이드바 -->
-  <div id="Rectangle29"></div>
-      <!-- 게시물 -->
+    <!-- 사이드바 -->
+    <div id="Rectangle29"></div>
+    <!-- 게시물 -->
     <a id="rectangle32" href="{% url 'post_list' %}"></a>
     <a href="{% url 'post_list' %}"><img src="{% static 'post/description.svg' %}" id="description"></a>
     <div id="post">게시물</div>
@@ -471,118 +493,129 @@ line-height: normal;
     <img src="{% static 'post/action_key.svg' %}" alt="" id="action_key">
     <div id="searchRegulation">규정 검색</div>
 
-  <!-- 게시물 카테고리 사이드바 -->
-  <div id="sidebar-container">
-      <!-- 게시물 -->
-      <div id="sidebar-post" class="sidebar-content">
-          {% include 'post/sidebar_post.html' %}
-      </div>
-
-      <!-- 정보 -->
-      <div id="sidebar-info" class="sidebar-content">
-          {% include 'post/sidebar_info.html' %}
-      </div>
-
-      <!-- 규정 검색 -->
-      <div id="sidebar-search" class="sidebar-content">
-          {% include 'post/sidebar_search.html' %}
-      </div>
-
-  </div>
-
-  <!-- 상단바 -->
-  <div id="Rectangle52"></div>
-  <a href="{% url 'post_list' %}"><img src="{% static 'post/notification.svg' %}" id="notificationsIcon"></a>
-  <a id="duckSungLogo" href="{% url 'post_list' %}">덕성신문고</a>
-  {% if user.is_authenticated %}
-      <a href="#"><img src="{% static 'post/account_circle.svg' %}" alt="" id="accountIcon"></a>
-      <a id="logout" href="/accounts/logout/">로그아웃</a>
-  {% else %}
-      <a href="/accounts/login/" id="loginText">로그인</a>
-      <a href="/accounts/signup/" id="rectangle17"></a>
-      <a id="signupText" href="/accounts/signup/">회원가입</a>
-  {% endif %}
-
-        <!-- 인기글 -->
-        <div id="popular">
-            <div id="popular_text">이번 달 인기글</div>
-            <ul id="popular_ul" style="margin-top: 70px; text-decoration: none;">
-                {% for post in top_5_posts %}
-                    <!-- <div class="post-info post-ranking"> -->
-                    <div style="margin-bottom: 5px;">
-                        <a href="{% url 'post_detail' pk=post.pk %}" id="popular_title" style="color: #000000;text-decoration: none;">{{ forloop.counter }}위 {{ post.title }}</a>
-                    </div>
-                    <!-- <div class="post-content post-ranking"> -->
-                    <div style="margin-bottom: 25px;">
-                        <a href="{% url 'post_detail' pk=post.pk %}" id="popular_content" style="color: #676767;text-decoration: none;">{{ post.content }}</a>
-                    </div>
-                {% endfor %}
-            </ul>
+    <!-- 게시물 카테고리 사이드바 -->
+    <div id="sidebar-container">
+        <!-- 게시물 -->
+        <div id="sidebar-post" class="sidebar-content">
+            {% include 'post/sidebar_post.html' %}
         </div>
+
+        <!-- 정보 -->
+        <div id="sidebar-info" class="sidebar-content">
+            {% include 'post/sidebar_info.html' %}
+        </div>
+
+        <!-- 규정 검색 -->
+        <div id="sidebar-search" class="sidebar-content">
+            {% include 'post/sidebar_search.html' %}
+        </div>
+
+    </div>
+
+    <!-- 상단바 -->
+    <div id="Rectangle52"></div>
+    <a href="{% url 'post_list' %}"><img src="{% static 'post/notification.svg' %}" id="notificationsIcon"></a>
+    <a id="duckSungLogo" href="{% url 'post_list' %}">덕성신문고</a>
+    {% if user.is_authenticated %}
+        <a href="#"><img src="{% static 'post/account_circle.svg' %}" alt="" id="accountIcon"></a>
+        <a id="logout" href="/accounts/logout/">로그아웃</a>
+    {% else %}
+        <a href="/accounts/login/" id="loginText">로그인</a>
+        <a href="/accounts/signup/" id="rectangle17"></a>
+        <a id="signupText" href="/accounts/signup/">회원가입</a>
+    {% endif %}
+
+    <!-- 인기글 -->
+    <div id="popular">
+        <div id="popular_text">이번 달 인기글</div>
+        <ul id="popular_ul" style="margin-top: 70px; text-decoration: none;">
+            {% for post in top_5_posts %}
+                <!-- <div class="post-info post-ranking"> -->
+                <div style="margin-bottom: 5px;">
+                    <a href="{% url 'post_detail' pk=post.pk %}" id="popular_title"
+                       style="color: #000000;text-decoration: none;">{{ forloop.counter }}위 {{ post.title }}</a>
+                </div>
+                <!-- <div class="post-content post-ranking"> -->
+                <div style="margin-bottom: 25px;">
+                    <a href="{% url 'post_detail' pk=post.pk %}" id="popular_content"
+                       style="color: #676767;text-decoration: none;">{{ post.content }}</a>
+                </div>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 
-  <form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-  <input id="title" type="text" name="{{ form.title.name }}" value="{{ post.title }}" required><hr id="Line31">
+    <input id="title" type="text" name="{{ form.title.name }}" value="{{ post.title }}" required
+           style="border: none; outline:none; color:#333333;">
+    <hr id="Line31">
     <br>
 
-<textarea id="content"name="{{ form.content.name }}" rows="8" cols="80" maxlength="{{ form.content.field.max_length }}" required>{{ post.content }}</textarea>
+    <textarea id="content" name="{{ form.content.name }}" rows="8" cols="80"
+              maxlength="{{ form.content.field.max_length }}" required
+              style="border: none; outline:none; color:#333333;">{{ post.content }}</textarea>
     <br>
 
     <div id="category">
-      <img src="{% static 'post/category.svg' %}"><span id="category-text">카테고리</span>
-      {{ form.category }}  
+        <img src="{% static 'post/category.svg' %}"><span id="category-text">카테고리</span>
+        {{ form.category }}
     </div>
     <br>
 
     <div id="tag"><span id="tag-text">태그</span>
-      {{ form.tags }}
+        {{ form.tags }}
     </div>
     <br>
 
     <div id="nikname">
-      <img src="{% static 'post/account_circle2.svg' %}">
-      {{ form.anonymous_nickname }}
+        <img src="{% static 'post/account_circle2.svg' %}">
+        {{ form.anonymous_nickname }}
     </div>
-  
+
     <hr id="Line32">
     <p id="plus"><img src="{% static 'post/attachment_btn.svg' %}">이미지{{ form.images }}
-    <br>
+        <br>
 
-    <img src="{% static 'post/attachment_btn.svg' %}">비디오{{ form.video }}
-    <br>
+        <img src="{% static 'post/attachment_btn.svg' %}">비디오{{ form.video }}
+        <br>
 
-    <img src="{% static 'post/attachment_btn.svg' %}">첨부 파일{{ form.attachment }}
-    <br>
+        <img src="{% static 'post/attachment_btn.svg' %}">첨부 파일{{ form.attachment }}
+        <br>
 
     <div id="sub">
-      <button type="submit">등록</button></div>
-      <div id="cancel"><a href="{% url 'post_list' %}"><button type="button">작성 취소</button></a></div>
-       <div id="list"><a href="{% url 'post_list' %}"><button type="button">목록보기</button></a></div>
-  </form>
+        <button type="submit">등록</button>
+    </div>
+    <div id="cancel"><a href="{% url 'post_list' %}">
+        <button type="button">작성 취소</button>
+    </a></div>
+    <div id="list"><a href="{% url 'post_list' %}">
+        <button type="button">목록보기</button>
+    </a></div>
+</form>
 
 </div>
 
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
 
-        <script>
-            document.getElementById('searchForm').addEventListener('submit', function (e) {
-                e.preventDefault();  // Prevent the form from submitting immediately
-                var searchTerm = document.querySelector('[name="searched"]').value;
-                var baseUrl = "{% url 'search' slug='placeholder' %}".replace('placeholder', searchTerm);
-                this.action = baseUrl
-                this.submit();
-            });
-        </script>
-        <script src="{% static '/post/js/script.js' %}"></script>
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
+<script>
+    document.getElementById('searchForm').addEventListener('submit', function (e) {
+        e.preventDefault();  // Prevent the form from submitting immediately
+        var searchTerm = document.querySelector('[name="searched"]').value;
+        var baseUrl = "{% url 'search' slug='placeholder' %}".replace('placeholder', searchTerm);
+        this.action = baseUrl
+        this.submit();
+    });
+</script>
+<script src="{% static '/post/js/script.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 </body>
 

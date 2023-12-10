@@ -343,7 +343,8 @@ a {
     /*height:990px;*/
     height:1800px;
     top:90px;
-    left:512px;
+    left:400px;
+    background:red;
     position: absolute;
     overflow: visible;
     z-index: 1;
@@ -438,4 +439,16 @@ a {
     font-size: 14px;
     width:80px;
 }
+
+input {
+    border: none;
+    outline: none; /* 포커스 시 외곽선 제거 */
+}
+
+/* 포커스 시 스타일 설정을 원하지 않는 경우 아래와 같이 따로 설정 가능 */
+input:focus {
+    border: none;
+    outline: none;
+}
+
 
