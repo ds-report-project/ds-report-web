@@ -163,12 +163,11 @@
                                         <div class="d-flex flex-column" id="comment={{ comment.pk }}">
 
                                             <div class="ms-3">
-
                                                 <div class="text" style="font-weight: 600;">익명</div>
                                                 {{ comment.content | linebreaks }}
 
-                                                <!-- COMMENT LIKES -->
-                                                <div class="d-flex align-items-center">
+                                                <!-- COMMENT LIKES, 작성 시간 -->
+                                                <div class="d-flex align-items-center mt-0">
                                                     <p class="text-muted"
                                                        style="margin-top: 5px; font-size: 13px;margin-right: 10px;">{{ comment.created_at }}
                                                         {% if comment.created_at != comment.modified_at %}</p>
@@ -176,8 +175,8 @@
                                                                style="margin-top: 5px; font-size: 13px;"><small>Updated
                                                                 : {{ comment.modified_at }}</small></p>
                                                         {% endif %}
-                                                    {% if user.is_authenticated %}
 
+                                                    {% if user.is_authenticated %}
                                                         <!-- 공감 버튼 크기 조정 -->
                                                         <form action="{% url 'comment_like' object.id %}" method="POST">
                                                             {% csrf_token %}
@@ -199,7 +198,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="ms-auto mt-auto" style="margin-top: -50px;">
+                                            <div class="ms-auto mt-0" style="margin-top: -50px;">
                                                 <!-- 수정과 삭제 버튼 오른쪽에 배치 및 간격 조정 -->
                                                 {% if user.is_authenticated and comment.author == user %}
                                                     <div class="btn-group" style="margin-top: -5px;">
