@@ -109,6 +109,8 @@ class PostDetail(DetailView):
             data['number_of_comment_likes'] = comment_likes_connected.number_of_comment_likes()
         else:
             data['number_of_comment_likes'] = 0
+
+
         
         # 인기글
         top_5_posts = Post.objects.annotate(like_count=models.Count('likes')).order_by('-like_count')[:5]
@@ -128,14 +130,6 @@ class PostDetail(DetailView):
             if (resolve_action_exists == False):
                 # Resolve Action이 없는 경우에만 추가
                 post.resolve_actions.add(request.user)
-
-                # 확인 코드
-                # if resolve_action: print("resolve_action 생성됨==================================")
-                # user_of_resolve_action = resolve_action.user
-                # post_of_resolve_action = resolve_action.post
-                # # 출력
-                # print("User:", user_of_resolve_action)
-                # print("Post:", post_of_resolve_action)
 
                 # 클릭 수가 3 이상인지 확인
                 if post.resolve_actions.count() >= 3:
