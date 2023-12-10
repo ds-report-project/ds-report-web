@@ -529,15 +529,13 @@
         <div id="popular_text">이번 달 인기글</div>
         <ul id="popular_ul" style="margin-top: 70px; text-decoration: none;">
             {% for post in top_5_posts %}
-                <!-- <div class="post-info post-ranking"> -->
                 <div style="margin-bottom: 5px;">
                     <a href="{% url 'post_detail' pk=post.pk %}" id="popular_title"
                        style="color: #000000;text-decoration: none;">{{ forloop.counter }}위 {{ post.title }}</a>
                 </div>
-                <!-- <div class="post-content post-ranking"> -->
                 <div style="margin-bottom: 25px;">
                     <a href="{% url 'post_detail' pk=post.pk %}" id="popular_content"
-                       style="color: #676767;text-decoration: none;">{{ post.content }}</a>
+                       style="color: #676767;text-decoration: none;">{{ post.content | truncatechars:19 }}</a>
                 </div>
             {% endfor %}
         </ul>
